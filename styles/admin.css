@@ -228,6 +228,65 @@
     margin-top: 2rem;
 }
 
+/* Admin Table Styles */
+.admin-table-container {
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-accent-purple);
+    border-radius: 15px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    backdrop-filter: blur(10px);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table thead {
+    background: rgba(153, 51, 255, 0.1);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.admin-table th {
+    padding: 1rem;
+    text-align: left;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+.admin-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+}
+
+.admin-table tbody tr {
+    transition: var(--transition-fast);
+}
+
+.admin-table tbody tr:hover {
+    background: rgba(255, 51, 102, 0.05);
+}
+
+.admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-table td .btn-small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+}
+
+.text-muted {
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
 .items-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
