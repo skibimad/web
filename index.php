@@ -14,6 +14,10 @@ require __DIR__ . '/vendor/autoload.php';
 // Import required classes
 use App\Core\Request;
 use App\Core\Router;
+use App\Core\ErrorHandler;
+
+// Register error handlers
+ErrorHandler::register();
 
 // Create request object
 $request = new Request();
