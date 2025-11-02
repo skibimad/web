@@ -850,6 +850,21 @@ section {
     border-bottom: 3px solid var(--color-primary);
 }
 
+/* Blog Preview Section */
+.blog-preview-section {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(
+        to bottom,
+        var(--color-bg-secondary) 0%,
+        var(--color-bg-primary) 100%
+    );
+}
+
+.blog-view-all {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+}
+
 .channel-content {
     display: grid;
     grid-template-columns: 1fr 1fr;

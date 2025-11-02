@@ -144,7 +144,7 @@ The cosmic keeper who harnesses stellar energy from across galaxies.
 
 ### Official Channels & References
 
-- **FireStormX Studios**: [@FireStormX](https://www.youtube.com/@FireStormX) - Original content creator
+- **FireStormX Studios**: [@FireStormX!?](https://www.youtube.com/@FireStormX!?) - Original content creator
 - **DaFuq!?Boom!**: [@DaFuqBoom](https://www.youtube.com/@DaFuqBoom) - Original Skibidi Toilet creator
 - **DOM Studio**: [@DOMSTUDIO](https://www.youtube.com/@DOMSTUDIO) - Community contributor
 - **Virlance**: [@virlance](https://www.youtube.com/@virlance) - Community contributor
@@ -335,7 +335,7 @@ Together, they face the greatest threat the multiverse has ever known.
 
 ## 📞 Contact & Support
 
-- **YouTube**: [@FireStormX](https://www.youtube.com/@FireStormX)
+- **YouTube**: [@FireStormX!?](https://www.youtube.com/@FireStormX!?)
 - **Issues**: Use GitHub Issues for bug reports
 - **Discussions**: Use GitHub Discussions for questions
 
