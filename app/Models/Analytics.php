@@ -38,10 +38,10 @@ class Analytics extends Model
         $db = static::getDb();
         
         $intervals = [
-            'day' => "datetime('now', '-1 day')",
-            'week' => "datetime('now', '-7 days')",
-            'month' => "datetime('now', '-1 month')",
-            'year' => "datetime('now', '-1 year')"
+            'day' => "DATE_SUB(NOW(), INTERVAL 1 DAY)",
+            'week' => "DATE_SUB(NOW(), INTERVAL 7 DAY)",
+            'month' => "DATE_SUB(NOW(), INTERVAL 1 MONTH)",
+            'year' => "DATE_SUB(NOW(), INTERVAL 1 YEAR)"
         ];
         
         $interval = $intervals[$period] ?? $intervals['day'];
@@ -61,10 +61,10 @@ class Analytics extends Model
         $db = static::getDb();
         
         $intervals = [
-            'day' => "datetime('now', '-1 day')",
-            'week' => "datetime('now', '-7 days')",
-            'month' => "datetime('now', '-1 month')",
-            'year' => "datetime('now', '-1 year')"
+            'day' => "DATE_SUB(NOW(), INTERVAL 1 DAY)",
+            'week' => "DATE_SUB(NOW(), INTERVAL 7 DAY)",
+            'month' => "DATE_SUB(NOW(), INTERVAL 1 MONTH)",
+            'year' => "DATE_SUB(NOW(), INTERVAL 1 YEAR)"
         ];
         
         $interval = $intervals[$period] ?? $intervals['day'];
