@@ -88,12 +88,14 @@ The script will:
    Edit `.env` with your database credentials:
    ```env
    DB_DRIVER=mysql
-   DB_HOST=localhost
+   DB_HOST=127.0.0.1
    DB_PORT=3306
    DB_NAME=skibidi_madness
    DB_USER=root
    DB_PASS=your_password
    ```
+   
+   **Note:** Use `127.0.0.1` instead of `localhost` to avoid socket connection issues.
 
 3. **Install dependencies**
    ```bash
@@ -242,17 +244,51 @@ web/
 
 ## Troubleshooting
 
+### Database Connection Error: "No such file or directory"
+
+This error typically occurs when PHP tries to connect to MySQL via a Unix socket instead of TCP/IP.
+
+**Solution:**
+- Use `127.0.0.1` instead of `localhost` for DB_HOST in your `.env` file
+- The install script now defaults to `127.0.0.1`
+- If you need to use `localhost`, specify the socket path:
+  ```env
+  DB_HOST=localhost:/var/run/mysqld/mysqld.sock
+  ```
+
+**Alternative Solutions:**
+1. **Check MySQL is running:**
+   ```bash
+   sudo service mysql status
+   # or
+   sudo systemctl status mysql
+   ```
+
+2. **Find your MySQL socket:**
+   ```bash
+   mysql_config --socket
+   # or check MySQL config
+   grep socket /etc/my.cnf
+   ```
+
+3. **Test connection manually:**
+   ```bash
+   mysql -h 127.0.0.1 -P 3306 -u root -p
+   ```
+
 ### Static $table Property Error
 
 If you see "Cannot redeclare non static" error:
 - This has been fixed in the latest version
 - Make sure all model classes use `protected static $table`
 
-### Database Connection Failed
+### Database Connection Failed (Other Reasons)
 
 - Check MySQL is running: `sudo service mysql status`
 - Verify credentials in `.env` file
 - Ensure database exists: `mysql -u root -p -e "SHOW DATABASES;"`
+- Check port is correct (usually 3306)
+- Verify user has proper permissions
 
 ### Permission Denied on Uploads
 

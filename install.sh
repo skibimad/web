@@ -37,8 +37,8 @@ echo "========================================="
 echo ""
 
 # Get database credentials
-read -p "Enter MySQL host [localhost]: " DB_HOST
-DB_HOST=${DB_HOST:-localhost}
+read -p "Enter MySQL host [127.0.0.1]: " DB_HOST
+DB_HOST=${DB_HOST:-127.0.0.1}
 
 read -p "Enter MySQL port [3306]: " DB_PORT
 DB_PORT=${DB_PORT:-3306}
