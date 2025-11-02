@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Controllers;
+
+use Core\Controller;
+use App\Models\Hero;
+use App\Models\Episode;
+use App\Models\BlogPost;
+
 /**
  * Home Controller
  * Handles main landing page

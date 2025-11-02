@@ -1,5 +1,13 @@
 <?php
 
+namespace App\Controllers;
+
+use Core\Controller;
+use Core\Security;
+use App\Models\User;
+use Core\Request;
+use Core\Response;
+
 /**
  * Auth Controller
  * Handles authentication

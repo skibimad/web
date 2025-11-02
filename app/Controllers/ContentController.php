@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Controllers;
+
+use Core\Controller;
+use App\Models\StaticContent;
+use Core\Security;
+use Core\Request;
+
 /**
  * Content Controller
  * Handles static content editing in admin

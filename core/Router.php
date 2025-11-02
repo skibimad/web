@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 /**
  * Router - Handles URL routing and dispatching
  */

@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 /**
  * Response - HTTP Response helper
  */

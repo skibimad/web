@@ -1,5 +1,14 @@
 <?php
 
+namespace App\Controllers;
+
+use Core\Controller;
+use App\Models\Hero;
+use App\Models\Episode;
+use App\Models\BlogPost;
+use Core\Security;
+use App\Models\User;
+
 /**
  * Dashboard Controller
  * Handles admin dashboard

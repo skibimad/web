@@ -1,4 +1,7 @@
 <?php
+
+namespace Core;
+
 /**
  * Security Class - Authentication, CSRF Protection, Input Sanitization
  */

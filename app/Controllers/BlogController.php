@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Controllers;
+
+use Core\Controller;
+use App\Models\BlogPost;
+
 /**
  * Blog Controller
  * Handles public blog pages

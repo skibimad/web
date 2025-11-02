@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 /**
  * View - Template rendering engine
  */

@@ -1,4 +1,7 @@
 <?php
+
+namespace Core;
+
 /**
  * Base Model Class
  */

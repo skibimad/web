@@ -1,0 +1,35 @@
+{
+    "name": "firestormx/skibidi-madness",
+    "description": "Skibidi Madness - A multi-universe animation series landing page with PHP/SQLite backend",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "FireStormX Studios",
+            "email": "studio@firestormx.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Controllers\\": "app/Controllers/",
+            "App\\Models\\": "app/Models/",
+            "Core\\": "core/",
+            "Config\\": "config/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@php database/seed.php"
+        ],
+        "post-update-cmd": [
+            "@php -r \"echo 'Autoloader regenerated successfully.\\n';\""
+        ]
+    }
+}

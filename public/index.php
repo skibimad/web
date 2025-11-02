@@ -9,9 +9,11 @@
 define('ROOT_PATH', dirname(__DIR__));
 define('PUBLIC_PATH', __DIR__);
 
-// Load application bootstrap
-require_once ROOT_PATH . '/core/Application.php';
+// Load Composer's autoloader
+require_once ROOT_PATH . '/vendor/autoload.php';
 
 // Run application
+use Core\Application;
+
 $app = Application::getInstance();
 $app->run();

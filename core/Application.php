@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 /**
  * Application Bootstrap
  * Handles initialization, autoloading, and application lifecycle
@@ -11,7 +13,6 @@ class Application {
     
     private function __construct() {
         $this->config = require_once __DIR__ . '/../config/config.php';
-        $this->registerAutoloader();
         $this->initializeSession();
     }
     
@@ -20,28 +21,6 @@ class Application {
             self::$instance = new self();
         }
         return self::$instance;
-    }
-    
-    /**
-     * Register PSR-4 style autoloader
-     */
-    private function registerAutoloader() {
-        spl_autoload_register(function ($class) {
-            $paths = [
-                __DIR__ . '/../app/Controllers/',
-                __DIR__ . '/../app/Controllers/Admin/',
-                __DIR__ . '/../app/Models/',
-                __DIR__ . '/../core/',
-            ];
-            
-            foreach ($paths as $path) {
-                $file = $path . $class . '.php';
-                if (file_exists($file)) {
-                    require_once $file;
-                    return;
-                }
-            }
-        });
     }
     
     /**

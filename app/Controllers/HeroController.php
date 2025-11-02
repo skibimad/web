@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Controllers;
+
+use Core\Controller;
+use App\Models\Hero;
+use Core\Security;
+use Core\Request;
+
 /**
  * Hero Controller
  * Handles hero management in admin

@@ -22,12 +22,13 @@ tmp/
 *.log
 logs/
 
-# Dependencies (if any are added in future)
+# Dependencies
 node_modules/
 package-lock.json
 yarn.lock
+vendor/
 
-# Build artifacts (if any are added in future)
+# Build artifacts
 dist/
 build/
 .next/
@@ -53,3 +54,6 @@ database/*.sqlite
 *.sqlite
 public/uploads/*
 !public/uploads/.gitkeep
+
+# Composer
+composer.lock

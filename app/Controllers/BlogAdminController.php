@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Controllers;
+
+use Core\Controller;
+use App\Models\BlogPost;
+use Core\Security;
+use Core\Request;
+
 /**
  * Blog Admin Controller
  * Handles blog post management in admin

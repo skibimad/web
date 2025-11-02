@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Controllers;
+
+use Core\Controller;
+use Core\Security;
+use Core\Request;
+use Core\Response;
+
 /**
  * Upload Controller
  * Handles file uploads

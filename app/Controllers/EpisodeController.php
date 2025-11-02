@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Controllers;
+
+use Core\Controller;
+use App\Models\Episode;
+use Core\Security;
+use Core\Request;
+
 /**
  * Episode Controller
  * Handles episode management in admin

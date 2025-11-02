@@ -1,4 +1,10 @@
 <?php
+
+namespace Core;
+
+use PDO;
+use PDOException;
+
 /**
  * Database Class - SQLite Connection and Query Builder
  */
