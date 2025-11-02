@@ -8,9 +8,9 @@ use App\Core\Request;
 use App\Models\Hero;
 
 /**
- * Admin Heroes List Controller
+ * Admin Delete Hero Controller
  */
-class HeroesController extends Controller
+class DeleteController extends Controller
 {
     public function handle(Request $request): void
     {
@@ -18,10 +18,15 @@ class HeroesController extends Controller
         $auth = new Auth();
         $auth->require();
         
-        $heroes = Hero::allOrdered();
+        $id = $request->get('id');
         
-        $this->view('admin/heroes/list', [
-            'heroes' => $heroes
-        ]);
+        if ($id) {
+            $hero = Hero::find($id);
+            if ($hero) {
+                $hero->delete();
+            }
+        }
+        
+        $this->redirect('/admin/heroes/heroes');
     }
 }

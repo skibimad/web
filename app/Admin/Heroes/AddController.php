@@ -8,9 +8,9 @@ use App\Core\Request;
 use App\Models\Hero;
 
 /**
- * Admin Edit Hero Controller
+ * Admin Add Hero Controller
  */
-class EditController extends Controller
+class AddController extends Controller
 {
     public function handle(Request $request): void
     {
@@ -18,32 +18,17 @@ class EditController extends Controller
         $auth = new Auth();
         $auth->require();
         
-        $id = $request->get('id');
-        
-        if (!$id) {
-            $this->redirect('/admin/heroes/heroes');
-            return;
-        }
-        
-        $hero = Hero::find($id);
-        
-        if (!$hero) {
-            $this->redirect('/admin/heroes/heroes');
-            return;
-        }
-        
-        // Handle POST request (save)
+        // Handle POST request (save new hero)
         if ($request->method() === 'POST') {
+            $hero = new Hero();
             $hero->name = $request->post('name');
             $hero->slug = $request->post('slug');
             $hero->description = $request->post('description');
             $hero->image = $request->post('image');
             $hero->video = $request->post('video');
-            $hero->display_order = $request->post('display_order');
+            $hero->abilities = $request->post('abilities', '');
+            $hero->display_order = $request->post('display_order', 0);
             $hero->enabled = $request->post('enabled', 1);
-            
-            $abilities = $request->post('abilities', '');
-            $hero->abilities = $abilities;
             
             $hero->save();
             
@@ -51,8 +36,6 @@ class EditController extends Controller
             return;
         }
         
-        $this->view('admin/heroes/edit', [
-            'hero' => $hero
-        ]);
+        $this->view('admin/heroes/add', []);
     }
 }

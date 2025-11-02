@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Admin\Heroes;
+namespace App\Admin\Social;
 
 use App\Core\Controller;
 use App\Core\Auth;
 use App\Core\Request;
-use App\Models\Hero;
+use App\Models\SocialLink;
 
 /**
- * Admin Heroes List Controller
+ * Admin Social Links Controller
  */
-class HeroesController extends Controller
+class LinksController extends Controller
 {
     public function handle(Request $request): void
     {
@@ -18,10 +18,10 @@ class HeroesController extends Controller
         $auth = new Auth();
         $auth->require();
         
-        $heroes = Hero::allOrdered();
+        $links = SocialLink::all();
         
-        $this->view('admin/heroes/list', [
-            'heroes' => $heroes
+        $this->view('admin/social/links', [
+            'links' => $links
         ]);
     }
 }
