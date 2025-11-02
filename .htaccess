@@ -2,8 +2,16 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
+    # Redirect old admin pages to new admin panel
+    RewriteRule ^admin\.html$ /admin/ [L,R=301]
+    RewriteRule ^admin-(.*)\.html$ /admin/ [L,R=301]
+    
     # Redirect admin to admin directory
     RewriteRule ^admin$ admin/ [L,R=301]
+    
+    # Redirect old HTML files to PHP equivalents
+    RewriteRule ^index\.html$ index.php [L,R=301]
+    RewriteRule ^blog\.html$ blog.php [L,R=301]
     
     # Protect sensitive files
     RewriteRule ^config\.php$ - [F,L]

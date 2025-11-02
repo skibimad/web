@@ -1,0 +1,15 @@
+# Admin directory settings
+DirectoryIndex login.php index.php
+
+# If not logged in, redirect to login page
+# (This is handled by PHP Auth class, but this provides a fallback)
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /admin/
+    
+    # Redirect root admin access to index.php (which checks auth)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^$ index.php [L]
+</IfModule>
