@@ -83,12 +83,12 @@ class Collection implements \Iterator, \Countable, \ArrayAccess
     }
     
     // Iterator implementation
-    public function current()
+    public function current(): mixed
     {
         return $this->items[$this->position];
     }
     
-    public function key()
+    public function key(): mixed
     {
         return $this->position;
     }
@@ -115,17 +115,17 @@ class Collection implements \Iterator, \Countable, \ArrayAccess
     }
     
     // ArrayAccess implementation
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->items[$offset]);
     }
     
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->items[$offset] ?? null;
     }
     
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->items[] = $value;
@@ -134,7 +134,7 @@ class Collection implements \Iterator, \Countable, \ArrayAccess
         }
     }
     
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->items[$offset]);
     }

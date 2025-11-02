@@ -45,6 +45,7 @@ class Router
      * Examples:
      *   / -> App\Controllers\HomeController
      *   /blog -> App\Controllers\BlogController
+     *   /admin -> App\Admin\AdminController
      *   /admin/blog/edit -> App\Admin\Blog\EditController
      *   /foo/bar/baz/acme -> App\Foo\Bar\Baz\AcmeController
      */
@@ -57,6 +58,11 @@ class Router
         
         // Remove leading slash and split into parts
         $parts = explode('/', trim($uri, '/'));
+        
+        // Special case: /admin maps to App\Admin\AdminController
+        if (count($parts) === 1 && $parts[0] === 'admin') {
+            return 'App\\Admin\\AdminController';
+        }
         
         // Last part becomes the controller name, others become namespace
         $controllerName = ucfirst(array_pop($parts)) . 'Controller';

@@ -49,6 +49,9 @@ coverage/
 *.orig
 
 # Old static HTML files (being replaced by MVC)
-index.html.old
-blog.html.old
-admin*.html.old
+*.html.old
+
+# Database files (generated)
+database/*.db
+database/*.sqlite
+database/*.sqlite3
