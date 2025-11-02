@@ -37,6 +37,10 @@ out/
 .env
 .env.local
 .env.*.local
+config.php
+
+# Uploads directory
+uploads/
 
 # Testing
 coverage/

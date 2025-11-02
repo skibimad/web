@@ -2,33 +2,13 @@
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize translations
-    if (window.translations) {
-        window.translations.init();
-    }
-    
     // Initialize all features
-    initLanguageSelector();
     initNavigation();
     initHeroCards();
     initScrollAnimations();
     initVideoAutoplay();
     initSmoothScroll();
 });
-
-// Language Selector
-function initLanguageSelector() {
-    const langButtons = document.querySelectorAll('.lang-btn');
-    
-    langButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const lang = this.getAttribute('data-lang');
-            if (window.translations) {
-                window.translations.change(lang);
-            }
-        });
-    });
-}
 
 // Navigation - Hamburger Menu
 function initNavigation() {

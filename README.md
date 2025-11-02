@@ -1,100 +1,224 @@
-# 🎬 Skibidi Madness - Official Landing Page
+# 🎬 Skibidi Madness - Official Website
 
 ![Skibidi Madness](res/img/all-together.png)
 
 ## 🌟 Overview
 
-**Skibidi Madness** is an epic multi-universe animation series created by **FireStormX Studios** that transcends the boundaries of the original Skibidi Toilet universe. This landing page showcases the revolutionary fusion of multiple dimensions, timelines, and realities where heroes unite against the forces of chaos.
+**Skibidi Madness** is an epic multi-universe animation series created by **FireStormX Studios** that transcends the boundaries of the original Skibidi Toilet universe. This repository contains the official website with a dynamic admin panel for content management.
 
 ### 🎯 Key Features
 
-- **Multi-language Support**: Available in English, Spanish, French, and German
+- **Dynamic Content Management**: MySQL database-driven content
+- **Admin Panel**: Secure admin area with CRUD operations for all content
+- **Image Upload**: Direct image upload capability for all entities
+- **Landing Page Editor**: Customize homepage content through admin panel
 - **Responsive Design**: Optimized for all devices from mobile to desktop
 - **Post-Apocalyptic Theme**: Dark, gritty aesthetics with neon accents
 - **Interactive Hero Gallery**: Hover effects and video previews
 - **Video Integration**: Embedded promo videos and YouTube links
-- **Smooth Animations**: Professional transitions and scroll effects
 - **SEO Optimized**: Meta tags and semantic HTML structure
 
 ## 🚀 Quick Start
 
-### Option 1: Direct Access (Recommended)
+### Prerequisites
 
-Simply open `index.html` in your web browser:
+- **Apache Web Server** (with mod_rewrite enabled)
+- **PHP** 8.1 or higher
+- **MySQL** 5.7 or higher
+- **Composer** (optional, for future extensions)
 
-```bash
-# Navigate to the project directory
-cd /path/to/skibidi-madness-web
+### Installation
 
-# Open in your default browser
-# On macOS:
-open index.html
-
-# On Linux:
-xdg-open index.html
-
-# On Windows:
-start index.html
-```
-
-### Option 2: Local Server
-
-For the best experience with video playback:
+#### 1. Clone the Repository
 
 ```bash
-# Using Python 3
-python -m http.server 8000
-
-# Using Python 2
-python -m SimpleHTTPServer 8000
-
-# Using Node.js (if you have http-server installed)
-npx http-server -p 8000
-
-# Using PHP
-php -S localhost:8000
+git clone https://github.com/skibimad/web.git
+cd web
 ```
 
-Then open `http://localhost:8000` in your browser.
+#### 2. Configure Apache
+
+Copy the Apache virtual host configuration:
+
+```bash
+sudo cp setup/apache-vhost.conf /etc/apache2/sites-available/skibidi-madness.conf
+```
+
+Edit the configuration file to match your directory path:
+
+```bash
+sudo nano /etc/apache2/sites-available/skibidi-madness.conf
+```
+
+Enable the site and required modules:
+
+```bash
+sudo a2ensite skibidi-madness
+sudo a2enmod rewrite
+sudo systemctl restart apache2
+```
+
+#### 3. Run the Installation Script
+
+The installation script will create the database and tables:
+
+```bash
+cd setup
+chmod +x install.sh
+./install.sh
+```
+
+Follow the prompts to enter your MySQL credentials. The script will:
+- Create the `skibidi_madness` database
+- Set up all required tables
+- Insert demo data (heroes, episodes, blog posts)
+- Create the default admin user
+- Configure the application
+
+#### 4. Set Permissions
+
+Ensure the uploads directory is writable:
+
+```bash
+chmod -R 755 uploads
+chown -R www-data:www-data uploads
+```
+
+#### 5. Access the Website
+
+- **Website**: http://localhost (or your configured domain)
+- **Admin Panel**: http://localhost/admin/
+
+### Default Admin Credentials
+
+```
+Username: fsx
+Password: 111111
+```
+
+**⚠️ IMPORTANT**: Change the admin password immediately after first login!
 
 ## 📁 Project Structure
 
 ```
 skibidi-madness-web/
-├── index.html                  # Main HTML file
-├── README.md                   # This file
-├── LICENSE                     # License information
-├── styles/
-│   └── main.css               # Main stylesheet
-├── scripts/
-│   ├── translations.js        # Multi-language translations
-│   └── main.js                # Main JavaScript functionality
-└── res/                       # Resources directory
-    ├── img/
-    │   ├── all-together.png   # Main hero image
-    │   └── heroes/
-    │       └── promo/         # Individual hero images
-    │           ├── g-man.png
-    │           ├── star-storage.png
-    │           ├── titan-camera.png
-    │           ├── titan-speaker.png
-    │           └── titan-tv.png
-    └── video/
-        ├── all-together.mp4   # Main promo video
-        └── heroes/
-            └── promo/         # Individual hero videos
-                ├── g-man.mp4
-                ├── star-storage.mp4
-                ├── titan-camera.mp4
-                ├── titan-speaker.mp4
-                └── titan-tv.mp4
+├── index.php                   # Main homepage (database-driven)
+├── blog.php                    # Blog listing page
+├── blog-post.php              # Individual blog post page
+├── config.php                 # Database configuration (not in repo)
+├── config.example.php         # Configuration template
+├── .htaccess                  # Apache rewrite rules
+├── admin/                     # Admin panel
+│   ├── login.php             # Admin login
+│   ├── index.php             # Admin dashboard
+│   ├── episodes.php          # Episode management
+│   ├── heroes.php            # Hero management
+│   ├── blog.php              # Blog management
+│   ├── landing.php           # Landing page editor
+│   ├── settings.php          # Admin settings
+│   ├── logout.php            # Logout handler
+│   └── includes/             # Shared admin files
+│       ├── header.php
+│       └── footer.php
+├── database/                  # Database layer
+│   ├── Database.php          # Database connection
+│   ├── Model.php             # Base model class
+│   ├── Auth.php              # Authentication helper
+│   ├── FileUpload.php        # File upload handler
+│   └── models/               # Entity models
+│       ├── Hero.php
+│       ├── Episode.php
+│       ├── BlogPost.php
+│       ├── User.php
+│       └── LandingContent.php
+├── setup/                     # Installation files
+│   ├── database.sql          # Database schema & seed data
+│   ├── install.sh            # Installation script
+│   └── apache-vhost.conf     # Apache configuration
+├── styles/                    # CSS stylesheets
+│   └── main.css
+├── scripts/                   # JavaScript files
+│   └── main.js
+├── res/                       # Static resources
+│   ├── img/                  # Images
+│   └── video/                # Videos
+└── uploads/                   # User-uploaded files
+    ├── heroes/
+    ├── episodes/
+    └── blog/
 ```
+
+## 🗄️ Database Schema
+
+The application uses the following tables:
+
+- **users**: Admin user accounts
+- **heroes**: Hero characters with abilities
+- **episodes**: Episode information
+- **blog_posts**: Blog posts and news
+- **landing_content**: Editable landing page sections
+
+All tables use UTF-8 character set and include timestamps for created/updated tracking.
+
+## 🛠️ Configuration
+
+### Database Settings
+
+Copy `config.example.php` to `config.php` and update with your credentials:
+
+```php
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'skibidi_madness');
+define('DB_USER', 'your_username');
+define('DB_PASS', 'your_password');
+```
+
+### Upload Directory
+
+The upload directory can be configured in `config.php`:
+
+```php
+define('UPLOAD_DIR', __DIR__ . '/uploads/');
+define('UPLOAD_URL', '/uploads/');
+```
+
+## 📋 Admin Panel Features
+
+### Dashboard
+- Overview of content statistics
+- Quick actions for common tasks
+- System information
+
+### Episodes Management
+- Create, read, update, delete episodes
+- Upload thumbnail images
+- Set video URLs and metadata
+- Order by episode number
+
+### Heroes Management
+- Manage hero profiles
+- Upload hero images
+- Define abilities (JSON array)
+- Set display order
+
+### Blog Management
+- Create and edit blog posts
+- Upload featured images
+- Set publish status
+- Auto-generate slugs from titles
+
+### Landing Page Editor
+- Edit hero section content
+- Customize about section
+- Update channel section text
+
+### Settings
+- Change admin password
+- View system information
 
 ## 🎨 Design & Theme
 
 ### Color Palette
-
-The landing page uses a **post-apocalyptic fantasy** color scheme:
 
 - **Primary Red**: `#ff3366` - Action, danger, energy
 - **Secondary Cyan**: `#00ffcc` - Technology, future
@@ -107,201 +231,74 @@ The landing page uses a **post-apocalyptic fantasy** color scheme:
 - **Headings**: [Orbitron](https://fonts.google.com/specimen/Orbitron) - Futuristic, tech-inspired
 - **Body Text**: [Rajdhani](https://fonts.google.com/specimen/Rajdhani) - Modern, readable
 
-## 🌍 Multi-Language Support
-
-The site supports four languages:
-
-| Language | Code | Status |
-|----------|------|--------|
-| English  | `en` | ✅ Complete |
-| Spanish  | `es` | ✅ Complete |
-| French   | `fr` | ✅ Complete |
-| German   | `de` | ✅ Complete |
-
-Language can be changed using:
-- Language selector buttons in the top-right corner
-- Keyboard shortcut: Press `L` key
-- Preference is saved in browser's localStorage
-
-## 🎭 Featured Heroes
-
-### 1. Titan Cameraman
-The vigilant guardian with unmatched surveillance capabilities and devastating firepower.
-
-### 2. Titan Speakerman
-Master of sonic devastation who channels raw sound energy into overwhelming force.
-
-### 3. Titan TV Man
-The hypnotic warrior whose screen broadcasts reality-altering frequencies.
-
-### 4. G-Man
-The enigmatic leader whose true power remains shrouded in mystery.
-
-### 5. Star Storage
-The cosmic keeper who harnesses stellar energy from across galaxies.
-
 ## 📺 YouTube Integration
 
 ### Official Channels & References
 
-- **FireStormX Studios**: [@FireStormX!?](https://www.youtube.com/@FireStormX!?) - Original content creator
+- **FirestomX-Tri**: [@FirestomX-Tri](https://www.youtube.com/@FirestomX-Tri) - Official channel
 - **DaFuq!?Boom!**: [@DaFuqBoom](https://www.youtube.com/@DaFuqBoom) - Original Skibidi Toilet creator
-- **DOM Studio**: [@DOMSTUDIO](https://www.youtube.com/@DOMSTUDIO) - Community contributor
-- **Virlance**: [@virlance](https://www.youtube.com/@virlance) - Community contributor
-- **Maxedy**: [@MaxedyYT](https://www.youtube.com/@MaxedyYT) - Community contributor
 
-## 🛠️ Technologies Used
+## 🔒 Security
 
-- **HTML5**: Semantic markup, video support
-- **CSS3**: Flexbox, Grid, animations, custom properties
-- **JavaScript (ES6+)**: Modern features, no frameworks required
-- **Google Fonts**: Orbitron & Rajdhani
-- **Responsive Design**: Mobile-first approach
+- Password hashing using PHP's bcrypt
+- Session-based authentication
+- SQL injection protection via PDO prepared statements
+- CSRF protection recommended for production
+- File upload validation (images only, 5MB limit)
+- Admin area protected by authentication
 
-## 📱 Browser Compatibility
+## 🌐 Deployment
 
-| Browser | Minimum Version |
-|---------|----------------|
-| Chrome  | 90+ |
-| Firefox | 88+ |
-| Safari  | 14+ |
-| Edge    | 90+ |
+### Production Checklist
 
-## ⚡ Performance Optimizations
+1. Update `config.php` with production database credentials
+2. Change admin password from default
+3. Set `display_errors` to `0` in `config.php`
+4. Configure proper file permissions (755 for directories, 644 for files)
+5. Enable HTTPS with SSL certificate
+6. Set up regular database backups
+7. Configure proper error logging
 
-- **Lazy Loading**: Images load only when needed
-- **Video Optimization**: Compressed MP4 format with efficient codecs
-- **CSS Animations**: Hardware-accelerated transforms
-- **Minimal Dependencies**: No heavy frameworks
-- **Responsive Images**: Appropriate sizing for different viewports
+### Apache Configuration
 
-## 🎮 Interactive Features
+Ensure these modules are enabled:
+```bash
+sudo a2enmod rewrite
+sudo a2enmod php
+sudo systemctl restart apache2
+```
 
-### Keyboard Shortcuts
+## 🧪 Testing
 
-- `H` - Scroll to home/top
-- `L` - Cycle through languages
+Access different parts of the site:
 
-### Mobile Support
+- Homepage: `http://your-domain/`
+- Blog: `http://your-domain/blog.php`
+- Admin: `http://your-domain/admin/`
 
-- Touch-enabled hero cards
-- Responsive hamburger menu
-- Optimized video playback
-- Smooth scrolling
-
-### Desktop Enhancements
-
-- Parallax effects
-- Hover video previews
-- Advanced animations
-- Glitch effects
+Test admin functions:
+1. Login with default credentials
+2. Change password
+3. Create/edit/delete content in each section
+4. Upload images
+5. Edit landing page content
 
 ## 📊 SEO & Metadata
 
-The page includes comprehensive SEO optimization:
-
+The site includes:
 - Meta descriptions
 - Open Graph tags
 - Semantic HTML structure
 - Keyword optimization
 - Accessibility features
 
-## 🔧 Customization
-
-### Changing Colors
-
-Edit CSS variables in `styles/main.css`:
-
-```css
-:root {
-    --color-primary: #ff3366;
-    --color-secondary: #00ffcc;
-    /* etc. */
-}
-```
-
-### Adding New Languages
-
-Add translations in `scripts/translations.js`:
-
-```javascript
-translations.newLang = {
-    nav: { /* ... */ },
-    hero: { /* ... */ },
-    // etc.
-};
-```
-
-### Modifying Content
-
-Edit `index.html` directly. All translatable text uses `data-i18n` attributes.
-
-## 🌐 Deployment
-
-### GitHub Pages
-
-```bash
-# Enable GitHub Pages in repository settings
-# Select main branch and root directory
-# Access at: https://yourusername.github.io/repository-name
-```
-
-### Netlify
-
-```bash
-# Drag and drop the project folder to Netlify
-# Or connect your GitHub repository
-```
-
-### Vercel
-
-```bash
-# Import your GitHub repository
-# Build command: (leave empty)
-# Output directory: .
-```
-
-### Traditional Hosting
-
-Upload all files to your web server via FTP/SFTP. Ensure relative paths are maintained.
-
-## 📄 File Paths
-
-All resource paths are **relative** for portability:
-
-```html
-<!-- Images -->
-<img src="res/img/all-together.png">
-
-<!-- Videos -->
-<video src="res/video/all-together.mp4">
-
-<!-- Stylesheets -->
-<link href="styles/main.css">
-
-<!-- Scripts -->
-<script src="scripts/main.js">
-```
-
-The entire project can be moved to any directory without breaking links.
-
-## 🎥 Media Credits
-
-All hero images and videos are located in the `res/` directory:
-
-- Hero promo images: `res/img/heroes/promo/`
-- Hero promo videos: `res/video/heroes/promo/`
-- Combined visuals: `res/img/all-together.png` and `res/video/all-together.mp4`
-
 ## 🤝 Contributing
 
-This is a fan-created project. Contributions are welcome!
+This is the official website for the Skibidi Madness series. For questions or issues:
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test across browsers
-5. Submit a pull request
+1. Check existing issues
+2. Create a detailed bug report
+3. Include steps to reproduce
 
 ## 📜 License
 
@@ -309,40 +306,18 @@ See [LICENSE](LICENSE) file for details.
 
 ## ⚠️ Disclaimer
 
-**Skibidi Madness** is a fan-created series inspired by the Skibidi Toilet universe. This project is not officially affiliated with the original creators (DaFuq!?Boom! or other community creators). All trademarks and copyrights belong to their respective owners.
+**Skibidi Madness** is a fan-created series inspired by the Skibidi Toilet universe created by DaFuq!?Boom!. This project is not officially affiliated with the original creator. All trademarks and copyrights belong to their respective owners.
 
-This landing page is created for entertainment and promotional purposes.
-
-## 🎬 The Story
-
-### Synopsis
-
-In **Skibidi Madness**, a new story unfolds featuring the chaos and fury of the evil forces known as the **Asotra**. Unlike the original series where heroes battled entire armies, this saga focuses on a single, formidable enemy: the **Supreme Leader**.
-
-This isn't just about the Skibidi Toilet universe from various stories like DOM Studio, Virlance, or Maxedy. Skibidi Madness encompasses **everything that exists**: Marvel, Stranger Things, DC, Star Wars, Minecraft, and countless other universes collide in an unprecedented multiverse event.
-
-### The Heroes
-
-Five legendary champions stand against the darkness:
-
-- **Titan Cameraman** - Tactical Vision
-- **Titan Speakerman** - Sonic Devastation
-- **Titan TV Man** - Reality Manipulation
-- **G-Man** - Strategic Leadership
-- **Star Storage** - Cosmic Power
-
-Together, they face the greatest threat the multiverse has ever known.
+This website is created for entertainment and promotional purposes.
 
 ## 📞 Contact & Support
 
-- **YouTube**: [@FireStormX!?](https://www.youtube.com/@FireStormX!?)
-- **Issues**: Use GitHub Issues for bug reports
-- **Discussions**: Use GitHub Discussions for questions
+- **YouTube**: [@FirestomX-Tri](https://www.youtube.com/@FirestomX-Tri)
+- **Original Creator**: [@DaFuqBoom](https://www.youtube.com/@DaFuqBoom)
 
 ## 🎉 Special Thanks
 
 - DaFuq!?Boom! for creating the original Skibidi Toilet universe
-- DOM Studio, Virlance, Maxedy for expanding the community
 - All fans and supporters of the series
 
 ---

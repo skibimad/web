@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS landing_content (
 
 -- Insert default admin user (password: 111111, hashed with bcrypt)
 INSERT INTO users (username, password) VALUES 
-('fsx', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+('fsx', '$2y$10$sHd5IYqchqigS8C8YqYO6.VFKmUDi7jEWnn1CR8fEDiO1oQV26Uza');
 -- Note: This is a bcrypt hash of '111111'
 
 -- Insert demo heroes
