@@ -9,14 +9,15 @@
 </section>
 
 <!-- Blog Posts -->
-<section class="blog-posts-section">
+<section class="blog-section">
     <div class="container">
         <?php if ($posts->isEmpty()): ?>
-        <div class="no-posts">
-            <p>No blog posts available yet. Check back soon!</p>
+        <div class="no-content">
+            <h3>No blog posts yet</h3>
+            <p>Check back soon for updates!</p>
         </div>
         <?php else: ?>
-        <div class="blog-posts-grid" id="blog-posts-grid">
+        <div id="blog-posts-grid" class="blog-grid">
             <?php foreach ($posts as $post): ?>
             <div class="blog-card">
                 <img src="/<?= htmlspecialchars($post->image) ?>" alt="<?= htmlspecialchars($post->title) ?>" class="blog-card-image">
