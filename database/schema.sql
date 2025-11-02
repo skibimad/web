@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS blog_posts (
 -- Landing page content table
 CREATE TABLE IF NOT EXISTS landing_content (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    section VARCHAR(50) UNIQUE NOT NULL,
+    section VARCHAR(50) NOT NULL,
     content_key VARCHAR(100) NOT NULL,
     content_value TEXT,
     content_type ENUM('text', 'image', 'video', 'url') DEFAULT 'text',
