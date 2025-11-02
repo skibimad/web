@@ -45,3 +45,9 @@ coverage/
 # Misc
 *.bak
 *.orig
+
+# PHP/Database
+database/*.db
+database/*.db-journal
+uploads/*
+!uploads/.gitkeep
