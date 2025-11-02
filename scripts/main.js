@@ -265,10 +265,16 @@ allVideos.forEach(video => {
     });
 });
 
-// Console easter egg
-console.log('%c🎬 Skibidi Madness 🎬', 'color: #ff3366; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 0px #00ffcc;');
-console.log('%cWelcome to the Multiverse!', 'color: #00ffcc; font-size: 16px;');
-console.log('%cSubscribe to FireStormX Studios: https://www.youtube.com/@FireStormX', 'color: #ffcc00; font-size: 14px;');
+// Console easter egg - using design system colors
+const styles = {
+    title: 'color: var(--color-primary, #ff3366); font-size: 24px; font-weight: bold; text-shadow: 2px 2px 0px var(--color-secondary, #00ffcc);',
+    subtitle: 'color: var(--color-secondary, #00ffcc); font-size: 16px;',
+    link: 'color: var(--color-accent, #ffcc00); font-size: 14px;'
+};
+
+console.log('%c🎬 Skibidi Madness 🎬', styles.title);
+console.log('%cWelcome to the Multiverse!', styles.subtitle);
+console.log('%cSubscribe to FireStormX Studios: https://www.youtube.com/@FireStormX', styles.link);
 
 // Keyboard shortcuts
 document.addEventListener('keydown', function(e) {
@@ -295,7 +301,8 @@ document.addEventListener('keydown', function(e) {
 const footerBottom = document.querySelector('.footer-bottom p');
 if (footerBottom) {
     const currentYear = new Date().getFullYear();
-    footerBottom.innerHTML = footerBottom.innerHTML.replace('2024', currentYear);
+    // Only replace the year in the copyright notice
+    footerBottom.innerHTML = footerBottom.innerHTML.replace(/©\s*\d{4}/, `© ${currentYear}`);
 }
 
 // Performance optimization: Lazy load images

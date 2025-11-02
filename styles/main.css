@@ -43,6 +43,10 @@
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
     
+    /* YouTube brand colors */
+    --youtube-red: #ff0000;
+    --youtube-red-dark: #cc0000;
+    
     /* Effects */
     --glow-primary: 0 0 20px rgba(255, 51, 102, 0.5);
     --glow-secondary: 0 0 20px rgba(0, 255, 204, 0.5);
@@ -892,15 +896,15 @@ section {
     align-items: center;
     gap: var(--spacing-sm);
     padding: 1.2rem 2.5rem;
-    background: #ff0000;
-    color: white;
+    background: var(--youtube-red);
+    color: var(--color-text-primary);
     border: none;
     font-size: 1.2rem;
     transition: var(--transition-normal);
 }
 
 .btn-channel:hover {
-    background: #cc0000;
+    background: var(--youtube-red-dark);
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
 }
