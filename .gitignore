@@ -22,10 +22,12 @@ tmp/
 *.log
 logs/
 
-# Dependencies (if any are added in future)
+# Dependencies
 node_modules/
 package-lock.json
 yarn.lock
+vendor/
+composer.lock
 
 # Build artifacts (if any are added in future)
 dist/
@@ -45,3 +47,6 @@ coverage/
 # Misc
 *.bak
 *.orig
+.env
+uploads/*
+!uploads/.gitkeep

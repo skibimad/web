@@ -1,0 +1,21 @@
+{
+    "name": "skibimad/web",
+    "description": "Skibidi Madness - Custom MVC Application",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "App\\Controllers\\": "app/Controllers/",
+            "App\\Models\\": "app/Models/",
+            "App\\Core\\": "app/Core/",
+            "App\\Middleware\\": "app/Middleware/",
+            "App\\Helpers\\": "app/Helpers/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}
