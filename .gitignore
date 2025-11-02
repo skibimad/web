@@ -49,5 +49,7 @@ coverage/
 # PHP/Database
 database/*.db
 database/*.db-journal
-uploads/*
-!uploads/.gitkeep
+database/*.sqlite
+*.sqlite
+public/uploads/*
+!public/uploads/.gitkeep

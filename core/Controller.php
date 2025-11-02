@@ -4,34 +4,32 @@
  */
 class Controller {
     
-    protected function view($viewPath, $data = []) {
-        extract($data);
-        $viewFile = __DIR__ . '/../views/' . $viewPath . '.php';
-        
-        if (file_exists($viewFile)) {
-            require_once $viewFile;
-        } else {
-            die("View not found: {$viewPath}");
-        }
+    /**
+     * Render a view
+     */
+    protected function view($template, $data = []) {
+        return View::make($template, $data);
     }
 
+    /**
+     * Return JSON response
+     */
     protected function json($data, $statusCode = 200) {
-        http_response_code($statusCode);
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit;
+        return Response::json($data, $statusCode);
     }
 
+    /**
+     * Redirect to URL
+     */
     protected function redirect($url) {
-        header('Location: ' . $url);
-        exit;
+        return Response::redirect($url);
     }
 
-    protected function getInput($key, $default = null) {
-        return Security::sanitize($_POST[$key] ?? $_GET[$key] ?? $default);
-    }
-
-    protected function getAllInput() {
-        return Security::sanitize($_POST + $_GET);
+    /**
+     * Get static content as key-value array
+     */
+    protected function getStaticContent() {
+        $model = new StaticContent();
+        return $model->getAllAsKeyValue();
     }
 }
