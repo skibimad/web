@@ -7,7 +7,7 @@ use App\Core\Collection;
 
 class YouTubeChannel extends Model
 {
-    protected static string $table = 'youtube_channel';
+    protected static $table = 'youtube_channel';
 
     public static function get(): ?object
     {

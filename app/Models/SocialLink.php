@@ -7,7 +7,7 @@ use App\Core\Collection;
 
 class SocialLink extends Model
 {
-    protected static string $table = 'social_links';
+    protected static $table = 'social_links';
 
     public static function enabled(): Collection
     {
