@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Heroes - Admin Panel</title>
+    <title>Manage Heroes - Skibidi Madness Admin</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/admin.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,89 +11,282 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="admin-body">
-    <nav class="admin-navbar">
-        <div class="admin-container">
-            <div class="admin-logo">
-                <span class="logo-main">SKIBIDI</span>
-                <span class="logo-sub">ADMIN PANEL</span>
-            </div>
-            <ul class="admin-menu">
-                <li><a href="admin.html">Dashboard</a></li>
-                <li><a href="admin-heroes.html" class="active">Heroes</a></li>
-                <li><a href="admin-episodes.html">Episodes</a></li>
-                <li><a href="admin-blog.html">Blog</a></li>
-                <li><a href="index.html">View Site</a></li>
-            </ul>
+    <nav class="admin-nav">
+        <div class="admin-nav-brand">
+            <span class="logo-main">SKIBIDI</span>
+            <span class="logo-sub">ADMIN PANEL</span>
         </div>
+        <ul class="admin-nav-menu">
+            <li><a href="admin.html">Dashboard</a></li>
+            <li><a href="admin-heroes.html" class="active">Heroes</a></li>
+            <li><a href="admin-episodes.html">Episodes</a></li>
+            <li><a href="admin-blog.html">Blog</a></li>
+            <li><a href="admin-content.html">Content Editor</a></li>
+            <li><a href="index.html" target="_blank">View Site</a></li>
+        </ul>
+        <button id="logout-btn" class="btn-logout">Logout</button>
     </nav>
 
-    <main class="admin-main">
-        <div class="admin-container">
-            <div class="admin-header">
-                <h1 class="admin-title">Manage Heroes</h1>
-                <button class="btn btn-primary" onclick="showAddHeroForm()">+ Add New Hero</button>
-            </div>
+    <div class="admin-container">
+        <div class="page-header">
+            <h1>Manage Heroes</h1>
+            <button id="add-hero-btn" class="btn btn-primary">+ Add New Hero</button>
+        </div>
 
-            <!-- Hero Form (Hidden by default) -->
-            <div id="hero-form" class="admin-form" style="display: none;">
-                <h2 id="form-title">Add New Hero</h2>
-                <form id="hero-edit-form">
-                    <input type="hidden" id="hero-id">
+        <div id="heroes-list" class="items-grid">
+            <!-- Heroes will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Hero Modal -->
+    <div id="hero-modal" class="modal" style="display: none;">
+        <div class="modal-content modal-large">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title">Add New Hero</h2>
+            <form id="hero-form" class="admin-form">
+                <input type="hidden" id="hero-id">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="hero-name">Name:*</label>
+                        <input type="text" id="hero-name" required>
+                    </div>
                     
                     <div class="form-group">
-                        <label for="hero-name">Hero Name *</label>
-                        <input type="text" id="hero-name" required placeholder="e.g., Titan Cameraman">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="hero-slug">Slug (for URLs) *</label>
+                        <label for="hero-slug">Slug:*</label>
                         <input type="text" id="hero-slug" required placeholder="e.g., titan-camera">
                     </div>
-
-                    <div class="form-group">
-                        <label for="hero-description">Description *</label>
-                        <textarea id="hero-description" required rows="4" placeholder="Describe the hero's abilities and role"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="hero-image">Image Path *</label>
-                        <input type="text" id="hero-image" required placeholder="res/img/heroes/promo/hero-name.png">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="hero-video">Video Path *</label>
-                        <input type="text" id="hero-video" required placeholder="res/video/heroes/promo/hero-name.mp4">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Abilities (3 required)</label>
-                        <input type="text" id="ability-1" required placeholder="Ability 1">
-                        <input type="text" id="ability-2" required placeholder="Ability 2">
-                        <input type="text" id="ability-3" required placeholder="Ability 3">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="hero-order">Display Order</label>
-                        <input type="number" id="hero-order" min="1" value="1">
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Save Hero</button>
-                        <button type="button" class="btn btn-secondary" onclick="hideHeroForm()">Cancel</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Heroes List -->
-            <div class="admin-list">
-                <div id="heroes-list" class="items-grid">
-                    <!-- Heroes will be loaded here -->
                 </div>
-            </div>
+                
+                <div class="form-group">
+                    <label for="hero-description">Description:*</label>
+                    <textarea id="hero-description" rows="4" required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="hero-image">Image:*</label>
+                        <div class="file-input-group">
+                            <input type="text" id="hero-image" placeholder="Image path" required>
+                            <input type="file" id="hero-image-file" accept="image/*" style="display: none;">
+                            <button type="button" class="btn btn-secondary" onclick="document.getElementById('hero-image-file').click()">Upload</button>
+                        </div>
+                        <img id="hero-image-preview" src="" alt="Preview" style="max-width: 200px; margin-top: 10px; display: none;">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hero-video">Video:*</label>
+                        <div class="file-input-group">
+                            <input type="text" id="hero-video" placeholder="Video path" required>
+                            <input type="file" id="hero-video-file" accept="video/*" style="display: none;">
+                            <button type="button" class="btn btn-secondary" onclick="document.getElementById('hero-video-file').click()">Upload</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Abilities (3):*</label>
+                    <input type="text" id="ability-1" placeholder="Ability 1" required>
+                    <input type="text" id="ability-2" placeholder="Ability 2" required style="margin-top: 5px;">
+                    <input type="text" id="ability-3" placeholder="Ability 3" required style="margin-top: 5px;">
+                </div>
+                
+                <div class="form-group">
+                    <label for="hero-order">Display Order:*</label>
+                    <input type="number" id="hero-order" min="1" value="1" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save Hero</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                </div>
+            </form>
         </div>
-    </main>
+    </div>
 
-    <script src="scripts/admin-common.js"></script>
     <script src="scripts/admin-heroes.js"></script>
+    <script>
+        // Check auth
+        async function checkAuth() {
+            try {
+                const response = await fetch('/api/auth/check');
+                const data = await response.json();
+                if (!data.authenticated) window.location.href = '/login.html';
+                else loadHeroes();
+            } catch (error) {
+                window.location.href = '/login.html';
+            }
+        }
+
+        let currentHeroId = null;
+
+        async function loadHeroes() {
+            try {
+                const response = await fetch('/api/heroes');
+                const heroes = await response.json();
+                
+                const container = document.getElementById('heroes-list');
+                container.innerHTML = heroes.map(hero => `
+                    <div class="item-card">
+                        <img src="${hero.image}" alt="${hero.name}" onerror="this.src='res/img/all-together.png'">
+                        <h3>${hero.name}</h3>
+                        <p class="truncate">${hero.description}</p>
+                        <div class="abilities">
+                            ${JSON.parse(hero.abilities).map(a => `<span class="ability-tag">${a}</span>`).join('')}
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn btn-small" onclick="editHero(${hero.id})">Edit</button>
+                            <button class="btn btn-small btn-danger" onclick="deleteHero(${hero.id}, '${hero.name}')">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading heroes:', error);
+            }
+        }
+
+        document.getElementById('add-hero-btn').addEventListener('click', () => {
+            currentHeroId = null;
+            document.getElementById('modal-title').textContent = 'Add New Hero';
+            document.getElementById('hero-form').reset();
+            document.getElementById('hero-id').value = '';
+            document.getElementById('hero-image-preview').style.display = 'none';
+            document.getElementById('hero-modal').style.display = 'block';
+        });
+
+        async function editHero(id) {
+            try {
+                const response = await fetch('/api/heroes');
+                const heroes = await response.json();
+                const hero = heroes.find(h => h.id === id);
+                
+                if (!hero) return;
+                
+                currentHeroId = id;
+                document.getElementById('modal-title').textContent = 'Edit Hero';
+                document.getElementById('hero-id').value = id;
+                document.getElementById('hero-name').value = hero.name;
+                document.getElementById('hero-slug').value = hero.slug;
+                document.getElementById('hero-description').value = hero.description;
+                document.getElementById('hero-image').value = hero.image;
+                document.getElementById('hero-video').value = hero.video;
+                document.getElementById('hero-order').value = hero.display_order;
+                
+                const abilities = JSON.parse(hero.abilities);
+                document.getElementById('ability-1').value = abilities[0] || '';
+                document.getElementById('ability-2').value = abilities[1] || '';
+                document.getElementById('ability-3').value = abilities[2] || '';
+                
+                const preview = document.getElementById('hero-image-preview');
+                preview.src = hero.image;
+                preview.style.display = 'block';
+                
+                document.getElementById('hero-modal').style.display = 'block';
+            } catch (error) {
+                console.error('Error loading hero:', error);
+            }
+        }
+
+        async function deleteHero(id, name) {
+            if (!confirm(`Delete hero "${name}"?`)) return;
+            
+            try {
+                const response = await fetch(`/api/heroes/${id}`, { method: 'DELETE' });
+                if (response.ok) {
+                    loadHeroes();
+                    alert('Hero deleted successfully!');
+                }
+            } catch (error) {
+                console.error('Error deleting hero:', error);
+                alert('Failed to delete hero');
+            }
+        }
+
+        // File uploads
+        document.getElementById('hero-image-file').addEventListener('change', async (e) => {
+            await uploadFile(e.target.files[0], 'hero-image', 'hero-image-preview');
+        });
+
+        document.getElementById('hero-video-file').addEventListener('change', async (e) => {
+            await uploadFile(e.target.files[0], 'hero-video');
+        });
+
+        async function uploadFile(file, fieldId, previewId) {
+            if (!file) return;
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById(fieldId).value = data.path;
+                    if (previewId) {
+                        const preview = document.getElementById(previewId);
+                        preview.src = data.path;
+                        preview.style.display = 'block';
+                    }
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+            }
+        }
+
+        // Save hero
+        document.getElementById('hero-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const heroData = {
+                name: document.getElementById('hero-name').value,
+                slug: document.getElementById('hero-slug').value,
+                description: document.getElementById('hero-description').value,
+                image: document.getElementById('hero-image').value,
+                video: document.getElementById('hero-video').value,
+                abilities: [
+                    document.getElementById('ability-1').value,
+                    document.getElementById('ability-2').value,
+                    document.getElementById('ability-3').value
+                ],
+                display_order: parseInt(document.getElementById('hero-order').value)
+            };
+            
+            try {
+                const url = currentHeroId ? `/api/heroes/${currentHeroId}` : '/api/heroes';
+                const method = currentHeroId ? 'PUT' : 'POST';
+                
+                const response = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(heroData)
+                });
+                
+                if (response.ok) {
+                    closeModal();
+                    loadHeroes();
+                    alert('Hero saved successfully!');
+                }
+            } catch (error) {
+                console.error('Error saving hero:', error);
+                alert('Failed to save hero');
+            }
+        });
+
+        function closeModal() {
+            document.getElementById('hero-modal').style.display = 'none';
+        }
+
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            await fetch('/api/logout', { method: 'POST' });
+            window.location.href = '/login.html';
+        });
+
+        checkAuth();
+    </script>
 </body>
 </html>
