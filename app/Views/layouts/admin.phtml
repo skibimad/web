@@ -12,30 +12,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="admin-body">
-    <!-- Admin Navigation -->
-    <nav class="admin-navbar">
-        <div class="admin-container">
-            <div class="admin-logo">
-                <span class="logo-main">SKIBIDI</span>
-                <span class="logo-sub">ADMIN PANEL</span>
-            </div>
-            <ul class="admin-menu">
-                <li><a href="/admin">Dashboard</a></li>
-                <li><a href="/admin/heroes/heroes">Heroes</a></li>
-                <li><a href="/admin/episodes/episodes">Episodes</a></li>
-                <li><a href="/admin/blog/blog">Blog</a></li>
-                <li><a href="/admin/landing/landing">Landing Page</a></li>
-                <li><a href="/admin/youtube/channel">YouTube</a></li>
-                <li><a href="/admin/social/links">Social Links</a></li>
-                <li><a href="/">View Site</a></li>
-                <li><a href="/admin/logout">Logout</a></li>
-            </ul>
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="admin-logo">
+            <span class="logo-main">SKIBIDI</span>
+            <span class="logo-sub">ADMIN PANEL</span>
         </div>
-    </nav>
+        
+        <nav class="sidebar-nav">
+            <ul class="sidebar-menu">
+                <li><a href="/admin"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                <li><a href="/admin/heroes/heroes"><i class="fas fa-user-secret"></i> <span>Heroes</span></a></li>
+                <li><a href="/admin/episodes/episodes"><i class="fas fa-film"></i> <span>Episodes</span></a></li>
+                <li><a href="/admin/blog/blog"><i class="fas fa-newspaper"></i> <span>Blog</span></a></li>
+                <li><a href="/admin/landing/landing"><i class="fas fa-home"></i> <span>Landing Page</span></a></li>
+                <li><a href="/admin/youtube/channel"><i class="fab fa-youtube"></i> <span>YouTube</span></a></li>
+                <li><a href="/admin/social/links"><i class="fas fa-share-alt"></i> <span>Social Links</span></a></li>
+                <li><a href="/"><i class="fas fa-external-link-alt"></i> <span>View Site</span></a></li>
+                <li><a href="/admin/logout"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+            </ul>
+        </nav>
+    </aside>
 
     <!-- Main Content -->
     <main class="admin-main">
-        <div class="admin-container">
+        <div class="admin-content">
             <?= $content ?? '' ?>
         </div>
     </main>
