@@ -1,162 +1,275 @@
-# 🎬 Skibidi Madness - Official Landing Page
+# 🎬 Skibidi Madness - Official Website
 
 ![Skibidi Madness](res/img/all-together.png)
 
 ## 🌟 Overview
 
-**Skibidi Madness** is an epic multi-universe animation series created by **FireStormX Studios** that transcends the boundaries of the original Skibidi Toilet universe. This landing page showcases the revolutionary fusion of multiple dimensions, timelines, and realities where heroes unite against the forces of chaos.
-
-### 🎯 Key Features
-
-- **Multi-language Support**: Available in English, Spanish, French, and German
-- **Responsive Design**: Optimized for all devices from mobile to desktop
-- **Post-Apocalyptic Theme**: Dark, gritty aesthetics with neon accents
-- **Interactive Hero Gallery**: Hover effects and video previews
-- **Video Integration**: Embedded promo videos and YouTube links
-- **Smooth Animations**: Professional transitions and scroll effects
-- **SEO Optimized**: Meta tags and semantic HTML structure
+**Skibidi Madness** is an epic multi-universe animation series created by **FireStormX Studios** that transcends the boundaries of the original Skibidi Toilet universe. This is the official website with a full-featured admin panel for managing content.
 
 ## 🚀 Quick Start
 
-### Option 1: Direct Access (Recommended)
+### Prerequisites
+- Node.js 14+ and npm
+- SQLite3
 
-Simply open `index.html` in your web browser:
-
-```bash
-# Navigate to the project directory
-cd /path/to/skibidi-madness-web
-
-# Open in your default browser
-# On macOS:
-open index.html
-
-# On Linux:
-xdg-open index.html
-
-# On Windows:
-start index.html
-```
-
-### Option 2: Local Server
-
-For the best experience with video playback:
+### Installation
 
 ```bash
-# Using Python 3
-python -m http.server 8000
+# Clone the repository
+git clone https://github.com/skibimad/web.git
+cd web
 
-# Using Python 2
-python -m SimpleHTTPServer 8000
+# Install dependencies
+npm install
 
-# Using Node.js (if you have http-server installed)
-npx http-server -p 8000
+# Initialize the database with demo data
+npm run init-db
 
-# Using PHP
-php -S localhost:8000
+# Start the server
+npm start
 ```
 
-Then open `http://localhost:8000` in your browser.
+The server will start on `http://localhost:3000`
+
+### Development Mode
+
+```bash
+# Start with auto-restart on file changes
+npm run dev
+```
+
+## 🔐 Admin Access
+
+**Default Credentials:**
+- Username: `fsx`
+- Password: `111111`
+
+**Admin Panel:** http://localhost:3000/login.html
+
+After logging in, you can:
+- Manage hero cards
+- Manage featured episodes
+- Write and publish blog posts
+- Edit static landing page content
+- Upload images and videos
+- Change your password
 
 ## 📁 Project Structure
 
 ```
 skibidi-madness-web/
-├── index.html                  # Main HTML file
-├── README.md                   # This file
-├── LICENSE                     # License information
+├── server.js              # Express server with API endpoints
+├── init-db.js             # Database initialization script
+├── package.json           # Dependencies and scripts
+├── database.sqlite        # SQLite database (auto-created)
+│
+├── index.html             # Main landing page
+├── blog.html              # Blog listing page
+├── login.html             # Admin login page
+│
+├── admin.html             # Admin dashboard
+├── admin-heroes.html      # Heroes management
+├── admin-episodes.html    # Episodes management
+├── admin-blog.html        # Blog management
+│
 ├── styles/
-│   └── main.css               # Main stylesheet
+│   ├── main.css           # Main stylesheet
+│   └── admin.css          # Admin panel styles
+│
 ├── scripts/
-│   ├── translations.js        # Multi-language translations
-│   └── main.js                # Main JavaScript functionality
-└── res/                       # Resources directory
-    ├── img/
-    │   ├── all-together.png   # Main hero image
-    │   └── heroes/
-    │       └── promo/         # Individual hero images
-    │           ├── g-man.png
-    │           ├── star-storage.png
-    │           ├── titan-camera.png
-    │           ├── titan-speaker.png
-    │           └── titan-tv.png
-    └── video/
-        ├── all-together.mp4   # Main promo video
-        └── heroes/
-            └── promo/         # Individual hero videos
-                ├── g-man.mp4
-                ├── star-storage.mp4
-                ├── titan-camera.mp4
-                ├── titan-speaker.mp4
-                └── titan-tv.mp4
+│   ├── main.js            # Main site JavaScript
+│   ├── blog.js            # Blog display logic
+│   ├── admin-common.js    # Shared admin functions (DEPRECATED - use API)
+│   ├── admin-dashboard.js # Dashboard logic
+│   ├── admin-heroes.js    # Heroes CRUD
+│   ├── admin-episodes.js  # Episodes CRUD
+│   └── admin-blog.js      # Blog CRUD
+│
+├── res/                   # Static resources
+│   ├── img/               # Images
+│   │   ├── all-together.png
+│   │   └── heroes/promo/  # Hero images
+│   └── video/             # Videos
+│       ├── all-together.mp4
+│       └── heroes/promo/  # Hero videos
+│
+└── uploads/               # User-uploaded files (auto-created)
 ```
 
-## 🎨 Design & Theme
+## 🎨 Features
 
-### Color Palette
+### Front-End
+- ✅ **Responsive Design**: Mobile-first approach, works on all devices
+- ✅ **Post-Apocalyptic Theme**: Dark backgrounds with neon accents
+- ✅ **Dynamic Content**: All content loaded from SQLite database
+- ✅ **Interactive Hero Cards**: Video preview on hover
+- ✅ **Blog System**: Full blog with featured images and excerpts
+- ✅ **SEO Optimized**: Meta tags and semantic HTML
 
-The landing page uses a **post-apocalyptic fantasy** color scheme:
+### Admin Panel
+- ✅ **Secure Authentication**: Session-based login with bcrypt
+- ✅ **Heroes Management**: Add/edit/delete hero cards
+- ✅ **Episodes Management**: Manage featured episodes
+- ✅ **Blog Management**: Write and publish blog posts
+- ✅ **Static Content Editor**: Edit landing page text and images
+- ✅ **File Upload**: Upload images and videos through the interface
+- ✅ **Password Management**: Change admin password
 
-- **Primary Red**: `#ff3366` - Action, danger, energy
-- **Secondary Cyan**: `#00ffcc` - Technology, future
-- **Accent Yellow**: `#ffcc00` - Highlights, warnings
-- **Accent Purple**: `#9933ff` - Mystery, power
-- **Dark Backgrounds**: `#0a0a0f`, `#141419`, `#1e1e28`
+## 🗄️ Database Schema
 
-### Typography
+### Users Table
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
 
-- **Headings**: [Orbitron](https://fonts.google.com/specimen/Orbitron) - Futuristic, tech-inspired
-- **Body Text**: [Rajdhani](https://fonts.google.com/specimen/Rajdhani) - Modern, readable
+### Heroes Table
+```sql
+CREATE TABLE heroes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    slug TEXT UNIQUE NOT NULL,
+    description TEXT,
+    image TEXT,
+    video TEXT,
+    abilities TEXT,  -- JSON array
+    display_order INTEGER DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
 
-## 🌍 Multi-Language Support
+### Episodes Table
+```sql
+CREATE TABLE episodes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    episode_number INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT,
+    thumbnail TEXT,
+    video_url TEXT,
+    duration TEXT,
+    release_date DATE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
 
-The site supports four languages:
+### Blog Posts Table
+```sql
+CREATE TABLE blog_posts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    slug TEXT UNIQUE NOT NULL,
+    image TEXT,
+    excerpt TEXT,
+    content TEXT,
+    author TEXT DEFAULT 'FireStormX Studios',
+    date DATE,
+    published INTEGER DEFAULT 1,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
 
-| Language | Code | Status |
-|----------|------|--------|
-| English  | `en` | ✅ Complete |
-| Spanish  | `es` | ✅ Complete |
-| French   | `fr` | ✅ Complete |
-| German   | `de` | ✅ Complete |
+### Static Content Table
+```sql
+CREATE TABLE static_content (
+    key TEXT PRIMARY KEY,
+    value TEXT,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
 
-Language can be changed using:
-- Language selector buttons in the top-right corner
-- Keyboard shortcut: Press `L` key
-- Preference is saved in browser's localStorage
+## 🔌 API Endpoints
 
-## 🎭 Featured Heroes
+### Authentication
+- `POST /api/login` - User login
+- `POST /api/logout` - User logout
+- `GET /api/auth/check` - Check auth status
+- `POST /api/change-password` - Change password (auth required)
 
-### 1. Titan Cameraman
-The vigilant guardian with unmatched surveillance capabilities and devastating firepower.
+### Heroes
+- `GET /api/heroes` - Get all heroes
+- `POST /api/heroes` - Create hero (auth required)
+- `PUT /api/heroes/:id` - Update hero (auth required)
+- `DELETE /api/heroes/:id` - Delete hero (auth required)
 
-### 2. Titan Speakerman
-Master of sonic devastation who channels raw sound energy into overwhelming force.
+### Episodes
+- `GET /api/episodes` - Get all episodes
+- `POST /api/episodes` - Create episode (auth required)
+- `PUT /api/episodes/:id` - Update episode (auth required)
+- `DELETE /api/episodes/:id` - Delete episode (auth required)
 
-### 3. Titan TV Man
-The hypnotic warrior whose screen broadcasts reality-altering frequencies.
+### Blog
+- `GET /api/blog` - Get published posts
+- `GET /api/blog/all` - Get all posts (auth required)
+- `POST /api/blog` - Create post (auth required)
+- `PUT /api/blog/:id` - Update post (auth required)
+- `DELETE /api/blog/:id` - Delete post (auth required)
 
-### 4. G-Man
-The enigmatic leader whose true power remains shrouded in mystery.
+### Static Content
+- `GET /api/content` - Get all static content
+- `PUT /api/content/:key` - Update content (auth required)
 
-### 5. Star Storage
-The cosmic keeper who harnesses stellar energy from across galaxies.
+### File Upload
+- `POST /api/upload` - Upload file (auth required)
 
-## 📺 YouTube Integration
+## 🎯 Content Management
 
-### Official Channels & References
+### Managing Heroes
+1. Login to admin panel
+2. Navigate to "Heroes" section
+3. Click "+ Add New Hero"
+4. Fill in hero details:
+   - Name, slug, description
+   - Upload image and video
+   - Add 3 abilities
+   - Set display order
+5. Save
 
-- **FireStormX Studios**: [@FireStormX!?](https://www.youtube.com/@FireStormX!?) - Original content creator
-- **DaFuq!?Boom!**: [@DaFuqBoom](https://www.youtube.com/@DaFuqBoom) - Original Skibidi Toilet creator
-- **DOM Studio**: [@DOMSTUDIO](https://www.youtube.com/@DOMSTUDIO) - Community contributor
-- **Virlance**: [@virlance](https://www.youtube.com/@virlance) - Community contributor
-- **Maxedy**: [@MaxedyYT](https://www.youtube.com/@MaxedyYT) - Community contributor
+### Managing Episodes
+1. Login to admin panel
+2. Navigate to "Episodes" section
+3. Click "+ Add New Episode"
+4. Fill in episode details:
+   - Episode number and title
+   - Description and thumbnail
+   - YouTube URL
+   - Duration and release date
+5. Save
 
-## 🛠️ Technologies Used
+### Managing Blog
+1. Login to admin panel
+2. Navigate to "Blog" section
+3. Click "+ Write New Post"
+4. Fill in post details:
+   - Title and slug
+   - Upload featured image
+   - Write excerpt and content
+   - Set publish status
+5. Save
 
-- **HTML5**: Semantic markup, video support
-- **CSS3**: Flexbox, Grid, animations, custom properties
-- **JavaScript (ES6+)**: Modern features, no frameworks required
-- **Google Fonts**: Orbitron & Rajdhani
-- **Responsive Design**: Mobile-first approach
+### Editing Static Content
+1. Login to admin panel
+2. Navigate to "Content Editor"
+3. Edit any landing page text
+4. Upload new images
+5. Save changes
+
+## 🎨 Design System
+
+**Color Palette:**
+- Primary Red: `#ff3366` - Action, energy
+- Secondary Cyan: `#00ffcc` - Technology, future
+- Accent Yellow: `#ffcc00` - Highlights
+- Accent Purple: `#9933ff` - Mystery, power
+- Dark Backgrounds: `#0a0a0f`, `#141419`, `#1e1e28`
+
+**Typography:**
+- Headings: **Orbitron** (futuristic, tech-inspired)
+- Body: **Rajdhani** (modern, highly readable)
 
 ## 📱 Browser Compatibility
 
@@ -167,151 +280,62 @@ The cosmic keeper who harnesses stellar energy from across galaxies.
 | Safari  | 14+ |
 | Edge    | 90+ |
 
-## ⚡ Performance Optimizations
+## 🔒 Security Features
 
-- **Lazy Loading**: Images load only when needed
-- **Video Optimization**: Compressed MP4 format with efficient codecs
-- **CSS Animations**: Hardware-accelerated transforms
-- **Minimal Dependencies**: No heavy frameworks
-- **Responsive Images**: Appropriate sizing for different viewports
+- ✅ Bcrypt password hashing (10 rounds)
+- ✅ Session-based authentication
+- ✅ Protected admin endpoints
+- ✅ File upload validation
+- ✅ SQL injection prevention (parameterized queries)
+- ✅ CORS protection
+- ✅ 24-hour session timeout
 
-## 🎮 Interactive Features
+## 🚢 Deployment
 
-### Keyboard Shortcuts
-
-- `H` - Scroll to home/top
-- `L` - Cycle through languages
-
-### Mobile Support
-
-- Touch-enabled hero cards
-- Responsive hamburger menu
-- Optimized video playback
-- Smooth scrolling
-
-### Desktop Enhancements
-
-- Parallax effects
-- Hover video previews
-- Advanced animations
-- Glitch effects
-
-## 📊 SEO & Metadata
-
-The page includes comprehensive SEO optimization:
-
-- Meta descriptions
-- Open Graph tags
-- Semantic HTML structure
-- Keyword optimization
-- Accessibility features
-
-## 🔧 Customization
-
-### Changing Colors
-
-Edit CSS variables in `styles/main.css`:
-
-```css
-:root {
-    --color-primary: #ff3366;
-    --color-secondary: #00ffcc;
-    /* etc. */
-}
-```
-
-### Adding New Languages
-
-Add translations in `scripts/translations.js`:
-
-```javascript
-translations.newLang = {
-    nav: { /* ... */ },
-    hero: { /* ... */ },
-    // etc.
-};
-```
-
-### Modifying Content
-
-Edit `index.html` directly. All translatable text uses `data-i18n` attributes.
-
-## 🌐 Deployment
-
-### GitHub Pages
-
+### Heroku
 ```bash
-# Enable GitHub Pages in repository settings
-# Select main branch and root directory
-# Access at: https://yourusername.github.io/repository-name
+# Add Procfile
+echo "web: node server.js" > Procfile
+
+# Deploy
+heroku create your-app-name
+git push heroku main
 ```
 
-### Netlify
-
+### DigitalOcean / VPS
 ```bash
-# Drag and drop the project folder to Netlify
-# Or connect your GitHub repository
+# Clone repository
+git clone https://github.com/skibimad/web.git
+cd web
+
+# Install dependencies
+npm install
+
+# Initialize database
+npm run init-db
+
+# Start with PM2
+pm2 start server.js --name skibidi-madness
+pm2 save
+pm2 startup
 ```
 
-### Vercel
-
+### Environment Variables
 ```bash
-# Import your GitHub repository
-# Build command: (leave empty)
-# Output directory: .
+PORT=3000  # Server port (default: 3000)
 ```
 
-### Traditional Hosting
-
-Upload all files to your web server via FTP/SFTP. Ensure relative paths are maintained.
-
-## 📄 File Paths
-
-All resource paths are **relative** for portability:
-
-```html
-<!-- Images -->
-<img src="res/img/all-together.png">
-
-<!-- Videos -->
-<video src="res/video/all-together.mp4">
-
-<!-- Stylesheets -->
-<link href="styles/main.css">
-
-<!-- Scripts -->
-<script src="scripts/main.js">
-```
-
-The entire project can be moved to any directory without breaking links.
-
-## 🎥 Media Credits
-
-All hero images and videos are located in the `res/` directory:
-
-- Hero promo images: `res/img/heroes/promo/`
-- Hero promo videos: `res/video/heroes/promo/`
-- Combined visuals: `res/img/all-together.png` and `res/video/all-together.mp4`
-
-## 🤝 Contributing
-
-This is a fan-created project. Contributions are welcome!
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test across browsers
-5. Submit a pull request
-
-## 📜 License
+## 📝 License
 
 See [LICENSE](LICENSE) file for details.
 
 ## ⚠️ Disclaimer
 
-**Skibidi Madness** is a fan-created series inspired by the Skibidi Toilet universe. This project is not officially affiliated with the original creators (DaFuq!?Boom! or other community creators). All trademarks and copyrights belong to their respective owners.
+**Skibidi Madness** is a fan-created series inspired by the Skibidi Toilet universe created by DaFuq!?Boom!. This project is not officially affiliated with the original creator. All trademarks and copyrights belong to their respective owners.
 
-This landing page is created for entertainment and promotional purposes.
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 🎬 The Story
 
@@ -319,7 +343,7 @@ This landing page is created for entertainment and promotional purposes.
 
 In **Skibidi Madness**, a new story unfolds featuring the chaos and fury of the evil forces known as the **Asotra**. Unlike the original series where heroes battled entire armies, this saga focuses on a single, formidable enemy: the **Supreme Leader**.
 
-This isn't just about the Skibidi Toilet universe from various stories like DOM Studio, Virlance, or Maxedy. Skibidi Madness encompasses **everything that exists**: Marvel, Stranger Things, DC, Star Wars, Minecraft, and countless other universes collide in an unprecedented multiverse event.
+This isn't just about the Skibidi Toilet universe from various stories. Skibidi Madness encompasses **everything that exists**: Marvel, Stranger Things, DC, Star Wars, Minecraft, and countless other universes collide in an unprecedented multiverse event.
 
 ### The Heroes
 
@@ -336,14 +360,8 @@ Together, they face the greatest threat the multiverse has ever known.
 ## 📞 Contact & Support
 
 - **YouTube**: [@FireStormX!?](https://www.youtube.com/@FireStormX!?)
+- **Original Creator**: [@DaFuqBoom](https://www.youtube.com/@DaFuqBoom)
 - **Issues**: Use GitHub Issues for bug reports
-- **Discussions**: Use GitHub Discussions for questions
-
-## 🎉 Special Thanks
-
-- DaFuq!?Boom! for creating the original Skibidi Toilet universe
-- DOM Studio, Virlance, Maxedy for expanding the community
-- All fans and supporters of the series
 
 ---
 
