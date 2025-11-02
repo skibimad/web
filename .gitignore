@@ -22,12 +22,14 @@ tmp/
 *.log
 logs/
 
-# Dependencies (if any are added in future)
+# Dependencies
 node_modules/
 package-lock.json
 yarn.lock
+vendor/
+composer.lock
 
-# Build artifacts (if any are added in future)
+# Build artifacts
 dist/
 build/
 .next/
@@ -45,3 +47,8 @@ coverage/
 # Misc
 *.bak
 *.orig
+
+# Old static HTML files (being replaced by MVC)
+index.html.old
+blog.html.old
+admin*.html.old

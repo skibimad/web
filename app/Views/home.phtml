@@ -1,0 +1,168 @@
+<?php ob_start(); ?>
+
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+    <div class="hero-background">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="/res/video/all-together.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+        <h1 class="glitch-text" data-text="SKIBIDI MADNESS">
+            <span>SKIBIDI MADNESS</span>
+        </h1>
+        <p class="hero-subtitle">A New Era of Chaos Begins</p>
+        <p class="hero-description">
+            Dive into an epic multiverse where heroes unite against the forces of chaos. 
+            From the depths of the Skibidi universe to the realms of Marvel, DC, Star Wars, and beyond.
+        </p>
+        <div class="hero-buttons">
+            <a href="#videos" class="btn btn-primary">Watch Now</a>
+            <a href="https://www.youtube.com/@FireStormX!?" target="_blank" class="btn btn-secondary">Subscribe</a>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <div class="scroll-arrow"></div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about-section">
+    <div class="container">
+        <h2 class="section-title">The Story Unfolds</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>A New Chapter in the Skibidi Universe</h3>
+                <p>
+                    Welcome to <strong>Skibidi Madness</strong> - an extraordinary animation series created by FireStormX Studios 
+                    that transcends the boundaries of the original Skibidi Toilet universe.
+                </p>
+                <p>
+                    In this new saga, witness the unprecedented chaos unleashed by the malevolent forces known as the 
+                    <strong>Asotra</strong>. Our heroes now face their most formidable adversary yet - the mysterious and 
+                    powerful <strong>Supreme Leader</strong>.
+                </p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">Legendary Heroes</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Universes Connected</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1</span>
+                        <span class="stat-label">Supreme Threat</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="/res/img/all-together.png" alt="All Heroes Together">
+                <div class="image-glow"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Heroes Section -->
+<section id="heroes" class="heroes-section">
+    <div class="container">
+        <h2 class="section-title">Meet the Heroes</h2>
+        <p class="section-subtitle">Five legendary champions unite against the darkness</p>
+        <div class="heroes-grid">
+            <?php foreach ($heroes as $hero): ?>
+            <div class="hero-card" data-hero="<?= htmlspecialchars($hero->slug) ?>">
+                <div class="hero-card-inner">
+                    <div class="hero-card-front">
+                        <img src="/<?= htmlspecialchars($hero->image) ?>" alt="<?= htmlspecialchars($hero->name) ?>">
+                        <div class="hero-card-overlay">
+                            <h3><?= htmlspecialchars($hero->name) ?></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-info">
+                    <h3><?= htmlspecialchars($hero->name) ?></h3>
+                    <p><?= htmlspecialchars($hero->description) ?></p>
+                    <div class="hero-abilities">
+                        <?php foreach ($hero->getAbilities() as $ability): ?>
+                        <span class="ability-badge"><?= htmlspecialchars($ability) ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- Episodes Section -->
+<section id="videos" class="episodes-section">
+    <div class="container">
+        <h2 class="section-title">Episodes</h2>
+        <p class="section-subtitle">Watch the epic saga unfold</p>
+        <div class="episodes-grid">
+            <?php foreach ($episodes as $episode): ?>
+            <div class="episode-card">
+                <div class="episode-thumbnail">
+                    <img src="/<?= htmlspecialchars($episode->thumbnail) ?>" alt="<?= htmlspecialchars($episode->title) ?>">
+                    <div class="episode-overlay">
+                        <span class="episode-number">Episode <?= $episode->episode_number ?></span>
+                        <span class="episode-duration"><?= htmlspecialchars($episode->duration) ?></span>
+                    </div>
+                </div>
+                <div class="episode-info">
+                    <h3><?= htmlspecialchars($episode->title) ?></h3>
+                    <p><?= htmlspecialchars($episode->description) ?></p>
+                    <a href="<?= htmlspecialchars($episode->video_url) ?>" target="_blank" class="btn btn-primary">Watch Now</a>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Section -->
+<?php if (!empty($recentPosts)): ?>
+<section id="blog" class="blog-section">
+    <div class="container">
+        <h2 class="section-title">Latest from the Blog</h2>
+        <div class="blog-grid">
+            <?php foreach ($recentPosts as $post): ?>
+            <div class="blog-card">
+                <img src="/<?= htmlspecialchars($post['image']) ?>" alt="<?= htmlspecialchars($post['title']) ?>" class="blog-card-image">
+                <div class="blog-card-content">
+                    <h3 class="blog-card-title"><?= htmlspecialchars($post['title']) ?></h3>
+                    <div class="blog-card-meta">
+                        <?= htmlspecialchars($post['author']) ?> • <?= date('F j, Y', strtotime($post['published_at'])) ?>
+                    </div>
+                    <p class="blog-card-excerpt"><?= htmlspecialchars($post['excerpt'] ?? substr(strip_tags($post['content']), 0, 150) . '...') ?></p>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="text-center">
+            <a href="/blog" class="btn btn-secondary">View All Posts</a>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- Channel Section -->
+<section id="channel" class="channel-section">
+    <div class="container">
+        <h2 class="section-title">Join Our Community</h2>
+        <p class="section-subtitle">Subscribe to FireStormX Studios on YouTube</p>
+        <div class="channel-content">
+            <a href="https://www.youtube.com/@FireStormX!?" target="_blank" class="btn btn-primary btn-large">
+                Subscribe Now
+            </a>
+        </div>
+    </div>
+</section>
+
+<?php 
+$content = ob_get_clean();
+require __DIR__ . '/layouts/main.phtml';
+?>

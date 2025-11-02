@@ -1,0 +1,35 @@
+<?php ob_start(); ?>
+
+<h1 class="admin-title">Manage Heroes</h1>
+
+<div class="admin-table-container">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Order</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Abilities</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($heroes as $hero): ?>
+            <tr>
+                <td><?= $hero->display_order ?></td>
+                <td><?= htmlspecialchars($hero->name) ?></td>
+                <td><?= htmlspecialchars($hero->slug) ?></td>
+                <td><?= htmlspecialchars($hero->abilities) ?></td>
+                <td>
+                    <a href="/admin/heroes/edit?id=<?= $hero->id ?>" class="btn btn-small">Edit</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<?php 
+$content = ob_get_clean();
+require __DIR__ . '/../../layouts/admin.phtml';
+?>

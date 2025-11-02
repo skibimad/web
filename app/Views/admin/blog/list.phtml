@@ -1,0 +1,35 @@
+<?php ob_start(); ?>
+
+<h1 class="admin-title">Manage Blog Posts</h1>
+
+<div class="admin-table-container">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Published</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($posts as $post): ?>
+            <tr>
+                <td><?= htmlspecialchars($post->title) ?></td>
+                <td><?= htmlspecialchars($post->author) ?></td>
+                <td><?= $post->published ? 'Yes' : 'No' ?></td>
+                <td><?= $post->getFormattedDate() ?></td>
+                <td>
+                    <a href="/admin/blog/edit?id=<?= $post->id ?>" class="btn btn-small">Edit</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<?php 
+$content = ob_get_clean();
+require __DIR__ . '/../../layouts/admin.phtml';
+?>

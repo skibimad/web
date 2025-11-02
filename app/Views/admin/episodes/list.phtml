@@ -1,0 +1,35 @@
+<?php ob_start(); ?>
+
+<h1 class="admin-title">Manage Episodes</h1>
+
+<div class="admin-table-container">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Episode #</th>
+                <th>Title</th>
+                <th>Duration</th>
+                <th>Release Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($episodes as $episode): ?>
+            <tr>
+                <td><?= $episode->episode_number ?></td>
+                <td><?= htmlspecialchars($episode->title) ?></td>
+                <td><?= htmlspecialchars($episode->duration) ?></td>
+                <td><?= $episode->getFormattedDate() ?></td>
+                <td>
+                    <span class="text-muted">View Only</span>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<?php 
+$content = ob_get_clean();
+require __DIR__ . '/../../layouts/admin.phtml';
+?>
