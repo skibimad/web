@@ -49,6 +49,21 @@
                     <p>Where Chaos Meets Destiny</p>
                 </div>
                 <div class="footer-links">
+                    <?php if (!empty($socialLinks) && count($socialLinks) > 0): ?>
+                    <div class="footer-column">
+                        <h4>Social Media</h4>
+                        <ul>
+                            <?php foreach ($socialLinks as $link): ?>
+                            <li>
+                                <a href="<?= htmlspecialchars($link->url) ?>" target="_blank">
+                                    <i class="<?= htmlspecialchars($link->icon_class) ?>"></i>
+                                    <?= htmlspecialchars($link->platform) ?>
+                                </a>
+                            </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <?php endif; ?>
                     <div class="footer-column">
                         <h4>Community</h4>
                         <ul>

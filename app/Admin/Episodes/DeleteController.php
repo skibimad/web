@@ -8,9 +8,9 @@ use App\Core\Request;
 use App\Models\Episode;
 
 /**
- * Admin Episodes List Controller
+ * Delete Episode Controller
  */
-class EpisodesController extends Controller
+class DeleteController extends Controller
 {
     public function handle(Request $request): void
     {
@@ -18,10 +18,11 @@ class EpisodesController extends Controller
         $auth = new Auth();
         $auth->require();
         
-        $episodes = Episode::allOrdered();
+        $id = $request->get('id');
+        if ($id) {
+            Episode::delete($id);
+        }
         
-        $this->view('admin/episodes/list', [
-            'episodes' => $episodes
-        ]);
+        $this->redirect('/admin/episodes/episodes');
     }
 }

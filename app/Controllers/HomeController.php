@@ -7,6 +7,7 @@ use App\Core\Request;
 use App\Models\Hero;
 use App\Models\Episode;
 use App\Models\BlogPost;
+use App\Models\SocialLink;
 
 /**
  * Home Controller
@@ -23,10 +24,14 @@ class HomeController extends Controller
         $recentPostsArray = $recentPosts->toArray();
         $recentPosts = array_slice($recentPostsArray, 0, 3);
         
+        // Get social links for footer
+        $socialLinks = SocialLink::enabled();
+        
         $this->view('home', [
             'heroes' => $heroes,
             'episodes' => $episodes,
-            'recentPosts' => $recentPosts
+            'recentPosts' => $recentPosts,
+            'socialLinks' => $socialLinks
         ]);
     }
 }

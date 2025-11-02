@@ -1,0 +1,45 @@
+<?php ob_start(); ?>
+
+<h1 class="admin-title">YouTube Channel Settings</h1>
+
+<form method="POST" class="admin-form">
+    <div class="form-group">
+        <label for="channel_name">Channel Name</label>
+        <input type="text" id="channel_name" name="channel_name" value="<?= htmlspecialchars($channel->channel_name ?? '') ?>" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="channel_url">Channel URL</label>
+        <input type="url" id="channel_url" name="channel_url" value="<?= htmlspecialchars($channel->channel_url ?? '') ?>" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="channel_handle">Channel Handle</label>
+        <input type="text" id="channel_handle" name="channel_handle" value="<?= htmlspecialchars($channel->channel_handle ?? '') ?>" required placeholder="@YourChannelHandle">
+    </div>
+    
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4"><?= htmlspecialchars($channel->description ?? '') ?></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="subscriber_count">Subscriber Count</label>
+        <input type="text" id="subscriber_count" name="subscriber_count" value="<?= htmlspecialchars($channel->subscriber_count ?? '') ?>" placeholder="e.g., 10K+">
+    </div>
+    
+    <div class="form-group">
+        <label for="video_count">Video Count</label>
+        <input type="text" id="video_count" name="video_count" value="<?= htmlspecialchars($channel->video_count ?? '') ?>" placeholder="e.g., 50+">
+    </div>
+    
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save Settings</button>
+        <a href="/admin" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</form>
+
+<?php 
+$content = ob_get_clean();
+require __DIR__ . '/../../layouts/admin.phtml';
+?>
