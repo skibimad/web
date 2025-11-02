@@ -55,3 +55,7 @@ coverage/
 database/*.db
 database/*.sqlite
 database/*.sqlite3
+
+# Uploaded files
+uploads/*
+!uploads/.gitkeep

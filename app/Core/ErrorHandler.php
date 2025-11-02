@@ -7,13 +7,26 @@ namespace App\Core;
  */
 class ErrorHandler
 {
-    private static array $heroImages = [
-        '/res/img/heroes/promo/titan-camera.png',
-        '/res/img/heroes/promo/titan-speaker.png',
-        '/res/img/heroes/promo/titan-tv.png',
-        '/res/img/heroes/promo/g-man.png',
-        '/res/img/heroes/promo/star-storage.png',
-    ];
+    /**
+     * Get random background video from fun folder
+     */
+    private static function getRandomVideo(): ?string
+    {
+        $videoPath = __DIR__ . '/../../res/video/fun/';
+        
+        if (!is_dir($videoPath)) {
+            return null;
+        }
+        
+        $videos = glob($videoPath . '*.{mp4,webm,mov}', GLOB_BRACE);
+        
+        if (empty($videos)) {
+            return null;
+        }
+        
+        $randomVideo = $videos[array_rand($videos)];
+        return str_replace(__DIR__ . '/../../', '/', $randomVideo);
+    }
     
     /**
      * Handle 404 Not Found
@@ -21,7 +34,7 @@ class ErrorHandler
     public static function handle404(): void
     {
         http_response_code(404);
-        $heroImage = self::getRandomHeroImage();
+        $backgroundVideo = self::getRandomVideo();
         require __DIR__ . '/../Views/errors/404.phtml';
         exit;
     }
@@ -32,7 +45,7 @@ class ErrorHandler
     public static function handle500(\Throwable $exception = null): void
     {
         http_response_code(500);
-        $heroImage = self::getRandomHeroImage();
+        $backgroundVideo = self::getRandomVideo();
         $errorMessage = $exception ? $exception->getMessage() : 'An unexpected error occurred';
         $errorTrace = $exception ? $exception->getTraceAsString() : '';
         
@@ -54,17 +67,9 @@ class ErrorHandler
     public static function handleError(int $code, string $message = ''): void
     {
         http_response_code($code);
-        $heroImage = self::getRandomHeroImage();
+        $backgroundVideo = self::getRandomVideo();
         require __DIR__ . '/../Views/errors/generic.phtml';
         exit;
-    }
-    
-    /**
-     * Get random hero image
-     */
-    private static function getRandomHeroImage(): string
-    {
-        return self::$heroImages[array_rand(self::$heroImages)];
     }
     
     /**
@@ -73,7 +78,7 @@ class ErrorHandler
     public static function register(): void
     {
         set_exception_handler([self::class, 'handleException']);
-        set_error_handler([self::class, 'handleError']);
+        set_error_handler([self::class, 'handlePhpError']);
         register_shutdown_function([self::class, 'handleFatalError']);
     }
     
@@ -83,6 +88,19 @@ class ErrorHandler
     public static function handleException(\Throwable $exception): void
     {
         self::handle500($exception);
+    }
+    
+    /**
+     * Handle PHP errors
+     */
+    public static function handlePhpError(int $errno, string $errstr, string $errfile, int $errline): bool
+    {
+        // Don't handle suppressed errors
+        if (!(error_reporting() & $errno)) {
+            return false;
+        }
+        
+        throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);
     }
     
     /**

@@ -58,6 +58,18 @@ class Database
         return $this->connection;
     }
     
+    public function getPdo(): \PDO
+    {
+        return $this->connection;
+    }
+    
+    public function query(string $sql, array $params = []): \PDOStatement
+    {
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute($params);
+        return $stmt;
+    }
+    
     // Prevent cloning
     private function __clone() {}
     
