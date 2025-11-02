@@ -1,37 +1,34 @@
-// Blog Display Script for Front-End (API Version)
+// Blog Display Script for Front-End
 
 document.addEventListener('DOMContentLoaded', function() {
     loadBlogPosts();
 });
 
-async function loadBlogPosts() {
-    try {
-        // Get blog posts from API
-        const response = await fetch('/api/blog');
-        const posts = await response.json();
-        
-        const container = document.getElementById('blog-posts-grid');
-        const noPostsDiv = document.getElementById('no-posts');
-        
-        if (posts.length === 0) {
-            if (container) container.style.display = 'none';
-            if (noPostsDiv) noPostsDiv.style.display = 'block';
-            return;
-        }
-        
-        if (container) {
-            container.innerHTML = posts.map(post => createBlogCard(post)).join('');
-        }
-        
-        if (noPostsDiv) noPostsDiv.style.display = 'none';
-    } catch (error) {
-        console.error('Error loading blog posts:', error);
-        const noPostsDiv = document.getElementById('no-posts');
-        if (noPostsDiv) {
-            noPostsDiv.innerHTML = '<h3>Unable to load blog posts</h3><p>Please try again later.</p>';
-            noPostsDiv.style.display = 'block';
-        }
+function loadBlogPosts() {
+    // Get blog posts from localStorage
+    const blogData = localStorage.getItem('skibidi_blog');
+    const posts = blogData ? JSON.parse(blogData) : [];
+    
+    // Filter only published posts
+    const publishedPosts = posts.filter(post => post.published !== false);
+    
+    // Sort by date (newest first)
+    publishedPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    const container = document.getElementById('blog-posts-grid');
+    const noPostsDiv = document.getElementById('no-posts');
+    
+    if (publishedPosts.length === 0) {
+        if (container) container.style.display = 'none';
+        if (noPostsDiv) noPostsDiv.style.display = 'block';
+        return;
     }
+    
+    if (container) {
+        container.innerHTML = publishedPosts.map(post => createBlogCard(post)).join('');
+    }
+    
+    if (noPostsDiv) noPostsDiv.style.display = 'none';
 }
 
 function createBlogCard(post) {
@@ -66,28 +63,23 @@ function truncateText(text, maxLength) {
     return cleanText.substring(0, maxLength).trim() + '...';
 }
 
-// Function to load first N posts for home page
-async function loadRecentBlogPosts(containerId, limit = 3) {
-    try {
-        const response = await fetch('/api/blog');
-        const posts = await response.json();
-        
-        const recentPosts = posts.slice(0, limit);
-        const container = document.getElementById(containerId);
-        
-        if (!container) return;
-        
-        if (recentPosts.length === 0) {
-            container.innerHTML = '<div class="no-content"><p>No blog posts yet. Check back soon!</p></div>';
-            return;
-        }
-        
-        container.innerHTML = recentPosts.map(post => createBlogCard(post)).join('');
-    } catch (error) {
-        console.error('Error loading recent blog posts:', error);
-        const container = document.getElementById(containerId);
-        if (container) {
-            container.innerHTML = '<div class="no-content"><p>Unable to load blog posts.</p></div>';
-        }
+// Function to load first 3 posts for home page
+function loadRecentBlogPosts(containerId, limit = 3) {
+    const blogData = localStorage.getItem('skibidi_blog');
+    const posts = blogData ? JSON.parse(blogData) : [];
+    
+    const publishedPosts = posts.filter(post => post.published !== false);
+    publishedPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    const recentPosts = publishedPosts.slice(0, limit);
+    const container = document.getElementById(containerId);
+    
+    if (!container) return;
+    
+    if (recentPosts.length === 0) {
+        container.innerHTML = '<div class="no-content"><p>No blog posts yet. Check back soon!</p></div>';
+        return;
     }
+    
+    container.innerHTML = recentPosts.map(post => createBlogCard(post)).join('');
 }

@@ -22,12 +22,12 @@ tmp/
 *.log
 logs/
 
-# Dependencies
+# Dependencies (if any are added in future)
 node_modules/
 package-lock.json
 yarn.lock
 
-# Build artifacts
+# Build artifacts (if any are added in future)
 dist/
 build/
 .next/
@@ -41,14 +41,6 @@ out/
 # Testing
 coverage/
 .nyc_output/
-
-# Database
-database.sqlite
-database.sqlite-journal
-*.db
-
-# Uploads
-uploads/
 
 # Misc
 *.bak
