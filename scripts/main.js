@@ -2,33 +2,13 @@
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize translations
-    if (window.translations) {
-        window.translations.init();
-    }
-    
     // Initialize all features
-    initLanguageSelector();
     initNavigation();
     initHeroCards();
     initScrollAnimations();
     initVideoAutoplay();
     initSmoothScroll();
 });
-
-// Language Selector
-function initLanguageSelector() {
-    const langButtons = document.querySelectorAll('.lang-btn');
-    
-    langButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const lang = this.getAttribute('data-lang');
-            if (window.translations) {
-                window.translations.change(lang);
-            }
-        });
-    });
-}
 
 // Navigation - Hamburger Menu
 function initNavigation() {
@@ -274,7 +254,7 @@ const styles = {
 
 console.log('%c🎬 Skibidi Madness 🎬', styles.title);
 console.log('%cWelcome to the Multiverse!', styles.subtitle);
-console.log('%cSubscribe to FireStormX Studios: https://www.youtube.com/@FireStormX!?', styles.link);
+console.log('%cSubscribe to FireStormX Studios: https://www.youtube.com/@FirestomX-Tri', styles.link);
 
 // Keyboard shortcuts
 document.addEventListener('keydown', function(e) {
@@ -282,17 +262,6 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'h' || e.key === 'H') {
         if (!e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    }
-    
-    // Press 'L' to change language
-    if (e.key === 'l' || e.key === 'L') {
-        if (!e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
-            const langButtons = document.querySelectorAll('.lang-btn');
-            const activeLang = document.querySelector('.lang-btn.active');
-            const currentIndex = Array.from(langButtons).indexOf(activeLang);
-            const nextIndex = (currentIndex + 1) % langButtons.length;
-            langButtons[nextIndex].click();
         }
     }
 });
