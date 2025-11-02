@@ -1,10 +1,225 @@
-# 🎬 Skibidi Madness - Official Landing Page
+# 🎬 Skibidi Madness - Laravel Edition
 
-![Skibidi Madness](res/img/all-together.png)
+![Skibidi Madness](public/res/img/all-together.png)
 
 ## 🌟 Overview
 
-**Skibidi Madness** is an epic multi-universe animation series created by **FireStormX Studios** that transcends the boundaries of the original Skibidi Toilet universe. This landing page showcases the revolutionary fusion of multiple dimensions, timelines, and realities where heroes unite against the forces of chaos.
+**Skibidi Madness** is now a full-stack Laravel application! This project has been completely refactored from a static HTML site to a modern Laravel framework with:
+
+- ✅ **RESTful API** backend with database persistence
+- ✅ **Eloquent ORM** models for Heroes, Episodes, and Blog Posts
+- ✅ **Service Providers** for modular architecture
+- ✅ **Blade Templates** for dynamic rendering
+- ✅ **Laravel Package** structure for reusability
+- ✅ **Multi-language support** (English, Spanish, French, German)
+- ✅ **Admin Panel** for content management
+- ✅ **Database migrations** and seeders
+
+## 📚 Documentation
+
+- **[README-LARAVEL.md](README-LARAVEL.md)** - Complete Laravel setup and usage guide
+- **[PACKAGE_USAGE.md](PACKAGE_USAGE.md)** - How to use this as a Laravel package
+- **[MIGRATION_GUIDE.md](MIGRATION_GUIDE.md)** - Changes from static HTML to Laravel
+
+## 🚀 Quick Start
+
+### Requirements
+- PHP 8.2+
+- Composer
+- SQLite or MySQL
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/skibimad/web.git
+cd web
+
+# Install dependencies (when available on Packagist)
+composer install
+
+# Setup environment
+cp .env.example .env
+php artisan key:generate
+
+# Create database
+touch database/database.sqlite
+
+# Run migrations and seed data
+php artisan migrate --seed
+
+# Start server
+php artisan serve
+```
+
+Visit http://localhost:8000
+
+## 🎯 Key Features
+
+### Backend (Laravel)
+- **RESTful API** - Full CRUD for Heroes, Episodes, Blog Posts
+- **Database Models** - Eloquent ORM with relationships
+- **Migrations** - Version-controlled database schema
+- **Seeders** - Default data population
+- **Service Provider** - Package integration support
+- **Validation** - Request validation for all inputs
+
+### Frontend
+- **Responsive Design** - Mobile-first approach
+- **Admin Panel** - Manage content through web interface
+- **Multi-language** - 4 languages supported
+- **Video Integration** - YouTube embeds and local videos
+- **Blog System** - Full-featured blog with publishing
+
+## 🔌 API Endpoints
+
+### Heroes
+```
+GET    /api/heroes          - List all heroes
+POST   /api/heroes          - Create hero
+GET    /api/heroes/{hero}   - Get hero
+PUT    /api/heroes/{hero}   - Update hero
+DELETE /api/heroes/{hero}   - Delete hero
+```
+
+### Episodes
+```
+GET    /api/episodes            - List episodes
+POST   /api/episodes            - Create episode
+GET    /api/episodes/{episode}  - Get episode
+PUT    /api/episodes/{episode}  - Update episode
+DELETE /api/episodes/{episode}  - Delete episode
+```
+
+### Blog Posts
+```
+GET    /api/blog-posts              - List posts
+POST   /api/blog-posts              - Create post
+GET    /api/blog-posts/{post}       - Get post
+PUT    /api/blog-posts/{post}       - Update post
+DELETE /api/blog-posts/{post}       - Delete post
+GET    /api/blog-posts-recent       - Get recent posts
+```
+
+## 📦 Use as Package
+
+Add to your Laravel project:
+
+```json
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/skibimad/web"
+        }
+    ],
+    "require": {
+        "skibimad/skibidi-madness": "dev-main"
+    }
+}
+```
+
+See [PACKAGE_USAGE.md](PACKAGE_USAGE.md) for details.
+
+## 🗄️ Database
+
+### Tables Created
+- `heroes` - Hero characters with abilities
+- `episodes` - Video episodes
+- `blog_posts` - Blog content
+
+### Default Data
+- 5 Heroes (Titan Cameraman, Titan Speakerman, Titan TV Man, G-Man, Star Storage)
+- 5 Episodes (The Awakening, Multiverse Mayhem, etc.)
+- Blog system ready for content
+
+## 🌐 Frontend Pages
+
+- `/` - Homepage with heroes showcase
+- `/blog` - Blog listing
+- `/admin` - Admin dashboard
+- `/admin/heroes` - Manage heroes
+- `/admin/episodes` - Manage episodes  
+- `/admin/blog` - Manage blog posts
+
+## 🛠️ Development
+
+```bash
+# Clear caches
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+
+# Run migrations
+php artisan migrate:fresh --seed
+
+# Code style
+./vendor/bin/pint
+```
+
+## 📁 Project Structure
+
+```
+skibidi-madness/
+├── app/
+│   ├── Http/Controllers/    # API Controllers
+│   ├── Models/              # Eloquent Models
+│   └── Providers/           # Service Providers
+├── database/
+│   ├── migrations/          # Database Schema
+│   └── seeders/             # Data Seeders
+├── public/                  # Web Root
+│   ├── res/                 # Images & Videos
+│   ├── scripts/             # JavaScript
+│   └── styles/              # CSS
+├── resources/views/         # Blade Templates
+├── routes/
+│   ├── api.php             # API Routes
+│   └── web.php             # Web Routes
+└── config/                  # Configuration
+```
+
+## 🎭 Original Features Preserved
+
+All original features from the static site are maintained:
+- Hero gallery with video previews
+- Episode showcase
+- Multi-language support
+- Responsive design
+- Smooth animations
+- Admin panel functionality
+
+## 🔄 What Changed?
+
+- ✅ Data now stored in database (was localStorage)
+- ✅ RESTful API for all operations
+- ✅ Server-side validation and security
+- ✅ Proper MVC architecture
+- ✅ Can be used as a Laravel package
+- ✅ Professional deployment options
+
+See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for details.
+
+## 📄 License
+
+See [LICENSE](LICENSE) file for details.
+
+## ⚠️ Disclaimer
+
+**Skibidi Madness** is a fan-created series inspired by the Skibidi Toilet universe. Not officially affiliated with the original creators. All trademarks belong to their respective owners.
+
+## 📞 Support
+
+- **YouTube**: [@FireStormX!?](https://www.youtube.com/@FireStormX!?)
+- **Issues**: Use GitHub Issues for bug reports
+- **Discussions**: Use GitHub Discussions for questions
+
+---
+
+**Made with ❤️ by FireStormX Studios**
+
+*Where Chaos Meets Destiny*
+
 
 ### 🎯 Key Features
 
