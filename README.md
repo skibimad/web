@@ -17,24 +17,41 @@
 
 ## 📚 Documentation
 
+- **[SETUP_SCRIPTS.md](SETUP_SCRIPTS.md)** - Automated setup scripts (one-click install)
+- **[QUICKSTART.md](QUICKSTART.md)** - 5-minute manual setup guide
 - **[README-LARAVEL.md](README-LARAVEL.md)** - Complete Laravel setup and usage guide
 - **[PACKAGE_USAGE.md](PACKAGE_USAGE.md)** - How to use this as a Laravel package
 - **[MIGRATION_GUIDE.md](MIGRATION_GUIDE.md)** - Changes from static HTML to Laravel
+- **[CHANGELOG.md](CHANGELOG.md)** - Version history and breaking changes
 
 ## 🚀 Quick Start
 
-### Requirements
-- PHP 8.2+
-- Composer
-- SQLite or MySQL
+### One-Click Setup (Recommended)
 
-### Installation
-
+**Linux/macOS:**
 ```bash
-# Clone the repository
 git clone https://github.com/skibimad/web.git
 cd web
+chmod +x setup.sh
+./setup.sh
+```
 
+**Windows:**
+```cmd
+git clone https://github.com/skibimad/web.git
+cd web
+setup.bat
+```
+
+The automated scripts will install dependencies, configure the database, run migrations, seed data, and optionally start the server.
+
+📖 **See [SETUP_SCRIPTS.md](SETUP_SCRIPTS.md) for all options and troubleshooting**
+
+### Manual Installation
+
+If you prefer manual setup:
+
+```bash
 # Install dependencies (when available on Packagist)
 composer install
 
@@ -51,6 +68,8 @@ php artisan migrate --seed
 # Start server
 php artisan serve
 ```
+
+**Requirements**: PHP 8.2+, Composer, SQLite or MySQL
 
 Visit http://localhost:8000
 
