@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <link rel="stylesheet" href="<?= asset('styles/main.css') ?>">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .error-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1e1e28 100%);
+            text-align: center;
+            padding: 20px;
+        }
+        .error-content {
+            color: #fff;
+        }
+        .error-code {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 120px;
+            color: var(--color-primary, #ff3366);
+            margin: 0;
+            text-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+        }
+        .error-message {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 24px;
+            color: var(--color-secondary, #00ffcc);
+            margin: 20px 0;
+        }
+        .error-description {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 18px;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+        }
+        .btn-home {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--color-primary, #ff3366);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s ease;
+        }
+        .btn-home:hover {
+            background: var(--color-secondary, #00ffcc);
+            color: #0a0a0f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 204, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-content">
+            <h1 class="error-code">404</h1>
+            <p class="error-message">Page Not Found</p>
+            <p class="error-description">
+                The page you're looking for doesn't exist or has been moved.
+            </p>
+            <a href="/" class="btn-home">Return to Home</a>
+        </div>
+    </div>
+</body>
+</html>
