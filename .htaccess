@@ -1,0 +1,27 @@
+# Skibidi Madness .htaccess
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Redirect admin to admin directory
+    RewriteRule ^admin$ admin/ [L,R=301]
+    
+    # Protect sensitive files
+    RewriteRule ^config\.php$ - [F,L]
+    RewriteRule ^database/.*$ - [F,L]
+    RewriteRule ^setup/.*$ - [F,L]
+    
+    # Allow access to uploads
+    RewriteCond %{REQUEST_URI} ^/uploads/
+    RewriteRule ^ - [L]
+</IfModule>
+
+# Disable directory browsing
+Options -Indexes
+
+# PHP settings
+<IfModule mod_php.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value memory_limit 128M
+    php_value max_execution_time 60
+</IfModule>
