@@ -29,12 +29,29 @@ class ErrorHandler
     }
     
     /**
+     * Get random hero image
+     */
+    private static function getRandomHero(): string
+    {
+        $heroes = [
+            '/res/img/titan-cameraman.png',
+            '/res/img/titan-speakerman.png',
+            '/res/img/titan-tvman.png',
+            '/res/img/g-man.png',
+            '/res/img/astro-toilet.png'
+        ];
+        
+        return $heroes[array_rand($heroes)];
+    }
+    
+    /**
      * Handle 404 Not Found
      */
     public static function handle404(): void
     {
         http_response_code(404);
         $backgroundVideo = self::getRandomVideo();
+        $heroImage = self::getRandomHero();
         require __DIR__ . '/../Views/errors/404.phtml';
         exit;
     }
@@ -46,6 +63,7 @@ class ErrorHandler
     {
         http_response_code(500);
         $backgroundVideo = self::getRandomVideo();
+        $heroImage = self::getRandomHero();
         $errorMessage = $exception ? $exception->getMessage() : 'An unexpected error occurred';
         $errorTrace = $exception ? $exception->getTraceAsString() : '';
         
