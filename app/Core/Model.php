@@ -167,4 +167,26 @@ abstract class Model
     {
         return $this->attributes;
     }
+    
+    /**
+     * Get database connection (static method)
+     */
+    protected static function getDb()
+    {
+        return Database::getInstance()->getConnection();
+    }
+    
+    /**
+     * Execute a raw query (static method)
+     */
+    protected static function query(string $sql, array $params = [])
+    {
+        $db = static::getDb();
+        if (empty($params)) {
+            return $db->query($sql);
+        }
+        $stmt = $db->prepare($sql);
+        $stmt->execute($params);
+        return $stmt;
+    }
 }
