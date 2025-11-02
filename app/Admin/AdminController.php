@@ -27,17 +27,17 @@ class AdminController extends Controller
         
         // Get analytics data
         $youtubeStats = [
-            'day' => Analytics::getYouTubeStats('day'),
-            'week' => Analytics::getYouTubeStats('week'),
-            'month' => Analytics::getYouTubeStats('month'),
-            'year' => Analytics::getYouTubeStats('year')
+            'day' => Analytics::getYouTubeStats('day')['count'],
+            'week' => Analytics::getYouTubeStats('week')['count'],
+            'month' => Analytics::getYouTubeStats('month')['count'],
+            'year' => Analytics::getYouTubeStats('year')['count']
         ];
         
         $visitorStats = [
-            'day' => Analytics::getVisitorStats('day'),
-            'week' => Analytics::getVisitorStats('week'),
-            'month' => Analytics::getVisitorStats('month'),
-            'year' => Analytics::getVisitorStats('year')
+            'day' => Analytics::getVisitorStats('day')['count'],
+            'week' => Analytics::getVisitorStats('week')['count'],
+            'month' => Analytics::getVisitorStats('month')['count'],
+            'year' => Analytics::getVisitorStats('year')['count']
         ];
         
         $this->view('admin/dashboard', [
