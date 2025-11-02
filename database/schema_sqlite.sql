@@ -74,3 +74,26 @@ INSERT INTO blog_posts (title, slug, content, excerpt, image, author, published,
 ('Welcome to Skibidi Madness', 'welcome-to-skibidi-madness', '<p>Welcome to the official Skibidi Madness website! We are thrilled to bring you this epic multiverse adventure.</p><p>Skibidi Madness is not just another series - it is a revolutionary fusion of multiple dimensions, timelines, and realities where heroes from different universes unite against the forces of chaos.</p>', 'Welcome to the official Skibidi Madness website! We are thrilled to bring you this epic multiverse adventure.', 'res/img/all-together.png', 'FireStormX Studios', 1, '2024-01-10 10:00:00'),
 ('Behind the Scenes: Creating the Titans', 'behind-the-scenes-titans', '<p>Ever wondered how we create the epic Titan characters? In this post, we take you behind the scenes of our animation process.</p><p>From concept art to final render, each Titan goes through dozens of iterations to ensure they look perfect on screen.</p>', 'Ever wondered how we create the epic Titan characters? In this post, we take you behind the scenes.', 'res/img/heroes/promo/titan-camera.png', 'FireStormX Studios', 1, '2024-01-17 14:30:00'),
 ('Episode 3 Preview: What to Expect', 'episode-3-preview', '<p>Episode 3 is coming soon and it''s going to be HUGE! G-Man finally discovers the truth about the Supreme Leader.</p><p>Get ready for plot twists, epic battles, and revelations that will change everything you thought you knew about the Skibidi universe.</p>', 'Episode 3 is coming soon and it is going to be HUGE! Get ready for plot twists and epic battles.', 'res/img/heroes/promo/g-man.png', 'FireStormX Studios', 1, '2024-01-25 16:00:00');
+
+-- Landing page content table
+CREATE TABLE IF NOT EXISTS landing_page_content (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    section TEXT NOT NULL,
+    key TEXT NOT NULL,
+    value TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(section, key)
+);
+
+CREATE INDEX IF NOT EXISTS idx_landing_section ON landing_page_content(section);
+
+-- Insert default values
+INSERT OR IGNORE INTO landing_page_content (section, key, value) VALUES
+('hero', 'title', 'SKIBIDI MADNESS'),
+('hero', 'subtitle', 'A New Era of Chaos Begins'),
+('hero', 'description', 'Dive into an epic multiverse where heroes unite against the forces of chaos. From the depths of the Skibidi universe to the realms of Marvel, DC, Star Wars, and beyond.'),
+('about', 'title', 'The Story Unfolds'),
+('about', 'subtitle', 'A New Chapter in the Skibidi Universe'),
+('channel', 'title', 'Join the FireStormX Community'),
+('channel', 'description', 'Subscribe to FireStormX Studios on YouTube to never miss an episode of Skibidi Madness! Get exclusive behind-the-scenes content, character reveals, and be part of the growing community of fans exploring the multiverse.');

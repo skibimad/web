@@ -1,0 +1,74 @@
+<?php ob_start(); ?>
+
+<div class="admin-header">
+    <h1 class="admin-title">Edit Landing Page</h1>
+    <?php if (isset($_GET['success'])): ?>
+        <div class="alert alert-success">Landing page updated successfully!</div>
+    <?php endif; ?>
+</div>
+
+<form method="POST" class="admin-form">
+    <h2>Hero Section</h2>
+    
+    <div class="form-group">
+        <label for="hero_title">Main Title</label>
+        <input type="text" id="hero_title" name="hero_title" 
+               value="<?= htmlspecialchars($hero['title'] ?? 'SKIBIDI MADNESS') ?>">
+    </div>
+    
+    <div class="form-group">
+        <label for="hero_subtitle">Subtitle</label>
+        <input type="text" id="hero_subtitle" name="hero_subtitle" 
+               value="<?= htmlspecialchars($hero['subtitle'] ?? 'A New Era of Chaos Begins') ?>">
+    </div>
+    
+    <div class="form-group">
+        <label for="hero_description">Description</label>
+        <textarea id="hero_description" name="hero_description" rows="3"><?= htmlspecialchars($hero['description'] ?? 'Dive into an epic multiverse where heroes unite against the forces of chaos. From the depths of the Skibidi universe to the realms of Marvel, DC, Star Wars, and beyond.') ?></textarea>
+    </div>
+</form>
+
+<form method="POST" class="admin-form">
+    <h2>About Section</h2>
+    
+    <div class="form-group">
+        <label for="about_title">Section Title</label>
+        <input type="text" id="about_title" name="about_title" 
+               value="<?= htmlspecialchars($about['title'] ?? 'The Story Unfolds') ?>">
+    </div>
+    
+    <div class="form-group">
+        <label for="about_subtitle">Main Heading</label>
+        <input type="text" id="about_subtitle" name="about_subtitle" 
+               value="<?= htmlspecialchars($about['subtitle'] ?? 'A New Chapter in the Skibidi Universe') ?>">
+    </div>
+    
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save About Section</button>
+    </div>
+</form>
+
+<form method="POST" class="admin-form">
+    <h2>Channel Section</h2>
+    
+    <div class="form-group">
+        <label for="channel_title">Section Title</label>
+        <input type="text" id="channel_title" name="channel_title" 
+               value="<?= htmlspecialchars($channel['title'] ?? 'Join the FireStormX Community') ?>">
+    </div>
+    
+    <div class="form-group">
+        <label for="channel_description">Description</label>
+        <textarea id="channel_description" name="channel_description" rows="3"><?= htmlspecialchars($channel['description'] ?? 'Subscribe to FireStormX Studios on YouTube to never miss an episode of Skibidi Madness! Get exclusive behind-the-scenes content, character reveals, and be part of the growing community of fans exploring the multiverse.') ?></textarea>
+    </div>
+    
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save Channel Section</button>
+        <a href="/admin" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</form>
+
+<?php 
+$content = ob_get_clean();
+require __DIR__ . '/../../layouts/admin.phtml';
+?>
