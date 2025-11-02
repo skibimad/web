@@ -9,7 +9,7 @@ use App\Core\Model;
  */
 class Episode extends Model
 {
-    protected $table = 'episodes';
+    protected static $table = 'episodes';
     
     /**
      * Get all episodes ordered by episode number
@@ -17,7 +17,7 @@ class Episode extends Model
     public static function allOrdered()
     {
         $instance = new static();
-        $stmt = $instance->db->query("SELECT * FROM {$instance->table} ORDER BY episode_number ASC");
+        $stmt = $instance->db->query("SELECT * FROM " . static::$table . " ORDER BY episode_number ASC");
         $results = $stmt->fetchAll();
         
         return new \App\Core\Collection(array_map(function($row) {

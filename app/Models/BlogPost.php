@@ -9,7 +9,7 @@ use App\Core\Model;
  */
 class BlogPost extends Model
 {
-    protected $table = 'blog_posts';
+    protected static $table = 'blog_posts';
     
     /**
      * Get published posts only
@@ -17,7 +17,7 @@ class BlogPost extends Model
     public static function published()
     {
         $instance = new static();
-        $stmt = $instance->db->query("SELECT * FROM {$instance->table} WHERE published = 1 ORDER BY published_at DESC");
+        $stmt = $instance->db->query("SELECT * FROM " . static::$table . " WHERE published = 1 ORDER BY published_at DESC");
         $results = $stmt->fetchAll();
         
         return new \App\Core\Collection(array_map(function($row) {
@@ -31,7 +31,7 @@ class BlogPost extends Model
     public static function findBySlug(string $slug): ?self
     {
         $instance = new static();
-        $stmt = $instance->db->prepare("SELECT * FROM {$instance->table} WHERE slug = ? LIMIT 1");
+        $stmt = $instance->db->prepare("SELECT * FROM " . static::$table . " WHERE slug = ? LIMIT 1");
         $stmt->execute([$slug]);
         $result = $stmt->fetch();
         

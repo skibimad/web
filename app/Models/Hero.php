@@ -9,7 +9,7 @@ use App\Core\Model;
  */
 class Hero extends Model
 {
-    protected $table = 'heroes';
+    protected static $table = 'heroes';
     
     /**
      * Get abilities as array
@@ -36,7 +36,7 @@ class Hero extends Model
     public static function allOrdered()
     {
         $instance = new static();
-        $stmt = $instance->db->query("SELECT * FROM {$instance->table} ORDER BY display_order ASC");
+        $stmt = $instance->db->query("SELECT * FROM " . static::$table . " ORDER BY display_order ASC");
         $results = $stmt->fetchAll();
         
         return new \App\Core\Collection(array_map(function($row) {

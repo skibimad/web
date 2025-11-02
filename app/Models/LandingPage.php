@@ -7,7 +7,7 @@ use App\Core\Database;
 
 class LandingPage extends Model
 {
-    protected $table = 'landing_page_content';
+    protected static $table = 'landing_page_content';
     
     public function __construct(
         public ?int $id = null,

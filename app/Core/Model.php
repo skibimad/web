@@ -8,7 +8,7 @@ namespace App\Core;
 abstract class Model
 {
     protected $db;
-    protected $table;
+    protected static $table;
     protected $primaryKey = 'id';
     protected $attributes = [];
     
@@ -51,7 +51,7 @@ abstract class Model
     public static function all(): Collection
     {
         $instance = new static();
-        $stmt = $instance->db->query("SELECT * FROM {$instance->table}");
+        $stmt = $instance->db->query("SELECT * FROM " . static::$table);
         $results = $stmt->fetchAll();
         
         return new Collection(array_map(function($row) {
@@ -65,7 +65,7 @@ abstract class Model
     public static function find($id): ?self
     {
         $instance = new static();
-        $stmt = $instance->db->prepare("SELECT * FROM {$instance->table} WHERE {$instance->primaryKey} = ? LIMIT 1");
+        $stmt = $instance->db->prepare("SELECT * FROM " . static::$table . " WHERE {$instance->primaryKey} = ? LIMIT 1");
         $stmt->execute([$id]);
         $result = $stmt->fetch();
         
@@ -78,7 +78,7 @@ abstract class Model
     public static function where(string $column, $value): Collection
     {
         $instance = new static();
-        $stmt = $instance->db->prepare("SELECT * FROM {$instance->table} WHERE {$column} = ?");
+        $stmt = $instance->db->prepare("SELECT * FROM " . static::$table . " WHERE {$column} = ?");
         $stmt->execute([$value]);
         $results = $stmt->fetchAll();
         
@@ -108,7 +108,7 @@ abstract class Model
         
         $sql = sprintf(
             "INSERT INTO %s (%s) VALUES (%s)",
-            $this->table,
+            static::$table,
             implode(', ', $columns),
             implode(', ', $placeholders)
         );
@@ -134,7 +134,7 @@ abstract class Model
         $columns = array_keys($this->attributes);
         $setClause = implode(', ', array_map(fn($col) => "$col = ?", $columns));
         
-        $sql = "UPDATE {$this->table} SET {$setClause} WHERE {$this->primaryKey} = ?";
+        $sql = "UPDATE " . static::$table . " SET {$setClause} WHERE {$this->primaryKey} = ?";
         
         $stmt = $this->db->prepare($sql);
         $values = array_values($this->attributes);
@@ -156,7 +156,7 @@ abstract class Model
             return false;
         }
         
-        $stmt = $this->db->prepare("DELETE FROM {$this->table} WHERE {$this->primaryKey} = ?");
+        $stmt = $this->db->prepare("DELETE FROM " . static::$table . " WHERE {$this->primaryKey} = ?");
         return $stmt->execute([$this->attributes[$this->primaryKey]]);
     }
     
