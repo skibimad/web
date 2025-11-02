@@ -16,14 +16,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Language Selector -->
-    <div class="language-selector">
-        <button class="lang-btn active" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="es">ES</button>
-        <button class="lang-btn" data-lang="fr">FR</button>
-        <button class="lang-btn" data-lang="de">DE</button>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -32,12 +24,12 @@
                 <span class="logo-sub">MADNESS</span>
             </div>
             <ul class="nav-menu">
-                <li><a href="#home" data-i18n="nav.home">Home</a></li>
-                <li><a href="#about" data-i18n="nav.about">About</a></li>
-                <li><a href="#heroes" data-i18n="nav.heroes">Heroes</a></li>
-                <li><a href="#videos" data-i18n="nav.videos">Videos</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#videos">Episodes</a></li>
+                <li><a href="#heroes">Heroes</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="#channel" data-i18n="nav.channel">Channel</a></li>
+                <li><a href="#channel">Channel</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -50,25 +42,25 @@
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="hero-background">
-            <video autoplay muted loop playsinline class="hero-video">
+            <video id="hero-video" autoplay muted loop playsinline class="hero-video">
                 <source src="res/video/all-together.mp4" type="video/mp4">
             </video>
             <div class="hero-overlay"></div>
         </div>
         <div class="hero-content">
             <h1 class="glitch-text" data-text="SKIBIDI MADNESS">
-                <span data-i18n="hero.title">SKIBIDI MADNESS</span>
+                <span id="hero-title">SKIBIDI MADNESS</span>
             </h1>
-            <p class="hero-subtitle" data-i18n="hero.subtitle">
+            <p class="hero-subtitle" id="hero-subtitle">
                 A New Era of Chaos Begins
             </p>
-            <p class="hero-description" data-i18n="hero.description">
+            <p class="hero-description" id="hero-description">
                 Dive into an epic multiverse where heroes unite against the forces of chaos. 
                 From the depths of the Skibidi universe to the realms of Marvel, DC, Star Wars, and beyond.
             </p>
             <div class="hero-buttons">
-                <a href="#videos" class="btn btn-primary" data-i18n="hero.watchNow">Watch Now</a>
-                <a href="https://www.youtube.com/@FireStormX!?" target="_blank" class="btn btn-secondary" data-i18n="hero.subscribe">Subscribe</a>
+                <a href="#videos" class="btn btn-primary">Watch Now</a>
+                <a href="https://www.youtube.com/@FireStormX!?" target="_blank" class="btn btn-secondary">Subscribe</a>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -79,309 +71,78 @@
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
-            <h2 class="section-title" data-i18n="about.title">The Story Unfolds</h2>
+            <h2 class="section-title" id="about-title">The Story Unfolds</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <h3 data-i18n="about.subtitle">A New Chapter in the Skibidi Universe</h3>
-                    <p data-i18n="about.paragraph1">
+                    <h3 id="about-subtitle">A New Chapter in the Skibidi Universe</h3>
+                    <p id="about-paragraph1">
                         Welcome to <strong>Skibidi Madness</strong> - an extraordinary animation series created by FireStormX Studios 
                         that transcends the boundaries of the original Skibidi Toilet universe. This isn't just another story; 
                         it's a revolutionary fusion of multiple dimensions, timelines, and realities.
                     </p>
-                    <p data-i18n="about.paragraph2">
+                    <p id="about-paragraph2">
                         In this new saga, witness the unprecedented chaos unleashed by the malevolent forces known as the 
                         <strong>Asotra</strong>. Unlike previous battles against entire armies, our heroes now face their 
                         most formidable adversary yet - the mysterious and powerful <strong>Supreme Leader</strong>, 
                         whose ambitions threaten not just one universe, but the entire multiverse fabric.
                     </p>
-                    <p data-i18n="about.paragraph3">
+                    <p id="about-paragraph3">
                         Skibidi Madness weaves together elements from beloved franchises including Marvel's cosmic battles, 
                         the supernatural mysteries of Stranger Things, DC's legendary heroes, the epic space opera of Star Wars, 
-                        the blocky realms of Minecraft, and countless other dimensions. This is where everything you love 
-                        collides in spectacular fashion.
+                        the blocky realms of Minecraft, and countless other dimensions. This is where everything you love collides in spectacular fashion.
                     </p>
-                    <div class="about-stats">
+                    <div class="stats-grid">
                         <div class="stat-item">
-                            <span class="stat-number">5</span>
-                            <span class="stat-label" data-i18n="about.stat1">Legendary Heroes</span>
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Legendary Heroes</div>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">∞</span>
-                            <span class="stat-label" data-i18n="about.stat2">Universes Connected</span>
+                            <div class="stat-number">∞</div>
+                            <div class="stat-label">Universes Connected</div>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">1</span>
-                            <span class="stat-label" data-i18n="about.stat3">Supreme Threat</span>
+                            <div class="stat-number">1</div>
+                            <div class="stat-label">Supreme Threat</div>
                         </div>
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="res/img/all-together.png" alt="All Heroes Together">
-                    <div class="image-glow"></div>
+                    <img id="about-image" src="res/img/all-together.png" alt="All Heroes Together">
                 </div>
             </div>
             
-            <!-- Original References -->
-            <div class="original-references">
-                <h3 data-i18n="about.originalTitle">Inspired by the Original Skibidi Toilet Universe</h3>
-                <p data-i18n="about.originalText">
-                    This series builds upon the creative foundation established by the original Skibidi Toilet creators 
-                    and the vibrant community including DOM Studio, Virlance, Maxedy, and many other talented animators 
-                    who have expanded this universe.
-                </p>
-                <div class="reference-links">
-                    <a href="https://www.youtube.com/@DaFuqBoom" target="_blank" class="ref-link">
-                        <span data-i18n="about.link1">DaFuq!?Boom! (Original Creator)</span>
-                    </a>
-                    <a href="https://www.youtube.com/@DOMSTUDIO" target="_blank" class="ref-link">
-                        <span data-i18n="about.link2">DOM Studio</span>
-                    </a>
-                    <a href="https://www.youtube.com/@virlance" target="_blank" class="ref-link">
-                        <span data-i18n="about.link3">Virlance</span>
-                    </a>
-                    <a href="https://www.youtube.com/@MaxedyYT" target="_blank" class="ref-link">
-                        <span data-i18n="about.link4">Maxedy</span>
+            <div class="inspired-section">
+                <h3>Inspired by the Original Skibidi Toilet Universe</h3>
+                <p>This series builds upon the creative foundation established by the original Skibidi Toilet creator.</p>
+                <div class="creator-link">
+                    <a href="https://www.youtube.com/@DaFuqBoom" target="_blank" class="btn btn-primary">
+                        DaFuq!?Boom! (Original Creator)
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Heroes Section -->
-    <section id="heroes" class="heroes-section">
-        <div class="container">
-            <h2 class="section-title" data-i18n="heroes.title">The Legendary Heroes</h2>
-            <p class="section-subtitle" data-i18n="heroes.subtitle">
-                Meet the champions who stand between order and absolute chaos
-            </p>
-            
-            <div class="heroes-grid">
-                <!-- Titan Cameraman -->
-                <div class="hero-card" data-hero="titan-camera">
-                    <div class="hero-card-inner">
-                        <div class="hero-image-wrapper">
-                            <img src="res/img/heroes/promo/titan-camera.png" alt="Titan Cameraman" class="hero-image">
-                            <video class="hero-video-preview" muted loop>
-                                <source src="res/video/heroes/promo/titan-camera.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="hero-info">
-                            <h3 class="hero-name" data-i18n="heroes.titanCamera.name">Titan Cameraman</h3>
-                            <p class="hero-description" data-i18n="heroes.titanCamera.description">
-                                The vigilant guardian with unmatched surveillance capabilities. His camera lens sees 
-                                through deception and captures the truth in every battle. Armed with devastating 
-                                firepower and tactical precision.
-                            </p>
-                            <div class="hero-abilities">
-                                <span class="ability" data-i18n="heroes.titanCamera.ability1">Tactical Vision</span>
-                                <span class="ability" data-i18n="heroes.titanCamera.ability2">Heavy Artillery</span>
-                                <span class="ability" data-i18n="heroes.titanCamera.ability3">Combat Analysis</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Titan Speakerman -->
-                <div class="hero-card" data-hero="titan-speaker">
-                    <div class="hero-card-inner">
-                        <div class="hero-image-wrapper">
-                            <img src="res/img/heroes/promo/titan-speaker.png" alt="Titan Speakerman" class="hero-image">
-                            <video class="hero-video-preview" muted loop>
-                                <source src="res/video/heroes/promo/titan-speaker.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="hero-info">
-                            <h3 class="hero-name" data-i18n="heroes.titanSpeaker.name">Titan Speakerman</h3>
-                            <p class="hero-description" data-i18n="heroes.titanSpeaker.description">
-                                Master of sonic devastation who channels raw sound energy into overwhelming force. 
-                                His acoustic waves can shatter dimensions and resonate across the multiverse, 
-                                disrupting enemy formations with thunderous power.
-                            </p>
-                            <div class="hero-abilities">
-                                <span class="ability" data-i18n="heroes.titanSpeaker.ability1">Sonic Blast</span>
-                                <span class="ability" data-i18n="heroes.titanSpeaker.ability2">Sound Barrier</span>
-                                <span class="ability" data-i18n="heroes.titanSpeaker.ability3">Resonance Strike</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Titan TV Man -->
-                <div class="hero-card" data-hero="titan-tv">
-                    <div class="hero-card-inner">
-                        <div class="hero-image-wrapper">
-                            <img src="res/img/heroes/promo/titan-tv.png" alt="Titan TV Man" class="hero-image">
-                            <video class="hero-video-preview" muted loop>
-                                <source src="res/video/heroes/promo/titan-tv.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="hero-info">
-                            <h3 class="hero-name" data-i18n="heroes.titanTv.name">Titan TV Man</h3>
-                            <p class="hero-description" data-i18n="heroes.titanTv.description">
-                                The hypnotic warrior whose screen broadcasts reality-altering frequencies. 
-                                Through his display, he can control minds, project illusions, and manipulate 
-                                the very perception of his enemies across all dimensions.
-                            </p>
-                            <div class="hero-abilities">
-                                <span class="ability" data-i18n="heroes.titanTv.ability1">Mind Control</span>
-                                <span class="ability" data-i18n="heroes.titanTv.ability2">Hypno Wave</span>
-                                <span class="ability" data-i18n="heroes.titanTv.ability3">Reality Distortion</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- G-Man -->
-                <div class="hero-card" data-hero="g-man">
-                    <div class="hero-card-inner">
-                        <div class="hero-image-wrapper">
-                            <img src="res/img/heroes/promo/g-man.png" alt="G-Man" class="hero-image">
-                            <video class="hero-video-preview" muted loop>
-                                <source src="res/video/heroes/promo/g-man.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="hero-info">
-                            <h3 class="hero-name" data-i18n="heroes.gMan.name">G-Man</h3>
-                            <p class="hero-description" data-i18n="heroes.gMan.description">
-                                The enigmatic leader whose true power remains shrouded in mystery. 
-                                A master tactician and skilled combatant, G-Man coordinates the resistance 
-                                with calculated precision, always three steps ahead of his adversaries.
-                            </p>
-                            <div class="hero-abilities">
-                                <span class="ability" data-i18n="heroes.gMan.ability1">Strategic Mastery</span>
-                                <span class="ability" data-i18n="heroes.gMan.ability2">Teleportation</span>
-                                <span class="ability" data-i18n="heroes.gMan.ability3">Energy Manipulation</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Star Storage -->
-                <div class="hero-card" data-hero="star-storage">
-                    <div class="hero-card-inner">
-                        <div class="hero-image-wrapper">
-                            <img src="res/img/heroes/promo/star-storage.png" alt="Star Storage" class="hero-image">
-                            <video class="hero-video-preview" muted loop>
-                                <source src="res/video/heroes/promo/star-storage.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="hero-info">
-                            <h3 class="hero-name" data-i18n="heroes.starStorage.name">Star Storage</h3>
-                            <p class="hero-description" data-i18n="heroes.starStorage.description">
-                                The cosmic keeper who harnesses stellar energy from across galaxies. 
-                                With the ability to store and release concentrated star power, this hero 
-                                brings celestial might to every confrontation, illuminating the darkest battles.
-                            </p>
-                            <div class="hero-abilities">
-                                <span class="ability" data-i18n="heroes.starStorage.ability1">Stellar Energy</span>
-                                <span class="ability" data-i18n="heroes.starStorage.ability2">Cosmic Shield</span>
-                                <span class="ability" data-i18n="heroes.starStorage.ability3">Star Burst</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Videos Section -->
+    <!-- Featured Episodes Section (NOW BEFORE HEROES) -->
     <section id="videos" class="videos-section">
         <div class="container">
-            <h2 class="section-title" data-i18n="videos.title">Featured Episodes</h2>
-            <p class="section-subtitle" data-i18n="videos.subtitle">
-                Watch the epic battles and witness the chaos unfold
-            </p>
+            <h2 class="section-title">Featured Episodes</h2>
+            <p class="section-subtitle">Watch the epic battles and witness the chaos unfold</p>
             
-            <div class="videos-grid">
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <img src="res/img/all-together.png" alt="Episode Preview">
-                        <a href="https://www.youtube.com/@FireStormX!?" target="_blank" class="play-button">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="video-info">
-                        <h3 data-i18n="videos.ep1.title">Episode 1: The Awakening</h3>
-                        <p data-i18n="videos.ep1.description">
-                            The Supreme Leader emerges from the shadows as the Asotra forces launch their first attack 
-                            across multiple dimensions. The heroes must unite quickly or watch reality crumble.
-                        </p>
-                    </div>
-                </div>
+            <div id="episodes-grid" class="videos-grid">
+                <!-- Episodes will be loaded here via JavaScript -->
+            </div>
+        </div>
+    </section>
 
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <img src="res/img/heroes/promo/titan-camera.png" alt="Episode Preview">
-                        <a href="https://www.youtube.com/@FireStormX!?" target="_blank" class="play-button">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="video-info">
-                        <h3 data-i18n="videos.ep2.title">Episode 2: Multiverse Mayhem</h3>
-                        <p data-i18n="videos.ep2.description">
-                            As portals tear open between Marvel, DC, and Star Wars universes, our heroes face 
-                            unprecedented challenges. Allies emerge from unexpected places.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <img src="res/img/heroes/promo/g-man.png" alt="Episode Preview">
-                        <a href="https://www.youtube.com/@FireStormX!?" target="_blank" class="play-button">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="video-info">
-                        <h3 data-i18n="videos.ep3.title">Episode 3: The Supreme Leader Revealed</h3>
-                        <p data-i18n="videos.ep3.description">
-                            G-Man uncovers the shocking truth about the Supreme Leader's identity and their 
-                            connection to the original Skibidi universe. Nothing will be the same.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <img src="res/img/heroes/promo/titan-speaker.png" alt="Episode Preview">
-                        <a href="https://www.youtube.com/@FireStormX!?" target="_blank" class="play-button">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="video-info">
-                        <h3 data-i18n="videos.ep4.title">Episode 4: Sonic Showdown</h3>
-                        <p data-i18n="videos.ep4.description">
-                            Titan Speakerman faces his greatest test as the Asotra deploy weapons that target 
-                            sound itself. Can he overcome this deadly silence?
-                        </p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <img src="res/img/heroes/promo/star-storage.png" alt="Episode Preview">
-                        <a href="https://www.youtube.com/@FireStormX!?" target="_blank" class="play-button">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="video-info">
-                        <h3 data-i18n="videos.ep5.title">Episode 5: Stellar Convergence</h3>
-                        <p data-i18n="videos.ep5.description">
-                            Star Storage channels the power of dying stars to create a weapon capable of 
-                            sealing dimensional rifts. But at what cost?
-                        </p>
-                    </div>
-                </div>
+    <!-- Heroes Section (NOW AFTER EPISODES) -->
+    <section id="heroes" class="heroes-section">
+        <div class="container">
+            <h2 class="section-title">The Legendary Heroes</h2>
+            <p class="section-subtitle">Meet the champions who stand between order and absolute chaos</p>
+            
+            <div id="heroes-grid" class="heroes-grid">
+                <!-- Heroes will be loaded here via JavaScript -->
             </div>
         </div>
     </section>
@@ -409,37 +170,30 @@
         <div class="container">
             <div class="channel-content">
                 <div class="channel-info">
-                    <h2 data-i18n="channel.title">Join the FireStormX Community</h2>
-                    <p data-i18n="channel.description">
+                    <h2>Join the FireStormX Community</h2>
+                    <p>
                         Subscribe to FireStormX Studios on YouTube to never miss an episode of Skibidi Madness! 
                         Get exclusive behind-the-scenes content, character reveals, and be part of the growing 
                         community of fans exploring the multiverse.
                     </p>
                     <div class="channel-stats">
                         <div class="stat">
-                            <span class="stat-icon">🎬</span>
-                            <span data-i18n="channel.stat1">New Episodes Weekly</span>
+                            <div class="stat-icon">🎬</div>
+                            <div class="stat-text">New Episodes Weekly</div>
                         </div>
                         <div class="stat">
-                            <span class="stat-icon">🌟</span>
-                            <span data-i18n="channel.stat2">Exclusive Content</span>
+                            <div class="stat-icon">🌟</div>
+                            <div class="stat-text">Exclusive Content</div>
                         </div>
                         <div class="stat">
-                            <span class="stat-icon">🎮</span>
-                            <span data-i18n="channel.stat3">Community Events</span>
+                            <div class="stat-icon">🎮</div>
+                            <div class="stat-text">Community Events</div>
                         </div>
                     </div>
                     <a href="https://www.youtube.com/@FireStormX!?" target="_blank" class="btn btn-channel">
-                        <svg viewBox="0 0 24 24" fill="currentColor" class="youtube-icon">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                        </svg>
-                        <span data-i18n="channel.subscribe">Subscribe Now</span>
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'/%3E%3C/svg%3E" alt="YouTube" style="width: 24px; height: 24px; margin-right: 10px;">
+                        <span>Subscribe Now</span>
                     </a>
-                </div>
-                <div class="channel-visual">
-                    <video autoplay muted loop playsinline class="channel-video">
-                        <source src="res/video/all-together.mp4" type="video/mp4">
-                    </video>
                 </div>
             </div>
         </div>
@@ -451,31 +205,30 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>SKIBIDI MADNESS</h3>
-                    <p data-i18n="footer.tagline">Where Chaos Meets Destiny</p>
+                    <p>Where Chaos Meets Destiny</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">
-                        <h4 data-i18n="footer.community">Community</h4>
+                        <h4>Community</h4>
                         <ul>
                             <li><a href="https://www.youtube.com/@FireStormX!?" target="_blank">YouTube</a></li>
-                            <li><a href="https://www.youtube.com/@DaFuqBoom" target="_blank" data-i18n="footer.original">Original Series</a></li>
-                            <li><a href="https://www.youtube.com/@DOMSTUDIO" target="_blank">DOM Studio</a></li>
+                            <li><a href="https://www.youtube.com/@DaFuqBoom" target="_blank">Original Series</a></li>
                         </ul>
                     </div>
                     <div class="footer-column">
-                        <h4 data-i18n="footer.resources">Resources</h4>
+                        <h4>Resources</h4>
                         <ul>
-                            <li><a href="#about" data-i18n="footer.about">About</a></li>
-                            <li><a href="#heroes" data-i18n="footer.heroes">Heroes</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#heroes">Heroes</a></li>
                             <li><a href="blog.html">Blog</a></li>
-                            <li><a href="#videos" data-i18n="footer.episodes">Episodes</a></li>
+                            <li><a href="#videos">Episodes</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 FireStormX Studios. <span data-i18n="footer.rights">All rights reserved.</span></p>
-                <p class="footer-disclaimer" data-i18n="footer.disclaimer">
+                <p>&copy; 2025 FireStormX Studios. All rights reserved.</p>
+                <p class="footer-disclaimer">
                     Skibidi Madness is a fan-created series inspired by the Skibidi Toilet universe. 
                     Not affiliated with original creators. All trademarks belong to their respective owners.
                 </p>
@@ -483,12 +236,96 @@
         </div>
     </footer>
 
-    <script src="scripts/translations.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/blog.js"></script>
     <script>
-        // Load first 3 blog posts on home page
+        // Load dynamic content from API
+        async function loadContent() {
+            try {
+                // Load static content
+                const contentRes = await fetch('/api/content');
+                const content = await contentRes.json();
+                
+                // Update static content
+                if (content.hero_title) document.getElementById('hero-title').textContent = content.hero_title;
+                if (content.hero_subtitle) document.getElementById('hero-subtitle').textContent = content.hero_subtitle;
+                if (content.hero_description) document.getElementById('hero-description').textContent = content.hero_description;
+                if (content.hero_video) {
+                    const video = document.getElementById('hero-video');
+                    video.querySelector('source').src = content.hero_video;
+                    video.load();
+                }
+                if (content.about_title) document.getElementById('about-title').textContent = content.about_title;
+                if (content.about_subtitle) document.getElementById('about-subtitle').textContent = content.about_subtitle;
+                if (content.about_paragraph1) document.getElementById('about-paragraph1').innerHTML = content.about_paragraph1;
+                if (content.about_paragraph2) document.getElementById('about-paragraph2').innerHTML = content.about_paragraph2;
+                if (content.about_paragraph3) document.getElementById('about-paragraph3').innerHTML = content.about_paragraph3;
+                if (content.about_image) document.getElementById('about-image').src = content.about_image;
+                
+                // Load episodes
+                const episodesRes = await fetch('/api/episodes');
+                const episodes = await episodesRes.json();
+                
+                const episodesGrid = document.getElementById('episodes-grid');
+                episodesGrid.innerHTML = episodes.map(ep => `
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <img src="${ep.thumbnail}" alt="${ep.title}" onerror="this.src='res/img/all-together.png'">
+                            <a href="${ep.video_url}" target="_blank" class="play-button">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='68' height='48' viewBox='0 0 68 48'%3E%3Cpath fill='%23ff0000' d='M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z' fill-opacity='.8'%3E%3C/path%3E%3Cpath d='M45 24L27 14v20' fill='white'%3E%3C/path%3E%3C/svg%3E" alt="Play">
+                            </a>
+                        </div>
+                        <div class="video-info">
+                            <h3>Episode ${ep.episode_number}: ${ep.title}</h3>
+                            <p>${ep.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Load heroes
+                const heroesRes = await fetch('/api/heroes');
+                const heroes = await heroesRes.json();
+                
+                const heroesGrid = document.getElementById('heroes-grid');
+                heroesGrid.innerHTML = heroes.map(hero => `
+                    <div class="hero-card">
+                        <div class="hero-media">
+                            <img src="${hero.image}" alt="${hero.name}" class="hero-image" onerror="this.src='res/img/all-together.png'">
+                            <video class="hero-video" loop muted>
+                                <source src="${hero.video}" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="hero-info">
+                            <h3>${hero.name}</h3>
+                            <p>${hero.description}</p>
+                            <div class="hero-abilities">
+                                ${hero.abilities.map(ability => `<span class="ability-tag">${ability}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Add hover effects for hero cards
+                document.querySelectorAll('.hero-card').forEach(card => {
+                    const video = card.querySelector('.hero-video');
+                    card.addEventListener('mouseenter', () => {
+                        video.play();
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        video.pause();
+                        video.currentTime = 0;
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error loading content:', error);
+                // Fallback to static content if API fails
+            }
+        }
+        
+        // Load blog posts
         document.addEventListener('DOMContentLoaded', function() {
+            loadContent();
             loadRecentBlogPosts('blog-preview-grid', 3);
         });
     </script>
