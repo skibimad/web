@@ -19,7 +19,7 @@ class AddController extends Controller
         $auth->require();
         
         // Handle POST request (save new hero)
-        if ($request->method() === 'POST') {
+        if ($request->isPost()) {
             $hero = new Hero();
             $hero->name = $request->post('name');
             $hero->slug = $request->post('slug');

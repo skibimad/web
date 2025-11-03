@@ -18,7 +18,7 @@ class AddController extends Controller
         $auth = new Auth();
         $auth->require();
         
-        if ($request->method === 'POST') {
+        if ($request->isPost()) {
             $post = new BlogPost();
             $post->title = $request->post('title');
             $post->content = $request->post('content');

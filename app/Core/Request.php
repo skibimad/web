@@ -57,7 +57,17 @@ class Request
     {
         return $this->method;
     }
-    
+
+    public function isPost(): bool
+    {
+        return $this->method === 'POST';
+    }
+
+    public function isGet(): bool
+    {
+        return $this->method === 'GET';
+    }
+
     public function get(string $key, $default = null)
     {
         return $this->query[$key] ?? $default;

@@ -274,7 +274,7 @@ const styles = {
 
 console.log('%c🎬 Skibidi Madness 🎬', styles.title);
 console.log('%cWelcome to the Multiverse!', styles.subtitle);
-console.log('%cSubscribe to FireStormX Studios: https://www.youtube.com/@FireStormX!?', styles.link);
+console.log('%cSubscribe to FireStormX Studios: https://www.youtube.com/@FireStorm-Tri', styles.link);
 
 // Keyboard shortcuts
 document.addEventListener('keydown', function(e) {

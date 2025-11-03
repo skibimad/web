@@ -64,11 +64,11 @@ INSERT INTO heroes (name, slug, description, image, video, abilities, display_or
 
 -- Insert default episodes data
 INSERT INTO episodes (episode_number, title, description, thumbnail, video_url, duration, release_date) VALUES
-(1, 'The Awakening', 'The Supreme Leader emerges from the shadows as the Asotra forces launch their first attack across multiple dimensions. The heroes must unite quickly or watch reality crumble.', 'res/img/all-together.png', 'https://www.youtube.com/@FireStormX!?', '10:30', '2024-01-15'),
-(2, 'Multiverse Mayhem', 'As portals tear open between Marvel, DC, and Star Wars universes, our heroes face unprecedented challenges. Allies emerge from unexpected places.', 'res/img/heroes/promo/titan-camera.png', 'https://www.youtube.com/@FireStormX!?', '12:45', '2024-01-22'),
-(3, 'The Supreme Leader Revealed', 'G-Man uncovers the shocking truth about the Supreme Leader''s identity and their connection to the original Skibidi universe. Nothing will be the same.', 'res/img/heroes/promo/g-man.png', 'https://www.youtube.com/@FireStormX!?', '15:20', '2024-01-29'),
-(4, 'Dimensional Rift', 'The Minecraft universe collides with reality as our heroes must protect Steve and Alex from the Asotra invasion while preventing total dimensional collapse.', 'res/img/heroes/promo/titan-speaker.png', 'https://www.youtube.com/@FireStormX!?', '11:15', '2024-02-05'),
-(5, 'The Final Stand', 'All heroes unite in an epic confrontation with the Supreme Leader. The fate of all universes hangs in the balance. Who will survive?', 'res/img/heroes/promo/titan-tv.png', 'https://www.youtube.com/@FireStormX!?', '18:00', '2024-02-12');
+(1, 'The Awakening', 'The Supreme Leader emerges from the shadows as the Asotra forces launch their first attack across multiple dimensions. The heroes must unite quickly or watch reality crumble.', 'res/img/all-together.png', 'https://www.youtube.com/@FireStorm-Tri', '10:30', '2024-01-15'),
+(2, 'Multiverse Mayhem', 'As portals tear open between Marvel, DC, and Star Wars universes, our heroes face unprecedented challenges. Allies emerge from unexpected places.', 'res/img/heroes/promo/titan-camera.png', 'https://www.youtube.com/@FireStorm-Tri', '12:45', '2024-01-22'),
+(3, 'The Supreme Leader Revealed', 'G-Man uncovers the shocking truth about the Supreme Leader''s identity and their connection to the original Skibidi universe. Nothing will be the same.', 'res/img/heroes/promo/g-man.png', 'https://www.youtube.com/@FireStorm-Tri', '15:20', '2024-01-29'),
+(4, 'Dimensional Rift', 'The Minecraft universe collides with reality as our heroes must protect Steve and Alex from the Asotra invasion while preventing total dimensional collapse.', 'res/img/heroes/promo/titan-speaker.png', 'https://www.youtube.com/@FireStorm-Tri', '11:15', '2024-02-05'),
+(5, 'The Final Stand', 'All heroes unite in an epic confrontation with the Supreme Leader. The fate of all universes hangs in the balance. Who will survive?', 'res/img/heroes/promo/titan-tv.png', 'https://www.youtube.com/@FireStorm-Tri', '18:00', '2024-02-12');
 
 -- Insert sample blog posts
 INSERT INTO blog_posts (title, slug, content, excerpt, image, author, published, published_at) VALUES

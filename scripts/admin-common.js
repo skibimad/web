@@ -75,7 +75,7 @@ function initStorage() {
                 title: 'The Awakening',
                 description: 'The Supreme Leader emerges from the shadows as the Asotra forces launch their first attack across multiple dimensions. The heroes must unite quickly or watch reality crumble.',
                 thumbnail: 'res/img/all-together.png',
-                videoUrl: 'https://www.youtube.com/@FireStormX!?',
+                videoUrl: 'https://www.youtube.com/@FireStorm-Tri',
                 duration: '10:30',
                 releaseDate: '2024-01-15'
             },
@@ -85,7 +85,7 @@ function initStorage() {
                 title: 'Multiverse Mayhem',
                 description: 'As portals tear open between Marvel, DC, and Star Wars universes, our heroes face unprecedented challenges. Allies emerge from unexpected places.',
                 thumbnail: 'res/img/heroes/promo/titan-camera.png',
-                videoUrl: 'https://www.youtube.com/@FireStormX!?',
+                videoUrl: 'https://www.youtube.com/@FireStorm-Tri',
                 duration: '12:45',
                 releaseDate: '2024-01-22'
             },
@@ -95,7 +95,7 @@ function initStorage() {
                 title: 'The Supreme Leader Revealed',
                 description: "G-Man uncovers the shocking truth about the Supreme Leader's identity and their connection to the original Skibidi universe. Nothing will be the same.",
                 thumbnail: 'res/img/heroes/promo/g-man.png',
-                videoUrl: 'https://www.youtube.com/@FireStormX!?',
+                videoUrl: 'https://www.youtube.com/@FireStorm-Tri',
                 duration: '15:20',
                 releaseDate: '2024-01-29'
             },
@@ -105,7 +105,7 @@ function initStorage() {
                 title: 'Sonic Showdown',
                 description: 'Titan Speakerman faces his greatest test as the Asotra deploy weapons that target sound itself. Can he overcome this deadly silence?',
                 thumbnail: 'res/img/heroes/promo/titan-speaker.png',
-                videoUrl: 'https://www.youtube.com/@FireStormX!?',
+                videoUrl: 'https://www.youtube.com/@FireStorm-Tri',
                 duration: '11:15',
                 releaseDate: '2024-02-05'
             },
@@ -115,7 +115,7 @@ function initStorage() {
                 title: 'Stellar Convergence',
                 description: 'Star Storage channels the power of dying stars to create a weapon capable of sealing dimensional rifts. But at what cost?',
                 thumbnail: 'res/img/heroes/promo/star-storage.png',
-                videoUrl: 'https://www.youtube.com/@FireStormX!?',
+                videoUrl: 'https://www.youtube.com/@FireStorm-Tri',
                 duration: '13:50',
                 releaseDate: '2024-02-12'
             }

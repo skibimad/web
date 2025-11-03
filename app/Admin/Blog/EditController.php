@@ -39,7 +39,7 @@ class EditController extends Controller
             
             $post->save();
             
-            $this->redirect('/admin/blog');
+            $this->redirect('/admin/blog/blog');
             return;
         }
         
