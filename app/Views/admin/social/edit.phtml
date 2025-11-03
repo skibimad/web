@@ -1,0 +1,43 @@
+<?php ob_start(); ?>
+
+<h1 class="admin-title">Edit Social Link</h1>
+
+<form method="POST" class="admin-form">
+    <div class="form-group">
+        <label for="platform">Platform</label>
+        <input type="text" id="platform" name="platform" value="<?= htmlspecialchars($link->platform ?? '') ?>" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="url">URL</label>
+        <input type="url" id="url" name="url" value="<?= htmlspecialchars($link->url ?? '') ?>" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="icon_class">Icon Class</label>
+        <input type="text" id="icon_class" name="icon_class" value="<?= htmlspecialchars($link->icon_class ?? '') ?>" placeholder="e.g., fab fa-youtube">
+        <small>Use Font Awesome icon classes</small>
+    </div>
+    
+    <div class="form-group">
+        <label for="display_order">Display Order</label>
+        <input type="number" id="display_order" name="display_order" value="<?= $link->display_order ?? 0 ?>" required>
+    </div>
+    
+    <div class="form-group">
+        <label>
+            <input type="checkbox" name="enabled" value="1" <?= ($link->enabled ?? 1) ? 'checked' : '' ?>>
+            Enabled
+        </label>
+    </div>
+    
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save Link</button>
+        <a href="/admin/social/links" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+<?php 
+$content = ob_get_clean();
+require __DIR__ . '/../../layouts/admin.phtml';
+?>

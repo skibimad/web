@@ -1,0 +1,59 @@
+<?php ob_start(); ?>
+
+<h1 class="admin-title">Add New Blog Post</h1>
+
+<form method="POST" class="admin-form">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="excerpt">Excerpt</label>
+        <textarea id="excerpt" name="excerpt" rows="3" required></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="content">Content</label>
+        <textarea id="content" name="content" rows="10" required></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="image">Featured Image</label>
+        <div class="file-upload-container">
+            <input type="hidden" id="image" name="image" value="">
+            <div class="file-uploader" data-target="image" data-category="blog" data-type="image">
+                <div class="file-upload-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag and drop image here or click to upload</p>
+                    <p class="file-size-info">Max file size: 10MB</p>
+                </div>
+                <div class="file-preview" style="display: none;">
+                    <img src="" alt="Preview">
+                    <button type="button" class="remove-file">×</button>
+                </div>
+                <div class="upload-progress" style="display: none;">
+                    <div class="progress-bar"></div>
+                    <span class="progress-text">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label>
+            <input type="checkbox" name="published" value="1">
+            Publish Now
+        </label>
+    </div>
+    
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Add Post</button>
+        <a href="/admin/blog/blog" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+<?php 
+$content = ob_get_clean();
+require __DIR__ . '/../../layouts/admin.phtml';
+?>

@@ -1,0 +1,42 @@
+<?php ob_start(); ?>
+
+<!-- Blog Header -->
+<section class="blog-header">
+    <div class="container">
+        <h1 class="section-title">Blog</h1>
+        <p class="section-subtitle">Latest news, updates, and behind-the-scenes content</p>
+    </div>
+</section>
+
+<!-- Blog Posts -->
+<section class="blog-section">
+    <div class="container">
+        <?php if ($posts->isEmpty()): ?>
+        <div class="no-content">
+            <h3>No blog posts yet</h3>
+            <p>Check back soon for updates!</p>
+        </div>
+        <?php else: ?>
+        <div id="blog-posts-grid" class="blog-grid">
+            <?php foreach ($posts as $post): ?>
+            <div class="blog-card">
+                <img src="/<?= htmlspecialchars($post->image) ?>" alt="<?= htmlspecialchars($post->title) ?>" class="blog-card-image">
+                <div class="blog-card-content">
+                    <h3 class="blog-card-title"><?= htmlspecialchars($post->title) ?></h3>
+                    <div class="blog-card-meta">
+                        <?= htmlspecialchars($post->author) ?> • <?= $post->getFormattedDate() ?>
+                    </div>
+                    <p class="blog-card-excerpt"><?= htmlspecialchars($post->getExcerpt()) ?></p>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</section>
+
+<?php 
+$content = ob_get_clean();
+$title = 'Blog - Skibidi Madness | FireStormX Studios';
+require __DIR__ . '/layouts/main.phtml';
+?>
