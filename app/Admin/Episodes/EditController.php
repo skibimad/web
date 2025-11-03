@@ -8,9 +8,9 @@ use App\Core\Request;
 use App\Models\Episode;
 
 /**
- * Add New Episode Controller
+ * Edit Episode Controller
  */
-class AddController extends Controller
+class EditController extends Controller
 {
     public function handle(Request $request): void
     {
@@ -18,8 +18,21 @@ class AddController extends Controller
         $auth = new Auth();
         $auth->require();
         
+        $id = $request->get('id');
+        
+        if (!$id) {
+            $this->redirect('/admin/episodes/episodes');
+            return;
+        }
+        
+        $episode = Episode::find($id);
+        
+        if (!$episode) {
+            $this->redirect('/admin/episodes/episodes');
+            return;
+        }
+        
         if ($request->getMethod() === 'POST') {
-            $episode = new Episode();
             $episode->title = $request->post('title');
             $episode->description = $request->post('description');
             $episode->video_url = $request->post('video_url');
@@ -31,6 +44,8 @@ class AddController extends Controller
             }
         }
         
-        $this->view('admin/episodes/add', []);
+        $this->view('admin/episodes/edit', [
+            'episode' => $episode
+        ]);
     }
 }

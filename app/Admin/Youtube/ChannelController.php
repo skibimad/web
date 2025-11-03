@@ -21,7 +21,7 @@ class ChannelController extends Controller
         $channel = YouTubeChannel::get();
         
         // Handle POST request (save)
-        if ($request->method() === 'POST') {
+        if ($request->getMethod() === 'POST') {
             YouTubeChannel::update([
                 'channel_name' => $request->post('channel_name'),
                 'channel_url' => $request->post('channel_url'),

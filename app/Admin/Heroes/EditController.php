@@ -33,7 +33,7 @@ class EditController extends Controller
         }
         
         // Handle POST request (save)
-        if ($request->method() === 'POST') {
+        if ($request->getMethod() === 'POST') {
             $hero->name = $request->post('name');
             $hero->slug = $request->post('slug');
             $hero->description = $request->post('description');

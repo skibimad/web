@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Episode - Skibidi Madness Admin</title>
+    <link rel="stylesheet" href="/res/css/admin.css">
+</head>
+<body>
+    <?php include __DIR__ . '/../layout/sidebar.phtml'; ?>
+    
+    <div class="admin-content">
+        <div class="admin-header">
+            <h1>Edit Episode</h1>
+            <a href="/admin/episodes/episodes" class="btn">← Back to Episodes</a>
+        </div>
+
+        <div class="admin-form-container">
+            <form method="POST" class="admin-form">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" value="<?= htmlspecialchars($episode->title) ?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="episode_number">Episode Number</label>
+                    <input type="number" id="episode_number" name="episode_number" value="<?= $episode->episode_number ?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="4" required><?= htmlspecialchars($episode->description) ?></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="video_url">Video URL</label>
+                    <input type="url" id="video_url" name="video_url" value="<?= htmlspecialchars($episode->video_url) ?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="enabled" value="1" <?= $episode->enabled ? 'checked' : '' ?>>
+                        Enabled
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Update Episode</button>
+                    <a href="/admin/episodes/episodes" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

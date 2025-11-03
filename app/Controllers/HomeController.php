@@ -16,8 +16,12 @@ class HomeController extends Controller
 {
     public function handle(Request $request): void
     {
-        $heroes = Hero::allOrdered();
-        $episodes = Episode::allOrdered();
+        // Get only enabled heroes and episodes for landing page
+        $allHeroes = Hero::allOrdered();
+        $heroes = array_filter($allHeroes->toArray(), fn($h) => $h->enabled == 1);
+        
+        $allEpisodes = Episode::allOrdered();
+        $episodes = array_filter($allEpisodes->toArray(), fn($e) => $e->enabled == 1);
         $recentPosts = BlogPost::published();
         
         // Get only first 3 blog posts for home page
