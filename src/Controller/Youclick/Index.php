@@ -12,7 +12,8 @@ class Index extends Controller
             'youclick',
             [
                 'videoUrl' => $this->getRequest('y')
-            ]
+            ],
+            true
         );
         //$this->redirect($this->getRequest('y'));
     }
