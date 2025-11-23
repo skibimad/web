@@ -1,0 +1,372 @@
+<style>
+/* YouTube-Inspired Admin Sidebar Styles */
+.admin-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100vh;
+    background: #ffffff;
+    border-right: 1px solid #e5e5e5;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    font-family: 'Roboto', 'Arial', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Admin Logo */
+.admin-logo {
+    padding: 24px 20px;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-main {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #ff0000;
+    letter-spacing: -0.5px;
+}
+
+.logo-sub {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #606060;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-left: 8px;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    padding: 8px 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 0;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    color: #0f0f0f;
+    text-decoration: none;
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-left: 3px solid transparent;
+    background: linear-gradient(90deg, transparent 0%, #f2f2f2 0%, #f2f2f2 0%, transparent 0%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+}
+
+.sidebar-menu a:hover {
+    color: #0f0f0f;
+    background-position: 0% 0;
+    transform: translateX(4px);
+}
+
+.sidebar-menu a.active {
+    background: #f2f2f2;
+    color: #0f0f0f;
+    border-left: 3px solid #ff0000;
+    font-weight: 500;
+    background-position: 0% 0;
+    transform: translateX(4px);
+}
+
+.sidebar-menu a.active:hover {
+    transform: translateX(8px);
+}
+
+.sidebar-menu a i {
+    font-size: 20px;
+    width: 24px;
+    text-align: center;
+    margin-right: 24px;
+    color: #606060;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu a:hover i,
+.sidebar-menu a.active i {
+    color: #0f0f0f;
+    transform: scale(1.1);
+}
+
+.sidebar-menu a span {
+    flex: 1;
+    font-weight: inherit;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu a:hover span,
+.sidebar-menu a.active span {
+    letter-spacing: 0.5px;
+}
+
+/* Disabled items */
+.sidebar-menu li.disabled a {
+    color: #aaaaaa;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: none;
+    transform: none;
+}
+
+.sidebar-menu li.disabled a i {
+    color: #cccccc;
+}
+
+/* Special styling for external link */
+.sidebar-menu a[href="/"] {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 8px;
+    padding-top: 16px;
+    background: linear-gradient(90deg, transparent 0%, #e8f4fd 0%, #e8f4fd 0%, transparent 0%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+}
+
+.sidebar-menu a[href="/"]:hover {
+    background-position: 0% 0;
+    color: #1976d2;
+}
+
+.sidebar-menu a[href="/"]:hover i {
+    color: #1976d2;
+}
+
+/* Special styling for logout */
+.sidebar-menu a[href*="logout"] {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 8px;
+    padding-top: 16px;
+    color: #606060;
+    background: linear-gradient(90deg, transparent 0%, #ffeaea 0%, #ffeaea 0%, transparent 0%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+}
+
+.sidebar-menu a[href*="logout"]:hover {
+    background-position: 0% 0;
+    color: #d32f2f;
+}
+
+.sidebar-menu a[href*="logout"]:hover i {
+    color: #d32f2f;
+}
+
+/* Mobile menu toggle */
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+    background: #ffffff;
+    color: #0f0f0f;
+    border: 1px solid #e5e5e5;
+    padding: 12px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(90deg, #ffffff 0%, #f2f2f2 0%, #f2f2f2 0%, #ffffff 0%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+}
+
+.mobile-menu-toggle:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-position: 0% 0;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+        width: 260px;
+        box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.3);
+    }
+    
+    .admin-sidebar.open {
+        transform: translateX(0);
+    }
+        
+    .mobile-menu-toggle {
+        display: flex;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .admin-sidebar {
+        background: #212121;
+        border-right-color: #303030;
+    }
+    
+    .admin-logo {
+        border-bottom-color: #303030;
+    }
+    
+    .logo-main {
+        color: #ff0000;
+    }
+    
+    .logo-sub {
+        color: #aaaaaa;
+    }
+    
+    .sidebar-menu a {
+        color: #ffffff;
+        background: linear-gradient(90deg, transparent 0%, #272727 0%, #272727 0%, transparent 0%);
+        background-size: 300% 100%;
+        background-position: 100% 0;
+    }
+    
+    .sidebar-menu a:hover {
+        background-position: 0% 0;
+        color: #ffffff;
+    }
+    
+    .sidebar-menu a.active {
+        background: #272727;
+        color: #ffffff;
+        background-position: 0% 0;
+    }
+    
+    .sidebar-menu a i {
+        color: #aaaaaa;
+    }
+    
+    .sidebar-menu a[href="/"] {
+        border-top-color: #303030;
+        color: #aaaaaa;
+        background: linear-gradient(90deg, transparent 0%, #1a2332 0%, #1a2332 0%, transparent 0%);
+        background-size: 300% 100%;
+        background-position: 100% 0;
+    }
+    
+    .sidebar-menu a[href="/"]:hover {
+        background-position: 0% 0;
+        color: #64b5f6;
+    }
+    
+    .sidebar-menu a[href="/"]:hover i {
+        color: #64b5f6;
+    }
+    
+    .sidebar-menu a[href="/admin/logout"] {
+        border-top-color: #303030;
+        color: #aaaaaa;
+        background: linear-gradient(90deg, transparent 0%, #2d1b1b 0%, #2d1b1b 0%, transparent 0%);
+        background-size: 300% 100%;
+        background-position: 100% 0;
+    }
+    
+    .sidebar-menu a[href="/admin/logout"]:hover {
+        background-position: 0% 0;
+        color: #ef5350;
+    }
+    
+    .sidebar-menu a[href="/admin/logout"]:hover i {
+        color: #ef5350;
+    }
+    
+    .mobile-menu-toggle {
+        background: #212121;
+        border-color: #303030;
+        color: #ffffff;
+    }
+    
+    .mobile-menu-toggle:hover {
+        background: linear-gradient(90deg, #212121 0%, #272727 0%, #272727 0%, #212121 0%);
+        background-size: 300% 100%;
+        background-position: 0% 0;
+    }
+}
+</style>
+
+<aside class="admin-sidebar">
+    <!-- Admin Sidebar -->
+    <div class="admin-logo">
+        <span class="logo-main">SKIBIDI</span>
+        <span class="logo-sub">ADMIN</span>
+    </div>
+
+    <nav class="sidebar-nav">
+        <ul class="sidebar-menu">
+            <li><a href="/admin"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+            <li><a href="/admin/youtube"><i class="fab fa-youtube"></i> <span>YouTube</span></a></li>
+            <li><a href="/admin/blog"><i class="fas fa-newspaper"></i> <span>Blog</span></a></li>
+            <li><a href="/admin/episodes"><i class="fas fa-film"></i> <span>Episodes</span></a></li>
+            <li><a href="/admin/heroes"><i class="fas fa-user-secret"></i> <span>Heroes</span></a></li>
+            
+            <li class="disabled"><a href="/admin/landing"><i class="fas fa-home"></i> <span>Landing Page</span></a></li>
+            <li><a href="/admin/social"><i class="fas fa-share-alt"></i> <span>Social Links</span></a></li>
+            <li><a href="/"><i class="fas fa-external-link-alt"></i> <span>View Site</span></a></li>
+            <li><a href="/admin/logout"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+        </ul>
+    </nav>
+</aside>
+
+<!-- Mobile Menu Toggle Button -->
+<button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+    <i class="fas fa-bars"></i>
+</button>
+
+<script>
+function toggleMobileMenu() {
+    const sidebar = document.querySelector('.admin-sidebar');
+    sidebar.classList.toggle('open');
+    
+    // Close sidebar when clicking outside on mobile
+    if (sidebar.classList.contains('open')) {
+        document.addEventListener('click', function closeSidebar(e) {
+            if (!sidebar.contains(e.target) && !e.target.classList.contains('mobile-menu-toggle')) {
+                sidebar.classList.remove('open');
+                document.removeEventListener('click', closeSidebar);
+            }
+        });
+    }
+}
+
+// Add active class to current page
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPath = window.location.pathname;
+    const menuLinks = document.querySelectorAll('.sidebar-menu a');
+    
+    menuLinks.forEach(link => {
+        if (currentPath.startsWith(link.getAttribute('href')) && link.getAttribute('href') !== '/') {
+            link.classList.add('active');
+        }
+    });
+});
+</script>

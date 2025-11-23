@@ -1,0 +1,52 @@
+<style>
+    
+/* Main content adjustment */
+.admin-main {
+    margin-left: 260px;
+    min-height: 100vh;
+    background: #0d0d0eff;
+    background-attachment: fixed;
+    transition: margin-left 0.3s ease;
+}
+
+.admin-content {
+    padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    
+    .admin-main {
+        margin-left: 0;
+    }
+    
+}
+
+
+/* Scrollbar styling for sidebar */
+.admin-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.admin-sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(0, 212, 255, 0.5);
+    border-radius: 3px;
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 212, 255, 0.8);
+}
+
+</style>
+
+<main class="admin-main">
+    <div class="admin-content">
+        <?php
+        include_once $this->getTemplate();
+        ?>
+    </div>
+</main>

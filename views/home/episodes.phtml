@@ -1,0 +1,27 @@
+<section id="videos" class="videos-section">
+    <div class="container">
+        <h2 class="section-title">Featured Episodes</h2>
+        <p class="section-subtitle">
+            Watch the epic battles and witness the chaos unfold
+        </p>
+        
+        <div class="videos-grid">
+            <?php foreach ($episodes as $episode): ?>
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <img src="<?= htmlspecialchars($episode['thumbnail'] ? $episode['thumbnail'] : 'public/media/img/default-video-thumbnail.png') ?>" alt="Episode Preview">
+                    <a href="<?= $episode->getVideoUrl() ?>" target="_blank" class="play-button">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6 5v14l11-7z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="video-info">
+                    <h3>Episode <?= $episode['episode_number'] ?>: <?= htmlspecialchars($episode['title']) ?></h3>
+                    <p><?= nl2br($episode['description']) ?></p>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>

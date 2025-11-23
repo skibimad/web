@@ -1,0 +1,539 @@
+
+:root {
+    /* Primary Colors - Dark, gritty tones */
+    --color-primary: #ff3366;
+    --color-primary-dark: #cc0033;
+    --color-primary-light: #ff6699;
+    
+    /* Secondary Colors - Neon accents */
+    --color-secondary: #00ffcc;
+    --color-secondary-dark: #00cc99;
+    --color-accent: #ffcc00;
+    --color-accent-purple: #9933ff;
+    
+    /* Background Colors */
+    --color-bg-primary: #0a0a0f;
+    --color-bg-secondary: #141419;
+    --color-bg-tertiary: #1e1e28;
+    --color-bg-card: rgba(30, 30, 40, 0.8);
+    
+    /* Text Colors */
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #b0b0c0;
+    --color-text-muted: #707080;
+    
+    /* Fonts */
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* YouTube brand colors */
+    --youtube-red: #ff0000;
+    --youtube-red-dark: #cc0000;
+    
+    /* Effects */
+    --glow-primary: 0 0 20px rgba(255, 51, 102, 0.5);
+    --glow-secondary: 0 0 20px rgba(0, 255, 204, 0.5);
+    --glow-accent: 0 0 20px rgba(255, 204, 0, 0.5);
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+/* Blog Management Styles - YouTube Style */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e5e5e5;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.admin-title {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: #0f0f0f;
+    margin: 0;
+    letter-spacing: -0.5px;
+    flex: 1;
+    min-width: 200px;
+}
+
+
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 24px;
+    transition: all 0.2s ease;
+    letter-spacing: 0.25px;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 200px;
+    height: 200px;
+}
+
+.btn-primary {
+    background: #ff0000;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(255, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+    background: #cc0000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+}
+
+.btn-add {
+    background: #00c853;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 200, 83, 0.2);
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 12px;
+    margin: 0 2px;
+    border-radius: 18px;
+    font-weight: 500;
+    text-transform: none;
+}
+
+.btn-edit {
+    background: #333;
+    color: #777;
+    border: 1px solid #111;
+}
+
+.btn-edit:hover {
+    background: #0448a0;
+    color: #ccc;
+    box-shadow: 0 3px 8px rgba(6, 95, 212, 0.3);
+}
+
+.btn-warning {
+    background: #333;
+    color: #777;
+    border: 1px solid #111;
+}
+
+.btn-warning:hover {
+    background: #cc7700;
+    color: #ccc;
+    box-shadow: 0 3px 8px rgba(255, 149, 0, 0.3);
+}
+
+.btn-danger {
+    background: #333;
+    color: #777;
+    border: 1px solid #000;
+}
+
+.btn-danger:hover {
+    background: #ff0000;
+    color: #ccc;
+    border-color: #ff0000;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(255, 0, 0, 0.3);
+}
+
+/* Blog Management Styles - YouTube Style */
+
+
+
+
+
+
+/* Table Styles - YouTube Clean */
+.admin-table-container {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 100%;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Roboto', 'Arial', sans-serif;
+}
+
+.admin-table thead {
+    background: #f9f9f9;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.admin-table th {
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #606060;
+    text-align: left;
+    letter-spacing: 0.25px;
+    text-transform: uppercase;
+    border-bottom: none;
+}
+
+.admin-table tbody tr {
+    background: #ffffff;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.admin-table tbody tr:hover {
+    background: #f8f8f8;
+}
+
+.admin-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.admin-table td {
+    padding: 16px 20px;
+    color: #0f0f0f;
+    font-size: 14px;
+    font-weight: 400;
+    vertical-align: middle;
+    border-bottom: none;
+}
+
+/* Mobile Card Layout - YouTube Style */
+.mobile-card {
+    display: none;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.mobile-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-card-title {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #0f0f0f;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 12px;
+    letter-spacing: -0.25px;
+}
+
+.mobile-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mobile-card-row.flex-end {
+    justify-content: flex-end;
+}
+
+
+.mobile-card-label {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-weight: 500;
+    color: #606060;
+    font-size: 13px;
+    min-width: 80px;
+    text-transform: uppercase;
+    letter-spacing: 0.25px;
+}
+
+.mobile-card-value {
+    color: #0f0f0f;
+    font-size: 14px;
+    flex: 1;
+    text-align: right;
+}
+
+.mobile-card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 16px;
+}
+
+.mobile-card-actions .btn-small {
+    flex: 1;
+    min-width: 80px;
+    padding: 10px 12px;
+    text-align: center;
+}
+
+/* Status Badges - YouTube Style */
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25px;
+    text-transform: uppercase;
+    background: #f0f0f0;
+    color: #606060;
+    transition: all 0.2s ease;
+}
+
+.status-enabled {
+    background: #e8f5e8;
+    color: #0d7377;
+}
+
+.status-disabled {
+    background: #fff2f2;
+    color: #d73502;
+}
+
+.status-badge:hover {
+    transform: scale(1.05);
+}
+
+/* Action Buttons Container */
+.admin-table td:last-child {
+    white-space: nowrap;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .admin-table th,
+    .admin-table td {
+        padding: 14px 16px;
+        font-size: 13px;
+    }
+    
+    .btn-small {
+        padding: 8px 12px;
+        font-size: 11px;
+        margin: 1px;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        margin-bottom: 24px;
+    }
+    
+    .admin-title {
+        font-size: 28px;
+        margin-bottom: 16px;
+    }
+    
+    .btn-primary {
+        width: 90%;
+        padding: 14px;
+        font-size: 14px;
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Hide table and show cards on mobile */
+    .admin-table-container {
+        display: none;
+    }
+    
+    .mobile-card {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-title {
+        font-size: 24px;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+        font-size: 13px;
+    }
+    
+    .mobile-card {
+        padding: 16px;
+        margin-bottom: 12px;
+    }
+    
+    .mobile-card-title {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+    
+    .mobile-card-row {
+        /*flex-direction: column;*/
+        color: #efefef;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .mobile-card-value {
+        text-align: left;
+    }
+    
+    .mobile-card-actions {
+        gap: 6px;
+    }
+    
+    .mobile-card-actions .btn-small {
+        padding: 10px 8px;
+        font-size: 11px;
+        min-width: 70px;
+    }
+    
+    .status-badge {
+        padding: 3px 6px;
+        font-size: 10px;
+    }
+}
+
+/* Dark Mode Support (YouTube's dark theme) */
+@media (prefers-color-scheme: dark) {
+    .admin-title,
+    .admin-table td,
+    .mobile-card-title,
+    .mobile-card-value {
+        color: #ffffff;
+    }
+    
+    .admin-table-container,
+    .mobile-card {
+        background: #212121;
+        border-color: #303030;
+    }
+    
+    .admin-table thead {
+        background: #181818;
+    }
+    
+    .admin-table th,
+    .mobile-card-label {
+        color: #aaaaaa;
+    }
+    
+    .admin-table tbody tr {
+        background: #212121;
+        border-color: #303030;
+    }
+    
+    .admin-table tbody tr:hover,
+    .mobile-card:hover {
+        background: #272727;
+    }
+    
+    .mobile-card-row,
+    .mobile-card-actions {
+        border-color: #303030;
+    }
+    
+    .status-badge {
+        background: #303030;
+        color: #aaaaaa;
+    }
+    
+    .status-enabled {
+        background: rgba(13, 115, 119, 0.2);
+        color: #4fc3f7;
+    }
+    
+    .status-disabled {
+        background: rgba(215, 53, 2, 0.2);
+        color: #ff7043;
+    }
+}
+
+/* YouTube-style animations */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.admin-table-container,
+.mobile-card {
+    animation: fadeInScale 0.3s ease forwards;
+}
+
+.admin-table tbody tr {
+    animation: fadeInScale 0.25s ease forwards;
+}
+
+.mobile-card:nth-child(1) { animation-delay: 0.1s; }
+.mobile-card:nth-child(2) { animation-delay: 0.15s; }
+.mobile-card:nth-child(3) { animation-delay: 0.2s; }
+.mobile-card:nth-child(4) { animation-delay: 0.25s; }
+.mobile-card:nth-child(5) { animation-delay: 0.3s; }
+
+.admin-table tbody tr:nth-child(1) { animation-delay: 0.1s; }
+.admin-table tbody tr:nth-child(2) { animation-delay: 0.15s; }
+.admin-table tbody tr:nth-child(3) { animation-delay: 0.2s; }
+.admin-table tbody tr:nth-child(4) { animation-delay: 0.25s; }
+.admin-table tbody tr:nth-child(5) { animation-delay: 0.3s; }
+
+/* YouTube-style focus states */
+.btn:focus,
+.admin-table tbody tr:focus {
+    outline: 2px solid #065fd4;
+    outline-offset: 2px;
+}
