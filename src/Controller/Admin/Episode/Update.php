@@ -1,43 +1,43 @@
 <?php
 
-namespace App\Controller\Dn\Blog;
+namespace App\Controller\Admin\Episode;
 
-use App\Controller\DnController;
+use App\Controller\AdminController;
 use App\Core\Model\CollectionInterface;
-use App\Model\BlogPost;
+use App\Model\Episode;
 
-class Update extends DnController
+class Update extends AdminController
 {
     public function handle(): void
     {
         //try {
         if ($this->getRequest()->isPost()) {
-            $this->updatePost();
-            $this->redirect('/admin/blog');
+            $this->updateEpisode();
+            $this->redirect('/admin/episodes');
         }
 
         $this->render(
-            'admin/blog/post',
+            'admin/episode/form',
             [
-                'post' => $this->findPost()
+                'episode' => $this->findEpisode()
             ]
         );
     }
 
-    protected function findPost()
+    protected function findEpisode()
     {
-        $post = new BlogPost();
+        $post = new Episode();
         $post->load($this->getRequest('id'));
 
         return $post;
     }
 
-    protected function updatePost()
+    protected function updateEpisode()
     {
-        $postData = $this->getRequest('post');
+        $postData = $this->getRequest('episode');
         $id = $this->getRequest('id');
         $this->assertValid($postData);
-        $post = new BlogPost();
+        $post = new Episode();
         $post->load($postData['id']);
         unset($postData['id']);
         $post->setData(

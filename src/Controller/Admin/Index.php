@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controller\Dn;
+namespace App\Controller\Admin;
 
-use App\Controller\DnController;
+use App\Controller\AdminController;
 use App\Model\BlogPost;
 
-class Index extends DnController
+class Index extends AdminController
 {
     public function handle(): void
     {

@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller\Dn\Blog;
+namespace App\Controller\Admin\Episode;
 
 use App\Core\Request;
 
@@ -33,7 +33,7 @@ class Uploader
     {
         $tmp_name = $fileData['tmp_name'];
         $fileext = pathinfo($fileData['name'], PATHINFO_EXTENSION);
-        $filename = uniqid('blog_', true) . '.' . $fileext;
+        $filename = uniqid('episode_', true) . '.' . $fileext;
         $filePath = $to . $filename;
 
         if (!is_dir($to)) {

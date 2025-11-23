@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controller\Dn\Blog;
+namespace App\Controller\Admin\Blog;
 
-use App\Controller\DnController;
+use App\Controller\AdminController;
 use App\Core\Config;
 use App\Core\Model\CollectionInterface;
 use App\Model\BlogPost;
 
-class Put extends DnController
+class Put extends AdminController
 {
     //const UPLOAD_DIR = 'public/media/uploads/blog/';
 

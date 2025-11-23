@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controller\Dn;
+namespace App\Controller\Admin;
 
-use App\Controller\DnController;
+use App\Controller\AdminController;
 use App\Core\Model\CollectionInterface;
 
-class Blog extends DnController
+class Blog extends AdminController
 {
     public function handle(): void
     {

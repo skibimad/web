@@ -1,27 +1,20 @@
 <?php
 
-namespace App\Controller\Dn\Episode;
+namespace App\Controller\Admin\Episode;
 
-use App\Controller\DnController;
+use App\Controller\AdminController;
 use App\Core\Model\CollectionInterface;
 use App\Model\Episode;
 
-class Update extends DnController
+class Status extends AdminController
 {
     public function handle(): void
     {
         //try {
-        if ($this->getRequest()->isPost()) {
+        if ($this->getRequest()->isGet()) {
             $this->updateEpisode();
-            $this->redirect('/admin/episodes');
         }
-
-        $this->render(
-            'admin/episode/form',
-            [
-                'episode' => $this->findEpisode()
-            ]
-        );
+        $this->redirectReferer();
     }
 
     protected function findEpisode()
@@ -34,15 +27,18 @@ class Update extends DnController
 
     protected function updateEpisode()
     {
-        $postData = $this->getRequest('episode');
-        $id = $this->getRequest('id');
-        $this->assertValid($postData);
+        $data = [
+            'id' => $this->getRequest('id'),
+            'status' => $this->getRequest('status'),
+        ];
+        
+        $this->assertValid($data);
         $post = new Episode();
-        $post->load($postData['id']);
-        unset($postData['id']);
+        $post->load($data['id']);
+        unset($data['id']);
         $post->setData(
             array_merge(
-                $postData,
+                $data,
                 []
             )
         )
@@ -52,7 +48,7 @@ class Update extends DnController
 
     protected function assertValid(array &$data)
     {
-        return true;
+        return isset($data['id']) && isset($data['status']);
     }
 
     

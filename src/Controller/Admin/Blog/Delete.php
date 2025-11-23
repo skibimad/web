@@ -1,31 +1,30 @@
 <?php
 
-namespace App\Controller\Dn\Blog;
+namespace App\Controller\Admin\Blog;
 
-use App\Controller\DnController;
+use App\Controller\AdminController;
 use App\Core\Model\CollectionInterface;
 use App\Model\BlogPost;
 
-class Publish extends DnController
+class Delete extends AdminController
 {
     public function handle(): void
     {
         //try {
-            $this->publishPost();
+            $this->deletePost();
 
         //} catch (\Throwable) {
-            $this->redirectReferer();
+            $this->redirect('/admin/blog');
         //}
 
 
     }
 
-    protected function publishPost()
+    protected function deletePost()
     {
         $postId = $this->getRequest()->query('id');
         $post = new BlogPost();
-        $post->load($postId);
-        $post->publish();
+        $post->delete($postId);
 
     }
 

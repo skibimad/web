@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controller\Dn;
+namespace App\Controller\Admin;
 
-use App\Controller\DnController;
+use App\Controller\AdminController;
 use App\Core\Helper\Auth;
 
-class Login extends DnController
+class Login extends AdminController
 {
     public function handle(): void
     {

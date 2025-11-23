@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controller\Dn\Episode;
+namespace App\Controller\Admin\Episode;
 
-use App\Controller\Dn\Episode\Uploader;
-use App\Controller\DnController;
+use App\Controller\Admin\Episode\Uploader;
+use App\Controller\AdminController;
 use App\Core\Config;
 use App\Model\Episode;
 
-class Put extends DnController
+class Put extends AdminController
 {
     //const UPLOAD_DIR = 'public/media/uploads/episode/';
 

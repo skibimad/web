@@ -5,7 +5,7 @@ use App\Core\Contract\ViewInterface;
 use App\Core\Controller;
 use App\View\Admin\View;
 
-abstract class DnController extends Controller
+abstract class AdminController extends Controller
 {
     /**
      * AccountController constructor.

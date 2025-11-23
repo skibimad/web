@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controller\Dn;
+namespace App\Controller\Admin;
 
-use App\Controller\DnController;
+use App\Controller\AdminController;
 use App\Core\Model\CollectionInterface;
 use App\Model\Episode;
 
-class Social extends DnController
+class Episodes extends AdminController
 {
     public function handle(): void
     {
