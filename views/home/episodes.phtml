@@ -10,7 +10,7 @@
             <div class="video-card">
                 <div class="video-thumbnail">
                     <img src="<?= htmlspecialchars($episode['thumbnail'] ? $episode['thumbnail'] : 'public/media/img/default-video-thumbnail.png') ?>" alt="Episode Preview">
-                    <a href="<?= $episode->getVideoUrl() ?>" target="_blank" class="play-button">
+                    <a href="/youclick?y=<?= $episode->getVideoUrl() ?>" target="_blank" class="play-button">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M6 5v14l11-7z"/>
                         </svg>
