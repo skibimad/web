@@ -20,10 +20,12 @@ abstract class Controller
     public function __construct()
     {
         $this->request = Request::getInstance();
-        $this->registerMiddleware();
-        $this->checkAuth();
-
         
+        // Register middleware first, allowing middleware-based auth to be set up
+        $this->registerMiddleware();
+        
+        // Legacy checkAuth - can be removed once all auth is handled by middleware
+        $this->checkAuth();
     }
 
     /**

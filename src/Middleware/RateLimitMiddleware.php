@@ -10,6 +10,10 @@ use App\Core\Request;
  * 
  * Prevents excessive requests from the same IP address.
  * This is an example middleware that can be applied to specific controllers.
+ * 
+ * Note: This implementation uses session storage for simplicity. 
+ * For production use with IP-based rate limiting across sessions, 
+ * consider using a proper cache backend (Redis, Memcached) or file-based storage.
  */
 class RateLimitMiddleware implements MiddlewareInterface
 {
@@ -45,6 +49,9 @@ class RateLimitMiddleware implements MiddlewareInterface
     public function process(Request $request, RequestHandlerInterface $handler): void
     {
         $ip = $request->getServer('REMOTE_ADDR', 'unknown');
+        
+        // Note: Using session storage here for simplicity
+        // For production, use shared cache (Redis/Memcached) for IP-based rate limiting
         $key = 'rate_limit_' . md5($ip);
         
         // Get current request data from session

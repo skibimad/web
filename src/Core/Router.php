@@ -5,6 +5,7 @@ use App\Controller\ErrorController;
 use App\Controller\NotFoundController;
 use App\Core\Error\ErrorHandler;
 use App\Core\Middleware\RequestHandlerInterface;
+use App\Core\Config;
 
 /**
  @todo: refactor
