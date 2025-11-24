@@ -83,8 +83,7 @@ class App
      */
     private function loadGlobalMiddleware(): void
     {
-        $config = Config::getInstance();
-        $middleware = $config->get('middleware.global', []);
+        $middleware = Config::get('middleware.global', []);
 
         foreach ($middleware as $middlewareClass) {
             if (class_exists($middlewareClass)) {

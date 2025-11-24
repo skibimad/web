@@ -135,8 +135,7 @@ class Router implements RequestHandlerInterface
      */
     private function applyMiddlewareGroup(Controller $controller, string $group): void
     {
-        $config = Config::getInstance();
-        $middlewareClasses = $config->get("middleware.groups.{$group}", []);
+        $middlewareClasses = Config::get("middleware.groups.{$group}", []);
         
         foreach ($middlewareClasses as $middlewareClass) {
             if (class_exists($middlewareClass)) {
