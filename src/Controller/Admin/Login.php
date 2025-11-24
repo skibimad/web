@@ -47,16 +47,14 @@ class Login extends AdminController
 
         try {
             $auth = $this->getAuth();
-            $success = $auth->login($userData);
+            $auth->login($userData);
             
-            if ($success) {
-                // Get intended URL or default to admin dashboard
-                $intendedUrl = $this->getRequest()->getSession('intended_url', '/?q=admin/index');
-                $this->getRequest()->setSession('intended_url', null);
-                
-                $this->redirect($intendedUrl);
-                return;
-            }
+            // Login successful - get intended URL or default to admin dashboard
+            $intendedUrl = $this->getRequest()->getSession('intended_url', '/?q=admin/index');
+            $this->getRequest()->setSession('intended_url', null);
+            
+            $this->redirect($intendedUrl);
+            return;
         } catch (\Throwable $e) {
             $this->getRequest()->addError($e->getMessage());
         }

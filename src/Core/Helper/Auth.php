@@ -33,10 +33,10 @@ class Auth extends Helper
      * Attempt to login an admin user
      *
      * @param array $userData Array containing 'email' and 'password'
-     * @return bool True if login successful, false otherwise
-     * @throws \Exception If credentials are invalid
+     * @return void
+     * @throws \Exception If credentials are invalid or empty
      */
-    public function login(array $userData): bool
+    public function login(array $userData): void
     {
         $request = static::getRequest();
         
@@ -54,7 +54,7 @@ class Auth extends Helper
             if ($adminUser->getId() && password_verify($password, $adminUser->get('password_hash'))) {
                 $request->setSession('admin_user_id', $adminUser->getId());
                 $request->setSession('admin_user_email', $adminUser->get('email'));
-                return true;
+                return;
             }
             
             throw new \Exception('Invalid login credentials.');
@@ -71,10 +71,15 @@ class Auth extends Helper
     public static function logout(): void
     {
         $request = static::getRequest();
+        
+        // Clear session variables
         $request->setSession('admin_user_id', null);
         $request->setSession('admin_user_email', null);
         
-        // Clear the session completely
+        // Clear the request session state
+        $request->clearSession();
+        
+        // Destroy the PHP session completely
         if (session_status() === PHP_SESSION_ACTIVE) {
             session_destroy();
         }

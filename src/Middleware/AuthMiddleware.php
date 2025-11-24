@@ -66,7 +66,7 @@ class AuthMiddleware implements MiddlewareInterface
         $route = strtolower(trim($route, '/'));
         
         foreach (self::EXCLUDED_ROUTES as $excludedRoute) {
-            if ($route === $excludedRoute || str_starts_with($route, $excludedRoute)) {
+            if ($route === $excludedRoute || strpos($route, $excludedRoute) === 0) {
                 return true;
             }
         }
