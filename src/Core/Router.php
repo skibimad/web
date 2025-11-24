@@ -4,12 +4,25 @@ namespace App\Core;
 use App\Controller\ErrorController;
 use App\Controller\NotFoundController;
 use App\Core\Error\ErrorHandler;
+use App\Core\Middleware\RequestHandlerInterface;
 
 /**
  @todo: refactor
  */
-class Router
+class Router implements RequestHandlerInterface
 {
+    /**
+     * Handle the request.
+     * This method is called by the middleware pipeline.
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function handle(Request $request): void
+    {
+        $this->dispatch();
+    }
+
     public function dispatch(): void
     {
         
@@ -58,6 +71,9 @@ class Router
             $parts[] = 'index'; // Default action if not specified
         }
         
+        // Determine middleware group based on route
+        $middlewareGroup = $this->getMiddlewareGroupForRoute($parts);
+        
         // Convert kebab-case to camelCase for each part
         $parts = array_map(function($part) {
             return preg_replace_callback('/-([a-z])/', function($matches) {
@@ -78,9 +94,54 @@ class Router
         }
 
         $controller = new $controllerClass();
-        $controller->handle(); 
+        
+        // Apply middleware group to controller if applicable
+        if ($middlewareGroup !== null) {
+            $this->applyMiddlewareGroup($controller, $middlewareGroup);
+        }
+        
+        // Execute controller with its middleware
+        $controller->executeWithMiddleware(function() use ($controller) {
+            $controller->handle();
+        });
 
         return true;
+    }
+
+    /**
+     * Determine the middleware group based on the route.
+     *
+     * @param array $parts Route parts
+     * @return string|null
+     */
+    private function getMiddlewareGroupForRoute(array $parts): ?string
+    {
+        // Check if route starts with 'admin'
+        if (isset($parts[0]) && strtolower($parts[0]) === 'admin') {
+            return 'admin';
+        }
+        
+        // Default to frontend group
+        return 'frontend';
+    }
+
+    /**
+     * Apply middleware group to a controller.
+     *
+     * @param Controller $controller
+     * @param string $group
+     * @return void
+     */
+    private function applyMiddlewareGroup(Controller $controller, string $group): void
+    {
+        $config = Config::getInstance();
+        $middlewareClasses = $config->get("middleware.groups.{$group}", []);
+        
+        foreach ($middlewareClasses as $middlewareClass) {
+            if (class_exists($middlewareClass)) {
+                $controller->addMiddleware(new $middlewareClass());
+            }
+        }
     }
 
 }

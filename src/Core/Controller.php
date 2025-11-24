@@ -3,19 +3,115 @@ namespace App\Core;
 
 use App\Controller\AuthController;
 use App\Core\Contract\ViewInterface;
+use App\Core\Middleware\MiddlewareInterface;
+use App\Core\Middleware\MiddlewarePipeline;
+use App\Core\Middleware\RequestHandlerInterface;
 
 abstract class Controller
 {
     private Request $request;
     private ResponseInterface $response;
 
+    /**
+     * @var MiddlewareInterface[]
+     */
+    protected array $middleware = [];
 
     public function __construct()
     {
         $this->request = Request::getInstance();
+        $this->registerMiddleware();
         $this->checkAuth();
 
         
+    }
+
+    /**
+     * Register middleware for this controller.
+     * Override this method in child controllers to add middleware.
+     *
+     * @return void
+     */
+    protected function registerMiddleware(): void
+    {
+        // Override in child controllers to register middleware
+    }
+
+    /**
+     * Add middleware to this controller.
+     *
+     * @param MiddlewareInterface $middleware
+     * @return self
+     */
+    protected function addMiddleware(MiddlewareInterface $middleware): self
+    {
+        $this->middleware[] = $middleware;
+        return $this;
+    }
+
+    /**
+     * Add middleware by class name.
+     *
+     * @param string $middlewareClass
+     * @return self
+     */
+    protected function addMiddlewareByClass(string $middlewareClass): self
+    {
+        if (class_exists($middlewareClass)) {
+            $this->middleware[] = new $middlewareClass();
+        }
+        return $this;
+    }
+
+    /**
+     * Get the middleware registered for this controller.
+     *
+     * @return MiddlewareInterface[]
+     */
+    public function getMiddleware(): array
+    {
+        return $this->middleware;
+    }
+
+    /**
+     * Execute the controller with its middleware.
+     * This method should be called instead of the action method directly.
+     *
+     * @param callable $action The action to execute after middleware
+     * @return void
+     */
+    public function executeWithMiddleware(callable $action): void
+    {
+        if (empty($this->middleware)) {
+            // No middleware, execute action directly
+            $action();
+            return;
+        }
+
+        // Create a pipeline for controller middleware
+        $pipeline = new MiddlewarePipeline();
+        
+        foreach ($this->middleware as $middleware) {
+            $pipeline->pipe($middleware);
+        }
+
+        // Set the action as the fallback handler
+        $handler = new class($action) implements RequestHandlerInterface {
+            private $action;
+
+            public function __construct(callable $action)
+            {
+                $this->action = $action;
+            }
+
+            public function handle(Request $request): void
+            {
+                ($this->action)();
+            }
+        };
+
+        $pipeline->setFallbackHandler($handler);
+        $pipeline->handle($this->request);
     }
 
     /**
