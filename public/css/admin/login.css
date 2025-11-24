@@ -38,6 +38,44 @@
     font-weight: 400;
 }
 
+/* Alert Messages */
+.alert {
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 14px;
+}
+
+.alert p {
+    margin: 0;
+    padding: 2px 0;
+}
+
+.alert-error {
+    background: rgba(255, 82, 82, 0.15);
+    border: 1px solid rgba(255, 82, 82, 0.4);
+    color: #ff5252;
+}
+
+.alert-info {
+    background: rgba(62, 166, 255, 0.15);
+    border: 1px solid rgba(62, 166, 255, 0.4);
+    color: #3ea6ff;
+}
+
+.alert-success {
+    background: rgba(76, 175, 80, 0.15);
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    color: #4caf50;
+}
+
+.alert-warning {
+    background: rgba(255, 193, 7, 0.15);
+    border: 1px solid rgba(255, 193, 7, 0.4);
+    color: #ffc107;
+}
+
 .login-form .form-group {
     margin-bottom: 20px;
 }
