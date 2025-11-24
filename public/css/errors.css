@@ -133,13 +133,6 @@
     box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
 }
 
-.error-btn-secondary:hover {
-    background: var(--color-secondary, #00ffcc);
-    color: #000;
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
-}
-
 .error-details {
     margin-top: 2rem;
     padding: 1rem;
