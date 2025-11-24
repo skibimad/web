@@ -45,7 +45,7 @@ abstract class Controller
      * @param MiddlewareInterface $middleware
      * @return self
      */
-    protected function addMiddleware(MiddlewareInterface $middleware): self
+    public function addMiddleware(MiddlewareInterface $middleware): self
     {
         $this->middleware[] = $middleware;
         return $this;
