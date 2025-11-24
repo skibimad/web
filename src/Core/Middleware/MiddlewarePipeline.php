@@ -62,7 +62,7 @@ class MiddlewarePipeline implements RequestHandlerInterface
      * @param int $index
      * @return void
      */
-    private function processMiddleware(Request $request, int $index): void
+    public function processMiddleware(Request $request, int $index): void
     {
         // If no more middleware, call the fallback handler
         if (!isset($this->middleware[$index])) {
