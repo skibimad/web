@@ -5,20 +5,20 @@
 </div>
 
 <!-- Responsive Grid View -->
-<div class="posts-grid">
+<div class="admin-cards-grid">
     <?php foreach ($this('posts') as $post): ?>
-    <div class="post-card">
-        <div class="post-header">
-            <h3 class="post-title"><?= htmlspecialchars($post['title']) ?></h3>
-            <span class="post-date"><?= $post['published_at'] ? date('M d, Y', strtotime($post['published_at'])) : 'N/A' ?></span>
+    <div class="admin-card">
+        <div class="admin-card-header">
+            <h3 class="admin-card-title"><?= htmlspecialchars($post['title']) ?></h3>
+            <span class="admin-card-date"><?= $post['published_at'] ? date('M d, Y', strtotime($post['published_at'])) : 'N/A' ?></span>
         </div>
         
-        <div class="post-excerpt">
+        <div class="admin-card-excerpt">
             <img height="100rem" src="/<?= htmlspecialchars(trim($post['image'], '/')) ?>" alt="<?= htmlspecialchars($post['title']) ?>" class="card-image">
             <p><?= htmlspecialchars(substr(strip_tags($post['content']), 0, 150) . '...') ?></p>
         </div>
         
-        <div class="post-actions">
+        <div class="card-actions">
             <a x-tooltip="Open on Page" target="_blank" href="/blog/#<?=$post->getAnchor()?>" class="btn-small btn-edit x-tooltip"><i class="fas fa-external-link-alt"></i></a>
             <a x-tooltip="Edit" href="/admin/blog/update?id=<?= $post->getId() ?>" class="btn-small btn-edit x-tooltip"><i class="fas fa-edit"></i></a>
             <a x-tooltip="<?= $post->isPublished() ? 'Unpublish' : 'Publish' ?>"
@@ -33,77 +33,3 @@
     </div>
     <?php endforeach; ?>
 </div>
-
-<style>
-.posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.post-card {
-    border: 1px solid #3a3a3a;
-    border-radius: 8px;
-    padding: 1.5rem;
-    background: #1a1a1a;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    transition: var(--transition-normal);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.post-card:hover {
-    box-shadow: var(--glow-primary);
-    border-color: var(--color-primary);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.post-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.post-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0;
-    color: #e0e0e0;
-    font-family: var(--font-heading);
-}
-
-.post-date {
-    font-size: 0.875rem;
-    color: #888888;
-    font-family: var(--font-body);
-}
-
-.post-excerpt {
-    flex: 1;
-    color: #b0b0b0;
-    line-height: 1.5;
-    font-family: var(--font-body);
-}
-
-.post-excerpt p {
-    margin: 0;
-}
-
-.post-actions {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid #2a2a2a;
-}
-
-@media (max-width: 768px) {
-    .posts-grid {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
-
