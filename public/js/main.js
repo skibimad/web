@@ -4,7 +4,10 @@
 function trackEvent(eventName, eventParams = {}) {
     if (typeof gtag === 'function') {
         gtag('event', eventName, eventParams);
-        console.log('GA Event:', eventName, eventParams);
+        // Debug logging (disabled in production)
+        if (window.location.hostname === 'localhost' || window.location.hostname.includes('127.0.0.1')) {
+            console.log('GA Event:', eventName, eventParams);
+        }
     }
 }
 
@@ -405,7 +408,7 @@ function initAnalyticsTracking() {
     }
     
     // Track "Watch Now" links in hero section
-    const watchNowLinks = document.querySelectorAll('a[href="#videos"]');
+    const watchNowLinks = document.querySelectorAll('.hero-buttons a[href="#videos"]');
     watchNowLinks.forEach(link => {
         link.addEventListener('click', function() {
             trackEvent('internal_navigation', {
@@ -417,7 +420,7 @@ function initAnalyticsTracking() {
     });
     
     // Track original series reference links
-    const referenceLinks = document.querySelectorAll('.reference-links a, .about-section a[target="_blank"]');
+    const referenceLinks = document.querySelectorAll('.reference-links a, .original-references a[target="_blank"]');
     referenceLinks.forEach(link => {
         link.addEventListener('click', function() {
             trackEvent('external_link_click', {
