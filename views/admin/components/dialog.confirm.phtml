@@ -5,7 +5,7 @@
 
 
 
-<div class="dialog-confirm" style="display: none;">
+<div class="dialog-confirm">
     <div class="dialog-content">
         <p class="dialog-message"></p>
         <div class="dialog-actions">
@@ -14,44 +14,6 @@
         </div>
     </div>
 </div>
-
-<style>
-    .dialog-confirm {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-    }
-
-    .dialog-content {
-        background: #212121;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-        max-width: 400px;
-        width: 100%;
-        text-align: center;
-    }
-
-    .dialog-message {
-        margin-bottom: 20px;
-        color: #ffffff;
-    }
-
-    .dialog-actions button {
-        margin: 0 10px;
-    }
-
-    .dialog-confirm.show {
-        display: flex;
-    }
-</style>
 
 <script>
     const dialog = document.querySelector('.dialog-confirm');

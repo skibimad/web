@@ -48,6 +48,11 @@
     --glow-accent: 0 0 20px rgba(255, 204, 0, 0.5);
 }
 
+/* Admin Layout Styles */
+body {
+    margin: 0;
+}
+
 .flex-end {
     justify-content: flex-end;
 }
@@ -536,4 +541,463 @@
 .admin-table tbody tr:focus {
     outline: 2px solid #065fd4;
     outline-offset: 2px;
+}
+
+/* Admin Card Styles - Consolidated for episodes and blog posts */
+.admin-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.admin-card {
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: var(--transition-normal);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.admin-card:hover {
+    box-shadow: var(--glow-primary);
+    border-color: var(--color-primary);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.admin-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: #e0e0e0;
+    font-family: var(--font-heading);
+}
+
+.admin-card-date {
+    font-size: 0.875rem;
+    color: #888888;
+    font-family: var(--font-body);
+}
+
+.admin-card-excerpt {
+    flex: 1;
+    color: #b0b0b0;
+    line-height: 1.5;
+    font-family: var(--font-body);
+}
+
+.admin-card-excerpt p {
+    margin: 0;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #2a2a2a;
+}
+
+.card-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+/* Dialog/Modal Styles */
+.dialog-confirm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.dialog-confirm.show {
+    display: flex;
+}
+
+.dialog-content {
+    background: #212121;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.dialog-message {
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.dialog-actions button {
+    margin: 0 10px;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .admin-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Admin Sidebar Navigation Styles */
+.admin-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100vh;
+    background: #ffffff;
+    border-right: 1px solid #e5e5e5;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    font-family: 'Roboto', 'Arial', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-logo {
+    padding: 24px 20px;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-main {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #ff0000;
+    letter-spacing: -0.5px;
+}
+
+.logo-sub {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #606060;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-left: 8px;
+}
+
+.sidebar-nav {
+    padding: 8px 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 0;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    color: #0f0f0f;
+    text-decoration: none;
+    font-family: 'Roboto', 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-left: 3px solid transparent;
+    background: linear-gradient(90deg, transparent 0%, #f2f2f2 0%, #f2f2f2 0%, transparent 0%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+}
+
+.sidebar-menu a:hover {
+    color: #0f0f0f;
+    background-position: 0% 0;
+    transform: translateX(4px);
+}
+
+.sidebar-menu a.active {
+    background: #f2f2f2;
+    color: #0f0f0f;
+    border-left: 3px solid #ff0000;
+    font-weight: 500;
+    background-position: 0% 0;
+    transform: translateX(4px);
+}
+
+.sidebar-menu a.active:hover {
+    transform: translateX(8px);
+}
+
+.sidebar-menu a i {
+    font-size: 20px;
+    width: 24px;
+    text-align: center;
+    margin-right: 24px;
+    color: #606060;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu a:hover i,
+.sidebar-menu a.active i {
+    color: #0f0f0f;
+    transform: scale(1.1);
+}
+
+.sidebar-menu a span {
+    flex: 1;
+    font-weight: inherit;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu a:hover span,
+.sidebar-menu a.active span {
+    letter-spacing: 0.5px;
+}
+
+.sidebar-menu li.disabled a {
+    color: #aaaaaa;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: none;
+    transform: none;
+}
+
+.sidebar-menu li.disabled a i {
+    color: #cccccc;
+}
+
+.sidebar-menu a[href="/"] {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 8px;
+    padding-top: 16px;
+    background: linear-gradient(90deg, transparent 0%, #e8f4fd 0%, #e8f4fd 0%, transparent 0%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+}
+
+.sidebar-menu a[href="/"]:hover {
+    background-position: 0% 0;
+    color: #1976d2;
+}
+
+.sidebar-menu a[href="/"]:hover i {
+    color: #1976d2;
+}
+
+.sidebar-menu a[href*="logout"] {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 8px;
+    padding-top: 16px;
+    color: #606060;
+    background: linear-gradient(90deg, transparent 0%, #ffeaea 0%, #ffeaea 0%, transparent 0%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+}
+
+.sidebar-menu a[href*="logout"]:hover {
+    background-position: 0% 0;
+    color: #d32f2f;
+}
+
+.sidebar-menu a[href*="logout"]:hover i {
+    color: #d32f2f;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+    background: #ffffff;
+    color: #0f0f0f;
+    border: 1px solid #e5e5e5;
+    padding: 12px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(90deg, #ffffff 0%, #f2f2f2 0%, #f2f2f2 0%, #ffffff 0%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+}
+
+.mobile-menu-toggle:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-position: 0% 0;
+    transform: scale(1.05);
+}
+
+/* Main Content Area */
+.admin-main {
+    margin-left: 260px;
+    min-height: 100vh;
+    background: #0d0d0eff;
+    background-attachment: fixed;
+    transition: margin-left 0.3s ease;
+}
+
+.admin-content {
+    padding: 20px;
+}
+
+/* Scrollbar styling for sidebar */
+.admin-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.admin-sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(0, 212, 255, 0.5);
+    border-radius: 3px;
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 212, 255, 0.8);
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+        width: 260px;
+        box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.3);
+    }
+    
+    .admin-sidebar.open {
+        transform: translateX(0);
+    }
+        
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .admin-main {
+        margin-left: 0;
+    }
+}
+
+/* Dark Mode Support for Navigation */
+@media (prefers-color-scheme: dark) {
+    .admin-sidebar {
+        background: #212121;
+        border-right-color: #303030;
+    }
+    
+    .admin-logo {
+        border-bottom-color: #303030;
+    }
+    
+    .logo-sub {
+        color: #aaaaaa;
+    }
+    
+    .sidebar-menu a {
+        color: #ffffff;
+        background: linear-gradient(90deg, transparent 0%, #272727 0%, #272727 0%, transparent 0%);
+        background-size: 300% 100%;
+        background-position: 100% 0;
+    }
+    
+    .sidebar-menu a:hover {
+        background-position: 0% 0;
+        color: #ffffff;
+    }
+    
+    .sidebar-menu a.active {
+        background: #272727;
+        color: #ffffff;
+        background-position: 0% 0;
+    }
+    
+    .sidebar-menu a i {
+        color: #aaaaaa;
+    }
+    
+    .sidebar-menu a[href="/"] {
+        border-top-color: #303030;
+        color: #aaaaaa;
+        background: linear-gradient(90deg, transparent 0%, #1a2332 0%, #1a2332 0%, transparent 0%);
+        background-size: 300% 100%;
+        background-position: 100% 0;
+    }
+    
+    .sidebar-menu a[href="/"]:hover {
+        background-position: 0% 0;
+        color: #64b5f6;
+    }
+    
+    .sidebar-menu a[href="/"]:hover i {
+        color: #64b5f6;
+    }
+    
+    .sidebar-menu a[href="/admin/logout"] {
+        border-top-color: #303030;
+        color: #aaaaaa;
+        background: linear-gradient(90deg, transparent 0%, #2d1b1b 0%, #2d1b1b 0%, transparent 0%);
+        background-size: 300% 100%;
+        background-position: 100% 0;
+    }
+    
+    .sidebar-menu a[href="/admin/logout"]:hover {
+        background-position: 0% 0;
+        color: #ef5350;
+    }
+    
+    .sidebar-menu a[href="/admin/logout"]:hover i {
+        color: #ef5350;
+    }
+    
+    .mobile-menu-toggle {
+        background: #212121;
+        border-color: #303030;
+        color: #ffffff;
+    }
+    
+    .mobile-menu-toggle:hover {
+        background: linear-gradient(90deg, #212121 0%, #272727 0%, #272727 0%, #212121 0%);
+        background-size: 300% 100%;
+        background-position: 0% 0;
+    }
 }

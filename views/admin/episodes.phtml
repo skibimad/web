@@ -5,20 +5,20 @@
 </div>
 
 <!-- Responsive Grid View -->
-<div class="episodes-grid">
+<div class="admin-cards-grid">
     <?php foreach ($this('episodes') as $episode): ?>
-    <div class="episode-card <?= $episode->isEnabled() ? 'enabled' : 'disabled' ?>">
-        <div class="episode-header">
-            <h3 class="episode-title"><?= htmlspecialchars($episode['title']) ?></h3>
-            <span class="episode-date"><?= $episode['published_at'] ? date('M d, Y', strtotime($episode['published_at'])) : 'N/A' ?></span>
+    <div class="admin-card <?= $episode->isEnabled() ? 'enabled' : 'disabled' ?>">
+        <div class="admin-card-header">
+            <h3 class="admin-card-title"><?= htmlspecialchars($episode['title']) ?></h3>
+            <span class="admin-card-date"><?= $episode['published_at'] ? date('M d, Y', strtotime($episode['published_at'])) : 'N/A' ?></span>
         </div>
         
-        <div class="episode-excerpt">
+        <div class="admin-card-excerpt">
             <img height="100rem" src="/<?= htmlspecialchars(trim($episode['thumbnail'], '/')) ?>" alt="<?= htmlspecialchars($episode['title']) ?>" class="card-image">
             <p><?= htmlspecialchars(substr(strip_tags($episode['description'] ?? ''), 0, 150) . '...') ?></p>
         </div>
         
-        <div class="episode-actions">
+        <div class="card-actions">
             <a x-tooltip="Edit" href="/admin/episode/update?id=<?= $episode->getId() ?>" class="btn-small btn-edit x-tooltip"><i class="fas fa-edit"></i></a>
             <a x-tooltip="<?= $episode->isEnabled() ? 'Disable' : 'Enable' ?>"
             href="/admin/episode/status?id=<?= $episode->getId() ?>&status=<?= $episode->isEnabled() ? 0 : 1 ?>" class="btn-small <?= $episode->isEnabled() ? 'btn-warning x-tooltip' : 'btn-edit x-tooltip' ?>">
@@ -33,81 +33,3 @@
     </div>
     <?php endforeach; ?>
 </div>
-
-<style>
-.episodes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.episode-card {
-    border: 1px solid #3a3a3a;
-    border-radius: 8px;
-    padding: 1.5rem;
-    background: #1a1a1a;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    transition: var(--transition-normal);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.episode-card.enabled {
-}
-
-
-
-.episode-card:hover {
-    box-shadow: var(--glow-primary);
-    border-color: var(--color-primary);
-}
-
-.episode-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.episode-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0;
-    color: #e0e0e0;
-    font-family: var(--font-heading);
-}
-
-.episode-date {
-    font-size: 0.875rem;
-    color: #888888;
-    font-family: var(--font-body);
-}
-
-.episode-excerpt {
-    flex: 1;
-    color: #b0b0b0;
-    line-height: 1.5;
-    font-family: var(--font-body);
-}
-
-.episode-excerpt p {
-    margin: 0;
-}
-
-.episode-actions {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid #2a2a2a;
-}
-
-@media (max-width: 768px) {
-    .episodes-grid {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
-
