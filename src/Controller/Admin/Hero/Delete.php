@@ -24,6 +24,6 @@ class Delete extends AdminController
             throw new \Exception('Hero not found');
         }
         
-        $hero->delete($this->getRequest('id'));
+        $hero->delete($hero->getId());
     }
 }
