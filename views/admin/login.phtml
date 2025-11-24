@@ -1,3 +1,7 @@
+<?php
+    $errors = $this->getRequest()->getErrors();
+    $infos = $this->getRequest()->getInfos();
+?>
 <div class="login-container">
     <div class="login-card">
         <div class="login-header">
@@ -5,7 +9,23 @@
             <p class="login-subtitle">Sign in to access the dashboard</p>
         </div>
 
-        <form action="/admin/login" method="POST" class="login-form">
+        <?php if (!empty($errors)): ?>
+            <div class="alert alert-error">
+                <?php foreach ($errors as $error): ?>
+                    <p><?= htmlspecialchars($error) ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($infos)): ?>
+            <div class="alert alert-info">
+                <?php foreach ($infos as $info): ?>
+                    <p><?= htmlspecialchars($info) ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <form action="/?q=admin/login" method="POST" class="login-form">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input 
