@@ -73,7 +73,7 @@ class Update extends AdminController
         
         // Generate upload path
         $uploadDir = Config::get('upload_dir') . 'landing/';
-        $fullPath = Config::get('root') . $uploadDir;
+        $fullPath = Config::get('root') . 'public' . $uploadDir;
         
         if (!is_dir($fullPath)) {
             mkdir($fullPath, 0755, true);

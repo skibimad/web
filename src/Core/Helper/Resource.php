@@ -37,6 +37,6 @@ class Resource extends Helper
         
         $randomVideo = $videos[array_rand($videos)];
 
-        return '/public/media/video/fun/' . basename($randomVideo);
+        return '/media/video/fun/' . basename($randomVideo);
     }
 }
