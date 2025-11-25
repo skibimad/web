@@ -2,7 +2,6 @@
 
 namespace App\Cli;
 
-use App\Core\Config;
 use App\Core\Database;
 use PDO;
 
@@ -100,7 +99,10 @@ class Migration
             return $migrations;
         }
 
-        $files = glob($this->migrationPath . '/migration-*.{sql,php}', GLOB_BRACE);
+        $files = array_merge(
+            glob($this->migrationPath . '/migration-*.sql'),
+            glob($this->migrationPath . '/migration-*.php')
+        );
 
         foreach ($files as $file) {
             $basename = basename($file);

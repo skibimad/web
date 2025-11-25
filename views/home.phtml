@@ -111,7 +111,7 @@ $heroes = $this->var('heroes');
                     </div>
                     <div class="hero-info">
                         <h3 class="hero-name"><?= htmlspecialchars($hero['name']) ?></h3>
-                        <p class="hero-description"><?= htmlspecialchars($hero['description']) ?></p>
+                        <p class="hero-description"><?= $hero['description'] ?></p>
                         <div class="hero-abilities">
                             <?php foreach ($hero->getAbilities() as $ability): ?>
                             <span class="ability"><?= htmlspecialchars($ability) ?></span>

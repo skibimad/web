@@ -3,7 +3,7 @@ return [
     'debug' => true,
     //'domain' => 'https://portal.aghawkdynamics.com/',
     'date_format' => 'm/d/Y',
-    'root' => __DIR__ . '/../',
+    'root' => realpath(__DIR__ . '/../').'/',
     
     'db' => [
         'host' => 'localhost',

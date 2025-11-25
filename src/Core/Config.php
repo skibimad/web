@@ -3,8 +3,8 @@ namespace App\Core;
 
 class Config
 {
-    const FILE = __DIR__ . '/../../config/config.php';
-    const LOCAL_FILE = __DIR__ . '/../../config/config.php.local.php';
+    const FILE = __DIR__ . '/../../etc/config.php';
+    const LOCAL_FILE = __DIR__ . '/../../etc/config.php.local.php';
     const TABLE = 'config';
 
     private static array $data = [];
@@ -33,12 +33,13 @@ class Config
             throw new \RuntimeException("Config file not found: " . $file);
         }
         $data = require $file;
+
+        $data = array_merge($data, self::loadDb()); // Load database config if needed
+
         $localData = @include ($file . '.local.php') ?: []; // Load local config if exists
         if (is_array($localData)) {
             $data = array_merge($data, $localData);
         }
-
-        $data = array_merge($data, self::loadDb()); // Load database config if needed
 
         if (!is_array($data)) {
             throw new \RuntimeException("Config file must return an array: " . $file);
@@ -110,7 +111,20 @@ class Config
      */
     public static function set(string $key, $value): void
     {
-        self::$data[$key] = $value;
+        $parts = explode('.', $key);
+        $data = &self::$data;
+        
+        foreach ($parts as $i => $part) {
+            if ($i === count($parts) - 1) {
+                $data[$part] = $value;
+            } else {
+                if (!isset($data[$part]) || !is_array($data[$part])) {
+                    $data[$part] = [];
+                }
+                $data = &$data[$part];
+            }
+        }
+        
         self::save();
     }
 
