@@ -163,16 +163,24 @@ class Migration
             fn($s) => !empty($s)
         );
 
-        // Use transaction for atomicity
+        // Use transaction for atomicity (note: DDL statements like DROP TABLE,
+        // CREATE TABLE, ALTER TABLE cause implicit commits in MySQL and cannot
+        // be rolled back)
         $pdo->beginTransaction();
         try {
             foreach ($statements as $statement) {
                 $pdo->exec($statement);
             }
-            $pdo->commit();
+            // Only commit if transaction is still active (DDL statements cause implicit commits)
+            if ($pdo->inTransaction()) {
+                $pdo->commit();
+            }
             return true;
         } catch (\Exception $e) {
-            $pdo->rollBack();
+            // Only rollback if transaction is still active
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
             throw $e;
         }
     }
