@@ -131,7 +131,7 @@ class ResourceExternalUpdateCommand extends AbstractCommand
     private function ensureDirectoryExists(string $dir): void
     {
         if (!is_dir($dir)) {
-            mkdir($dir, 0755, true);
+            mkdir($dir, 0750, true);
             $this->info("Created directory: {$dir}");
         }
     }
@@ -149,6 +149,7 @@ class ResourceExternalUpdateCommand extends AbstractCommand
                 'method' => 'GET',
                 'timeout' => 30,
                 'user_agent' => 'Mozilla/5.0 (compatible; SkibidiMadness/1.0)',
+                'follow_location' => false,
             ],
             'ssl' => [
                 'verify_peer' => true,
@@ -156,7 +157,34 @@ class ResourceExternalUpdateCommand extends AbstractCommand
             ],
         ]);
 
-        $content = @file_get_contents($url, false, $context);
+        // Suppress warnings during download, but capture error info for network-related issues
+        $errorMessage = null;
+        set_error_handler(function($errno, $errstr) use (&$errorMessage) {
+            // Only handle warnings (E_WARNING) which are expected from network errors
+            if ($errno === E_WARNING) {
+                $errorMessage = $errstr;
+                return true;
+            }
+            return false; // Let other error types be handled normally
+        }, E_WARNING);
+
+        $content = file_get_contents($url, false, $context);
+
+        // $http_response_header is populated by PHP after file_get_contents() with HTTP URLs
+        $responseHeaders = $http_response_header ?? [];
+
+        restore_error_handler();
+
+        if ($content === false) {
+            if (!empty($responseHeaders)) {
+                $this->warning("  HTTP Response: " . $responseHeaders[0]);
+            } elseif ($errorMessage) {
+                // Extract meaningful part of error message
+                if (preg_match('/getaddrinfo|network|connection|timeout/i', $errorMessage)) {
+                    $this->warning("  Network error (host unreachable or timeout)");
+                }
+            }
+        }
 
         return $content;
     }
