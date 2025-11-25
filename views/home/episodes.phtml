@@ -10,7 +10,7 @@
                 <div class="video-card">
                     <div class="video-thumbnail">
                         <img loading="lazy" src="<?= htmlspecialchars($episode['thumbnail'] ? $episode['thumbnail'] : 'public/media/img/default-video-thumbnail.png') ?>" alt="Episode Preview">
-                        <a href="/youclick?y=<?= $episode->getVideoUrl() ?>" target="_blank" class="play-button">
+                        <a href="/youclick?y=<?= $episode->getVideoUrl() ?>" target="_blank" class="play-button g-tag" data-gtag="video_click" data-gtag-section="episodes" data-gtag-video-title="Episode <?= $episode['episode_number'] ?>: <?= htmlspecialchars($episode['title']) ?>">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M6 5v14l11-7z" />
                             </svg>
