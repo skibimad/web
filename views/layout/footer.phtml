@@ -23,7 +23,7 @@
                     </ul>
                 </div>
                 <?php $socialLinks = $this('socialLinks'); ?>
-                <?php if (!empty($socialLinks) && count($socialLinks) > 0): ?>
+                <?php if ($socialLinks && !$socialLinks->isEmpty()): ?>
                     <div class="footer-column">
                         <h4>Social Media</h4>
                         <ul>

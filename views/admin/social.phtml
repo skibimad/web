@@ -35,7 +35,7 @@
     <?php endforeach; ?>
 </div>
 
-<?php if (count($this('socialLinks')) === 0): ?>
+<?php if ($this('socialLinks')->isEmpty()): ?>
 <div class="empty-state">
     <p>No social links found. <a href="/admin/social/add">Add your first social link</a>.</p>
 </div>
