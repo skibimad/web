@@ -11,9 +11,12 @@ class Database
     {
         if (self::$pdo === null) {
             $cfg = Config::get('db');
+            // Use 127.0.0.1 instead of localhost to force TCP/IP connection
+            // This prevents socket-based connection issues when the Unix socket file doesn't exist
+            $host = $cfg['host'] === 'localhost' ? '127.0.0.1' : $cfg['host'];
             $dsn = sprintf(
                 'mysql:host=%s;port=%d;dbname=%s;charset=utf8mb4',
-                $cfg['host'],
+                $host,
                 $cfg['port'],
                 $cfg['database_name']
             );
