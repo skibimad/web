@@ -287,18 +287,24 @@ console.log('%c🎬 Skibidi Madness 🎬', styles.title);
 console.log('%cWelcome to the Multiverse!', styles.subtitle);
 console.log('%cSubscribe to FireStormX Studios: https://www.youtube.com/@FireStorm-Tri', styles.link);
 
+// Helper function to check if element is a form input
+function isFormElement(element) {
+    const formTags = ['INPUT', 'TEXTAREA', 'SELECT'];
+    return formTags.includes(element.tagName);
+}
+
 // Keyboard shortcuts
 document.addEventListener('keydown', function(e) {
     // Press 'H' to go to home
     if (e.key === 'h' || e.key === 'H') {
-        if (!e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+        if (!e.ctrlKey && !e.metaKey && !isFormElement(document.activeElement)) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
     
     // Press 'L' to change language
     if (e.key === 'l' || e.key === 'L') {
-        if (!e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+        if (!e.ctrlKey && !e.metaKey && !isFormElement(document.activeElement)) {
             const langButtons = document.querySelectorAll('.lang-btn');
             const activeLang = document.querySelector('.lang-btn.active');
             const currentIndex = Array.from(langButtons).indexOf(activeLang);
@@ -309,7 +315,7 @@ document.addEventListener('keydown', function(e) {
     
     // Press 'T' to cycle through themes
     if (e.key === 't' || e.key === 'T') {
-        if (!e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+        if (!e.ctrlKey && !e.metaKey && !isFormElement(document.activeElement)) {
             const themeButtons = document.querySelectorAll('.theme-btn');
             const activeTheme = document.querySelector('.theme-btn.active');
             const currentIndex = Array.from(themeButtons).indexOf(activeTheme);

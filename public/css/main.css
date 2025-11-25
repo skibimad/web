@@ -55,6 +55,9 @@
     --color-text-primary: #ffffff;
     --color-text-secondary: #b0b0c0;
     --color-text-muted: #707080;
+    
+    /* RGB values for backgrounds with opacity */
+    --color-bg-primary-rgb: 10, 10, 15;
 }
 
 /* Light Theme */
@@ -64,6 +67,9 @@
     --color-bg-secondary: #e8e8ed;
     --color-bg-tertiary: #dcdce5;
     --color-bg-card: rgba(255, 255, 255, 0.9);
+    
+    /* RGB values for backgrounds with opacity */
+    --color-bg-primary-rgb: 245, 245, 248;
     
     /* Text Colors */
     --color-text-primary: #1a1a2e;
@@ -203,19 +209,19 @@ body {
 }
 
 [data-theme="light"] .navbar {
-    background: rgba(245, 245, 248, 0.95);
+    background: rgba(var(--color-bg-primary-rgb), 0.95);
 }
 
 [data-theme="light"] .nav-menu {
-    background: rgba(245, 245, 248, 0.98);
+    background: rgba(var(--color-bg-primary-rgb), 0.98);
 }
 
 [data-theme="light"] .hero-overlay {
     background: linear-gradient(
         to bottom,
-        rgba(245, 245, 248, 0.7) 0%,
-        rgba(245, 245, 248, 0.5) 50%,
-        rgba(245, 245, 248, 0.9) 100%
+        rgba(var(--color-bg-primary-rgb), 0.7) 0%,
+        rgba(var(--color-bg-primary-rgb), 0.5) 50%,
+        rgba(var(--color-bg-primary-rgb), 0.9) 100%
     );
 }
 
