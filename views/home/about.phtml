@@ -7,7 +7,7 @@
             </div>
             <div class="about-image">
                 <?php $aboutImage = $getContent('about', 'image'); ?>
-                <img src="<?= htmlspecialchars($aboutImage ?: '/media/img/all-together.png') ?>" alt="All Heroes Together">
+                <img loading="lazy" src="<?= htmlspecialchars($aboutImage ?: '/media/img/all-together.png') ?>" alt="All Heroes Together">
                 <div class="image-glow"></div>
             </div>
         </div>
