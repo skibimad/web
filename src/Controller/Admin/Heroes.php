@@ -4,13 +4,13 @@ namespace App\Controller\Admin;
 
 use App\Controller\AdminController;
 use App\Core\Model\CollectionInterface;
-use App\Model\Episode;
+use App\Model\Hero;
 
-class Episodes extends AdminController
+class Heroes extends AdminController
 {
     public function handle(): void
     {
-        $collection = $this->getEpisodes();
+        $collection = $this->getHeroes();
         
         // Handle pagination
         $page = max(1, (int)$this->getRequest('page', 1));
@@ -24,9 +24,9 @@ class Episodes extends AdminController
         $collection->setPage($page);
 
         $this->render(
-            'admin/episodes',
+            'admin/heroes',
             [
-                'episodes' => $collection,
+                'heroes' => $collection,
                 'currentPage' => $collection->getPage(),
                 'totalPages' => $collection->getPages(),
                 'pageSize' => $pageSize,
@@ -35,13 +35,13 @@ class Episodes extends AdminController
         );
     }
 
-    protected function getEpisodes()
+    protected function getHeroes()
     {
-        $episodeCollection = (new Episode())
+        $heroCollection = (new Hero())
             ->getCollection()
             ->setItemMode(CollectionInterface::ITEM_MODE_OBJECT)
-            ->sort('created_at', 'DESC');
+            ->sort('id', 'DESC');
 
-        return $episodeCollection;
+        return $heroCollection;
     }
 }

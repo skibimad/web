@@ -4,6 +4,9 @@
     <a href="/admin/episode/add" class="btn btn-add">Create</a>
 </div>
 
+<!-- Pagination Controls -->
+<?php include __DIR__ . '/components/pagination.phtml'; ?>
+
 <!-- Responsive Grid View -->
 <div class="admin-cards-grid">
     <?php foreach ($this('episodes') as $episode): ?>
@@ -33,3 +36,6 @@
     </div>
     <?php endforeach; ?>
 </div>
+
+<!-- Pagination Controls (bottom) -->
+<?php include __DIR__ . '/components/pagination.phtml'; ?>
