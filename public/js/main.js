@@ -1,5 +1,19 @@
 // Skibidi Madness - Main JavaScript
 
+// Throttle utility function for scroll performance
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize translations
@@ -109,11 +123,11 @@ function initNavigation() {
         });
     });
     
-    // Navbar background on scroll
+    // Navbar background on scroll (throttled for performance)
     const navbar = document.querySelector('.navbar');
     let lastScroll = 0;
     
-    window.addEventListener('scroll', function() {
+    const handleNavbarScroll = throttle(function() {
         const currentScroll = window.pageYOffset;
         
         if (currentScroll > 100) {
@@ -123,7 +137,9 @@ function initNavigation() {
         }
         
         lastScroll = currentScroll;
-    });
+    }, 16); // ~60fps throttle
+    
+    window.addEventListener('scroll', handleNavbarScroll, { passive: true });
 }
 
 // Hero Cards - Video Preview on Hover
@@ -237,15 +253,19 @@ function initSmoothScroll() {
     });
 }
 
-// Parallax effect for hero section
-window.addEventListener('scroll', function() {
-    const heroVideo = document.querySelector('.hero-video');
-    const scrolled = window.pageYOffset;
+// Parallax effect for hero section (throttled for performance)
+const heroVideo = document.querySelector('.hero-video');
+if (heroVideo) {
+    const handleParallax = throttle(function() {
+        const scrolled = window.pageYOffset;
+        // Only apply parallax when in view (hero section)
+        if (scrolled < window.innerHeight) {
+            heroVideo.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+    }, 16); // ~60fps throttle
     
-    if (heroVideo) {
-        heroVideo.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
+    window.addEventListener('scroll', handleParallax, { passive: true });
+}
 
 // Loading screen (optional - can be added if needed)
 window.addEventListener('load', function() {

@@ -10,7 +10,7 @@
                 <?php foreach ($recentPosts as $post): ?>
                     <div class="blog-card">
                         <div class="flex tooltipable">
-                            <img height="200px" class="tooltip-content" src="/<?= htmlspecialchars(trim($post['image'], '/')) ?>" alt="<?= htmlspecialchars($post['title']) ?>" class="blog-card-image">
+                            <img loading="lazy" height="200px" class="tooltip-content" src="/<?= htmlspecialchars(trim($post['image'], '/')) ?>" alt="<?= htmlspecialchars($post['title']) ?>" class="blog-card-image">
                         </div>
                         <div class="blog-card-content">
                             <h3 class="blog-card-title"><?= htmlspecialchars($post['title']) ?></h3>

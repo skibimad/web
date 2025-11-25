@@ -9,7 +9,7 @@
             <?php foreach ($this('blogPosts') ?? [] as $index => $post): ?>
                 <article id="<?=$post->getAnchor()?>" class="blog-item <?= $index % 2 === 0 ? 'even' : 'odd' ?>">
                     <div class="blog-image">
-                        <img src="/<?= htmlspecialchars(trim($post['image'], '/')) ?>" alt="<?= htmlspecialchars($post['title']) ?>" class="blog-item-image">
+                        <img loading="lazy" src="/<?= htmlspecialchars(trim($post['image'], '/')) ?>" alt="<?= htmlspecialchars($post['title']) ?>" class="blog-item-image">
                     </div>
                     <div class="blog-content">
                         <h3 class="blog-title"><?= htmlspecialchars($post['title']) ?></h3>
