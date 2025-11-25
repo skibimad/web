@@ -1,8 +1,8 @@
 <section id="videos" class="videos-section">
     <div class="container">
-        <h2 class="section-title"><?= htmlspecialchars($getContent('episodes', 'title')) ?></h2>
+        <h2 class="section-title">Featured Episodes</h2>
         <p class="section-subtitle">
-            <?= $getContent('episodes', 'subtitle') ?>
+            Watch the epic battles and witness the chaos unfold
         </p>
         
         <div class="videos-grid">
