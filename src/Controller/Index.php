@@ -15,6 +15,7 @@ class Index extends Controller
             'blogPosts' => $this->getBlogPosts(),
             'heroes' => $this->getHeroes(),
             'landingContent' => $this->getLandingContent(),
+            'sectionsConfig' => LandingPageContent::getSectionsConfig(),
         ]);
     }
 

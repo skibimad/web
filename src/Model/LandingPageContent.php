@@ -141,38 +141,119 @@ class LandingPageContent extends Model
             self::SECTION_HOME => [
                 'title' => 'Home Section',
                 'fields' => [
-                    'hero_subtitle' => ['label' => 'Hero Subtitle', 'type' => self::FIELD_TYPE_STRING],
-                    'hero_description' => ['label' => 'Hero Description', 'type' => self::FIELD_TYPE_RICH],
+                    'hero_subtitle' => [
+                        'label' => 'Hero Subtitle',
+                        'type' => self::FIELD_TYPE_STRING,
+                        'default' => 'A New Era of Chaos Begins',
+                    ],
+                    'hero_description' => [
+                        'label' => 'Hero Description',
+                        'type' => self::FIELD_TYPE_RICH,
+                        'default' => 'Dive into an epic multiverse where heroes unite against the forces of chaos. From the depths of the Skibidi universe to the realms of Marvel, DC, Star Wars, and beyond.',
+                    ],
                 ],
             ],
             self::SECTION_ABOUT => [
                 'title' => 'About Section',
                 'fields' => [
-                    'title' => ['label' => 'Title', 'type' => self::FIELD_TYPE_STRING],
-                    'about_text' => ['label' => 'About Text', 'type' => self::FIELD_TYPE_RICH],
+                    'title' => [
+                        'label' => 'Title',
+                        'type' => self::FIELD_TYPE_STRING,
+                        'default' => 'The Story Unfolds',
+                    ],
+                    'about_text' => [
+                        'label' => 'About Text',
+                        'type' => self::FIELD_TYPE_RICH,
+                        'default' => self::getDefaultAboutText(),
+                    ],
                 ],
             ],
             self::SECTION_EPISODES => [
                 'title' => 'Episodes Section',
                 'fields' => [
-                    'title' => ['label' => 'Title', 'type' => self::FIELD_TYPE_STRING],
-                    'subtitle' => ['label' => 'Subtitle', 'type' => self::FIELD_TYPE_RICH],
+                    'title' => [
+                        'label' => 'Title',
+                        'type' => self::FIELD_TYPE_STRING,
+                        'default' => 'Featured Episodes',
+                    ],
+                    'subtitle' => [
+                        'label' => 'Subtitle',
+                        'type' => self::FIELD_TYPE_RICH,
+                        'default' => 'Watch the epic battles and witness the chaos unfold',
+                    ],
                 ],
             ],
             self::SECTION_HEROES => [
                 'title' => 'Heroes Section',
                 'fields' => [
-                    'title' => ['label' => 'Title', 'type' => self::FIELD_TYPE_STRING],
-                    'subtitle' => ['label' => 'Subtitle', 'type' => self::FIELD_TYPE_RICH],
+                    'title' => [
+                        'label' => 'Title',
+                        'type' => self::FIELD_TYPE_STRING,
+                        'default' => 'The Legendary Heroes',
+                    ],
+                    'subtitle' => [
+                        'label' => 'Subtitle',
+                        'type' => self::FIELD_TYPE_RICH,
+                        'default' => 'Meet the champions who stand between order and absolute chaos',
+                    ],
                 ],
             ],
             self::SECTION_CHANNEL => [
                 'title' => 'Channel Section',
                 'fields' => [
-                    'title' => ['label' => 'Title', 'type' => self::FIELD_TYPE_STRING],
-                    'subtitle' => ['label' => 'Subtitle', 'type' => self::FIELD_TYPE_RICH],
+                    'title' => [
+                        'label' => 'Title',
+                        'type' => self::FIELD_TYPE_STRING,
+                        'default' => 'Join the FireStormX Community',
+                    ],
+                    'subtitle' => [
+                        'label' => 'Subtitle',
+                        'type' => self::FIELD_TYPE_RICH,
+                        'default' => 'Subscribe to FireStormX Studios on YouTube to never miss an episode of Skibidi Madness! Get exclusive behind-the-scenes content, character reveals, and be part of the growing community of fans exploring the multiverse.',
+                    ],
                 ],
             ],
         ];
+    }
+
+    /**
+     * Get default about text content.
+     *
+     * @return string
+     */
+    private static function getDefaultAboutText(): string
+    {
+        return '<h3>A New Chapter in the Skibidi Universe</h3>
+<p>
+    Welcome to <strong>Skibidi Madness</strong> - an extraordinary animation series created by FireStormX Studios 
+    that transcends the boundaries of the original Skibidi Toilet universe. This isn\'t just another story; 
+    it\'s a revolutionary fusion of multiple dimensions, timelines, and realities. It\'s a celebration of creativity, imagination, and the limitless possibilities 
+    of storytelling.
+</p>
+<p>
+    In this new saga, witness the unprecedented chaos unleashed by the malevolent forces known as the 
+    <strong>Asotra</strong>. Unlike previous battles against entire armies, our heroes now face their 
+    most formidable adversary yet - the mysterious and powerful <strong>Supreme Leader</strong>, 
+    whose ambitions threaten not just one universe, but the entire multiverse fabric.
+</p>
+<p>
+    Skibidi Madness weaves together elements from beloved franchises including Marvel\'s cosmic battles, 
+    the supernatural mysteries of Stranger Things, DC\'s legendary heroes, the epic space opera of Star Wars, 
+    the blocky realms of Minecraft, and countless other dimensions. This is where everything you love 
+    collides in spectacular fashion.
+</p>';
+    }
+
+    /**
+     * Get default value for a field.
+     *
+     * @param string $section Section name
+     * @param string $fieldKey Field key
+     * @return string Default value or empty string
+     */
+    public static function getDefaultValue(string $section, string $fieldKey): string
+    {
+        $config = self::getSectionsConfig();
+        return $config[$section]['fields'][$fieldKey]['default'] ?? '';
     }
 }
