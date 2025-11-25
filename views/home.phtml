@@ -7,9 +7,9 @@ $recentPosts = $this->var('blogPosts');
 $heroes = $this->var('heroes');
 $landingContent = $this->var('landingContent');
 
-// Helper function to get content value from database only
+// Helper function to get content value
 $getContent = function($section, $key) use ($landingContent) {
-    return $landingContent[$section][$key]['value'] ?? '';
+    return isset($landingContent[$section][$key]) ? $landingContent[$section][$key]['value'] : '';
 };
 
 ?>
