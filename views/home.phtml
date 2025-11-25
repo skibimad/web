@@ -1,19 +1,15 @@
 <?php
 
 use App\Core\Helper\Resource;
-use App\Model\LandingPageContent;
 
 $episodes = $this->var('episodes');
 $recentPosts = $this->var('blogPosts');
 $heroes = $this->var('heroes');
 $landingContent = $this->var('landingContent');
 
-// Helper function to get content value with default fallback
+// Helper function to get content value from database only
 $getContent = function($section, $key) use ($landingContent) {
-    if (isset($landingContent[$section][$key])) {
-        return $landingContent[$section][$key]['value'];
-    }
-    return LandingPageContent::getDefaultValue($section, $key);
+    return $landingContent[$section][$key]['value'] ?? '';
 };
 
 ?>
