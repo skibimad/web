@@ -52,6 +52,16 @@ CREATE TABLE `heroes` (
   `enabled` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE `landing_page_content` (
+  `id` int(11) NOT NULL,
+  `section` varchar(50) NOT NULL,
+  `field_key` varchar(100) NOT NULL,
+  `field_value` text DEFAULT NULL,
+  `field_type` enum('string','rich') NOT NULL DEFAULT 'string',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE `migrations` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
@@ -128,6 +138,10 @@ ALTER TABLE `heroes`
   ADD KEY `idx_slug` (`slug`),
   ADD KEY `idx_order` (`display_order`);
 
+ALTER TABLE `landing_page_content`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `section_field` (`section`, `field_key`);
+
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `version` (`version`);
@@ -162,6 +176,9 @@ ALTER TABLE `episodes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `heroes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `landing_page_content`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `migrations`

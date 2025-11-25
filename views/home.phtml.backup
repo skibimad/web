@@ -5,14 +5,7 @@ use App\Core\Helper\Resource;
 $episodes = $this->var('episodes');
 $recentPosts = $this->var('blogPosts');
 $heroes = $this->var('heroes');
-$landingContent = $this->var('landingContent');
 
-// Helper function to get content value
-$getContent = function($section, $key, $default = '') use ($landingContent) {
-    return isset($landingContent[$section][$key]) 
-        ? $landingContent[$section][$key]['value'] 
-        : $default;
-};
 
 ?>
 <!-- Hero Section -->
@@ -29,10 +22,11 @@ $getContent = function($section, $key, $default = '') use ($landingContent) {
             <span>SKIBIDI MADNESS</span>
         </h1>
         <p class="hero-subtitle">
-            <?= htmlspecialchars($getContent('home', 'hero_subtitle', 'A New Era of Chaos Begins')) ?>
+            A New Era of Chaos Begins
         </p>
         <p class="hero-description">
-            <?= $getContent('home', 'hero_description', 'Dive into an epic multiverse where heroes unite against the forces of chaos. From the depths of the Skibidi universe to the realms of Marvel, DC, Star Wars, and beyond.') ?>
+            Dive into an epic multiverse where heroes unite against the forces of chaos. 
+            From the depths of the Skibidi universe to the realms of Marvel, DC, Star Wars, and beyond.
         </p>
         <div class="hero-buttons">
             <a href="#videos" class="btn btn-primary">Watch Now</a>
@@ -47,14 +41,14 @@ $getContent = function($section, $key, $default = '') use ($landingContent) {
 <!-- About Section -->
 <section id="about" class="about-section">
     <div class="container">
-        <h2 class="section-title"><?= htmlspecialchars($getContent('about', 'title', 'The Story Unfolds')) ?></h2>
+        <h2 class="section-title">The Story Unfolds</h2>
         <div class="about-content">
             <div class="about-text">
-                <?= $getContent('about', 'about_text', '<h3>A New Chapter in the Skibidi Universe</h3>
+                <h3>A New Chapter in the Skibidi Universe</h3>
                 <p>
                     Welcome to <strong>Skibidi Madness</strong> - an extraordinary animation series created by FireStormX Studios 
-                    that transcends the boundaries of the original Skibidi Toilet universe. This isn\'t just another story; 
-                    it\'s a revolutionary fusion of multiple dimensions, timelines, and realities. It\'s a celebration of creativity, imagination, and the limitless possibilities 
+                    that transcends the boundaries of the original Skibidi Toilet universe. This isn't just another story; 
+                    it's a revolutionary fusion of multiple dimensions, timelines, and realities. It's a celebration of creativity, imagination, and the limitless possibilities 
                     of storytelling.
                 </p>
                 <p>
@@ -64,11 +58,12 @@ $getContent = function($section, $key, $default = '') use ($landingContent) {
                     whose ambitions threaten not just one universe, but the entire multiverse fabric.
                 </p>
                 <p>
-                    Skibidi Madness weaves together elements from beloved franchises including Marvel\'s cosmic battles, 
-                    the supernatural mysteries of Stranger Things, DC\'s legendary heroes, the epic space opera of Star Wars, 
+                    Skibidi Madness weaves together elements from beloved franchises including Marvel's cosmic battles, 
+                    the supernatural mysteries of Stranger Things, DC's legendary heroes, the epic space opera of Star Wars, 
                     the blocky realms of Minecraft, and countless other dimensions. This is where everything you love 
                     collides in spectacular fashion.
-                </p>') ?>
+                </p>
+                
             </div>
             <div class="about-image">
                 <img src="/public/media/img/all-together.png" alt="All Heroes Together">
@@ -98,9 +93,9 @@ $getContent = function($section, $key, $default = '') use ($landingContent) {
 <!-- Heroes Section (now after Videos) -->
 <section id="heroes" class="heroes-section">
     <div class="container">
-        <h2 class="section-title"><?= htmlspecialchars($getContent('heroes', 'title', 'The Legendary Heroes')) ?></h2>
+        <h2 class="section-title">The Legendary Heroes</h2>
         <p class="section-subtitle">
-            <?= $getContent('heroes', 'subtitle', 'Meet the champions who stand between order and absolute chaos') ?>
+            Meet the champions who stand between order and absolute chaos
         </p>
         
         <div class="heroes-grid">
@@ -171,9 +166,11 @@ $getContent = function($section, $key, $default = '') use ($landingContent) {
     <div class="container">
         <div class="channel-content">
             <div class="channel-info">
-                <h2><?= htmlspecialchars($getContent('channel', 'title', 'Join the FireStormX Community')) ?></h2>
+                <h2>Join the FireStormX Community</h2>
                 <p>
-                    <?= $getContent('channel', 'subtitle', 'Subscribe to FireStormX Studios on YouTube to never miss an episode of Skibidi Madness! Get exclusive behind-the-scenes content, character reveals, and be part of the growing community of fans exploring the multiverse.') ?>
+                    Subscribe to FireStormX Studios on YouTube to never miss an episode of Skibidi Madness! 
+                    Get exclusive behind-the-scenes content, character reveals, and be part of the growing 
+                    community of fans exploring the multiverse.
                 </p>
                 <div class="channel-stats">
                     <div class="stat">

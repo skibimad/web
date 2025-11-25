@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Core\Controller;
 use App\Core\Model\Collection;
 use App\Model\BlogPost;
+use App\Model\LandingPageContent;
 
 class Index extends Controller
 {
@@ -13,7 +14,18 @@ class Index extends Controller
             'episodes' => $this->getEpisodes(),
             'blogPosts' => $this->getBlogPosts(),
             'heroes' => $this->getHeroes(),
+            'landingContent' => $this->getLandingContent(),
         ]);
+    }
+
+    /**
+     * Retrieve landing page content from database
+     *
+     * @return array
+     */
+    protected function getLandingContent(): array
+    {
+        return LandingPageContent::getAllSections();
     }
 
     /**
