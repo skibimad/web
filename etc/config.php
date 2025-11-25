@@ -12,7 +12,7 @@ return [
         'password' => 'smxksmxkmM1@',
         'database_name' => 'skibidi_madness'
     ],
-    'upload_dir' => '/public/uploads/',
+    'upload_dir' => '/uploads/',
 
     'max_upload_size' => 10485760, // 10 MB
 

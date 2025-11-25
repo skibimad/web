@@ -83,7 +83,7 @@ $stmt->execute([
 $stmt->execute([
     'section' => 'about',
     'field_key' => 'image',
-    'field_value' => '/public/media/img/all-together.png',
+    'field_value' => '/media/img/all-together.png',
     'field_type' => 'image'
 ]);
 

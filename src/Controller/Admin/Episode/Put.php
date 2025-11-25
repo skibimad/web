@@ -47,7 +47,7 @@ class Put extends AdminController
         $uploader = new Uploader($this->getRequest());
         $uploadPath = Config::get('upload_dir') . 'episode/'.$episode->getId().'/';
 
-        $fullPath = Config::get('root').$uploadPath;
+        $fullPath = Config::get('root') . 'public' . $uploadPath;
 
         $uploads = $uploader->upload('thumbnail', $fullPath);
 
