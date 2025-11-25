@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Initialize all features
+    initThemeSwitcher();
     initLanguageSelector();
     initNavigation();
     initHeroCards();
@@ -15,6 +16,59 @@ document.addEventListener('DOMContentLoaded', function() {
     initVideoAutoplay();
     initSmoothScroll();
 });
+
+// Theme Switcher
+function initThemeSwitcher() {
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    const storedPreference = localStorage.getItem('theme') || 'system';
+    
+    // Set initial active state
+    updateThemeButtonState(storedPreference);
+    
+    // Add click handlers
+    themeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const theme = this.getAttribute('data-theme');
+            setTheme(theme);
+        });
+    });
+    
+    // Listen for system preference changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme === 'system' || !storedTheme) {
+            applyTheme(e.matches ? 'dark' : 'light');
+        }
+    });
+}
+
+function setTheme(theme) {
+    localStorage.setItem('theme', theme);
+    updateThemeButtonState(theme);
+    
+    if (theme === 'system') {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark ? 'dark' : 'light');
+    } else {
+        applyTheme(theme);
+    }
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+}
+
+function updateThemeButtonState(activeTheme) {
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    themeButtons.forEach(button => {
+        const buttonTheme = button.getAttribute('data-theme');
+        if (buttonTheme === activeTheme) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+}
 
 // Language Selector
 function initLanguageSelector() {
@@ -250,6 +304,17 @@ document.addEventListener('keydown', function(e) {
             const currentIndex = Array.from(langButtons).indexOf(activeLang);
             const nextIndex = (currentIndex + 1) % langButtons.length;
             langButtons[nextIndex].click();
+        }
+    }
+    
+    // Press 'T' to cycle through themes
+    if (e.key === 't' || e.key === 'T') {
+        if (!e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            const activeTheme = document.querySelector('.theme-btn.active');
+            const currentIndex = Array.from(themeButtons).indexOf(activeTheme);
+            const nextIndex = (currentIndex + 1) % themeButtons.length;
+            themeButtons[nextIndex].click();
         }
     }
 });
