@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Theme Switcher
 function initThemeSwitcher() {
     const themeButtons = document.querySelectorAll('.theme-btn');
-    const storedPreference = localStorage.getItem('theme') || 'system';
+    const storedPreference = localStorage.getItem('theme') || 'dark';
     
     // Set initial active state
     updateThemeButtonState(storedPreference);
