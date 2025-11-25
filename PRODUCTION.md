@@ -255,7 +255,7 @@ opcache.fast_shutdown=1
 1. Verify database credentials in environment variables
 2. Check database server is running
 3. Ensure database user has proper permissions
-4. Test connection manually: `mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_NAME`
+4. Test connection manually: `mysql -h $DB_HOST -u $DB_USER -p $DB_NAME` (password will be prompted)
 
 ### Issue: Upload/File Permissions Error
 
@@ -270,8 +270,16 @@ opcache.fast_shutdown=1
 Regular database backups are essential:
 
 ```bash
-# Daily backup example
-mysqldump -u $DB_USER -p$DB_PASSWORD $DB_NAME > backup-$(date +%Y%m%d).sql
+# Daily backup example (password will be prompted)
+mysqldump -u $DB_USER -p $DB_NAME > backup-$(date +%Y%m%d).sql
+
+# Or use a more secure method with a config file
+# Create ~/.my.cnf with:
+# [client]
+# user=your_user
+# password=your_password
+# Then run:
+mysqldump $DB_NAME > backup-$(date +%Y%m%d).sql
 ```
 
 ### Update Procedure

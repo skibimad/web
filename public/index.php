@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // Load configuration to determine debug mode
-$debug = getenv('APP_DEBUG') === 'true' ? true : false;
+$debug = getenv('APP_DEBUG') === 'true';
 
 if ($debug) {
     error_reporting(E_ALL);

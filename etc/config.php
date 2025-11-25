@@ -1,6 +1,6 @@
 <?php
 return [
-    'debug' => getenv('APP_DEBUG') === 'true' ? true : false,
+    'debug' => getenv('APP_DEBUG') === 'true',
     'date_format' => 'm/d/Y',
     'root' => realpath(__DIR__ . '/../').'/',
     
