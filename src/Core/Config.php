@@ -34,11 +34,11 @@ class Config
         }
         $data = require $file;
 
-        $data = array_merge($data, self::loadDb()); // Load database config if needed
+        $data = array_replace_recursive($data, self::loadDb()); // Load database config if needed
 
         $localData = @include ($file . '.local.php') ?: []; // Load local config if exists
         if (is_array($localData)) {
-            $data = array_merge($data, $localData);
+            $data = array_replace_recursive($data, $localData);
         }
 
         if (!is_array($data)) {
