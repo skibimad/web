@@ -9,11 +9,27 @@ class Blog extends AdminController
 {
     public function handle(): void
     {
+        $collection = $this->getPosts();
+        
+        // Handle pagination
+        $page = max(1, (int)$this->getRequest('page', 1));
+        $pageSize = (int)$this->getRequest('pageSize', 6);
+        
+        if ($pageSize < 1) {
+            $pageSize = 6;
+        }
+        
+        $collection->setPageSize($pageSize);
+        $collection->setPage($page);
 
         $this->render(
             'admin/blog',
             [
-                'posts' => $this->getPosts()
+                'posts' => $collection,
+                'currentPage' => $collection->getPage(),
+                'totalPages' => $collection->getPages(),
+                'pageSize' => $pageSize,
+                'totalCount' => $collection->count()
             ]
         );
     }
