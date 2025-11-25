@@ -82,7 +82,8 @@ class Migration
             }
         }
 
-        ksort($pending);
+        // Sort using version_compare for proper semantic version ordering
+        uksort($pending, 'version_compare');
         return $pending;
     }
 
@@ -110,7 +111,8 @@ class Migration
             }
         }
 
-        ksort($migrations);
+        // Sort using version_compare for proper semantic version ordering
+        uksort($migrations, 'version_compare');
         return $migrations;
     }
 
@@ -138,6 +140,7 @@ class Migration
      *
      * @param string $filepath
      * @return bool
+     * @throws \Exception on failure
      */
     public function executeSqlFile(string $filepath): bool
     {
@@ -158,11 +161,18 @@ class Migration
             fn($s) => !empty($s)
         );
 
-        foreach ($statements as $statement) {
-            $pdo->exec($statement);
+        // Use transaction for atomicity
+        $pdo->beginTransaction();
+        try {
+            foreach ($statements as $statement) {
+                $pdo->exec($statement);
+            }
+            $pdo->commit();
+            return true;
+        } catch (\Exception $e) {
+            $pdo->rollBack();
+            throw $e;
         }
-
-        return true;
     }
 
     /**
@@ -196,9 +206,11 @@ class Migration
      * Run all pending migrations.
      *
      * @param callable|null $onMigration Callback called for each migration (version, filepath)
+     * @param callable|null $onError Callback called on error (version, filepath, exception)
      * @return int Number of migrations executed
+     * @throws \Exception if a migration fails and no error callback is provided
      */
-    public function migrate(?callable $onMigration = null): int
+    public function migrate(?callable $onMigration = null, ?callable $onError = null): int
     {
         $this->ensureMigrationTable();
         $pending = $this->getPendingMigrations();
@@ -209,9 +221,22 @@ class Migration
                 $onMigration($version, $filepath);
             }
 
-            if ($this->executeMigrationFile($filepath)) {
-                $this->recordMigration($version);
-                $count++;
+            try {
+                if ($this->executeMigrationFile($filepath)) {
+                    $this->recordMigration($version);
+                    $count++;
+                } else {
+                    $exception = new \RuntimeException("Migration file returned false: $filepath");
+                    if ($onError) {
+                        $onError($version, $filepath, $exception);
+                    }
+                    throw $exception;
+                }
+            } catch (\Exception $e) {
+                if ($onError) {
+                    $onError($version, $filepath, $e);
+                }
+                throw $e;
             }
         }
 

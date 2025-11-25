@@ -5,7 +5,6 @@ namespace App\Cli\Command;
 use App\Cli\AbstractCommand;
 use App\Cli\Migration;
 use App\Core\Config;
-use App\Core\Database;
 
 /**
  * Command to set up the database using etc/db/setup.sql or setup.php.
@@ -38,37 +37,32 @@ class DbSetupCommand extends AbstractCommand
 
         $this->info('Starting database setup...');
 
-        // Check for setup.php first, then setup.sql
+        // Check for setup.php first, then setup.sql (PHP takes priority)
         $migration = new Migration($setupPath);
 
         $phpFile = $setupPath . 'setup.php';
         $sqlFile = $setupPath . 'setup.sql';
 
-        $executed = false;
-
-        if (file_exists($phpFile)) {
-            $this->output("Executing: $phpFile");
-            if ($migration->executePhpFile($phpFile)) {
-                $executed = true;
+        try {
+            if (file_exists($phpFile)) {
+                $this->output("Executing: $phpFile");
+                if (!$migration->executePhpFile($phpFile)) {
+                    $this->error("Failed to execute: $phpFile");
+                    return 1;
+                }
+            } elseif (file_exists($sqlFile)) {
+                $this->output("Executing: $sqlFile");
+                if (!$migration->executeSqlFile($sqlFile)) {
+                    $this->error("Failed to execute: $sqlFile");
+                    return 1;
+                }
             } else {
-                $this->error("Failed to execute: $phpFile");
-                return 1;
+                $this->warning("No setup file found at $setupPath (setup.sql or setup.php)");
+                return 0;
             }
-        }
-
-        if (file_exists($sqlFile)) {
-            $this->output("Executing: $sqlFile");
-            if ($migration->executeSqlFile($sqlFile)) {
-                $executed = true;
-            } else {
-                $this->error("Failed to execute: $sqlFile");
-                return 1;
-            }
-        }
-
-        if (!$executed) {
-            $this->warning("No setup file found at $setupPath (setup.sql or setup.php)");
-            return 0;
+        } catch (\Exception $e) {
+            $this->error("Setup failed: " . $e->getMessage());
+            return 1;
         }
 
         $this->success('Database setup completed successfully!');

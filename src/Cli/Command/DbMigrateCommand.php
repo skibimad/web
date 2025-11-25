@@ -59,11 +59,21 @@ class DbMigrateCommand extends AbstractCommand
         }
 
         $this->output('');
-        $count = $migration->migrate(function ($version, $filepath) {
-            $this->info("Executing migration: $version");
-        });
-
-        $this->success("Successfully executed $count migration(s).");
-        return 0;
+        
+        try {
+            $count = $migration->migrate(
+                function ($version, $filepath) {
+                    $this->info("Executing migration: $version");
+                },
+                function ($version, $filepath, $exception) {
+                    $this->error("Migration $version failed: " . $exception->getMessage());
+                }
+            );
+            $this->success("Successfully executed $count migration(s).");
+            return 0;
+        } catch (\Exception $e) {
+            $this->error('Migration failed: ' . $e->getMessage());
+            return 1;
+        }
     }
 }
