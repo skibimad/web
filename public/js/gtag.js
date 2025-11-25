@@ -15,35 +15,35 @@ function trackEvent(eventName, eventParams = {}) {
 
 // Initialize Google Analytics Event Tracking
 function initAnalyticsTracking() {
-    // Unified handler for all elements with g-tag class
+    // Attach click handlers directly to elements with g-tag class
     // Event name is specified via data-gtag attribute
     // Additional data can be passed via data-gtag-* attributes
-    document.addEventListener('click', function(e) {
-        const gtagElement = e.target.closest('.g-tag');
-        if (!gtagElement) return;
+    const gtagElements = document.querySelectorAll('.g-tag');
+    gtagElements.forEach(function(element) {
+        element.addEventListener('click', function() {
+            const eventName = this.dataset.gtag;
+            if (!eventName) return;
 
-        const eventName = gtagElement.dataset.gtag;
-        if (!eventName) return;
-
-        // Collect all data-gtag-* attributes as event parameters
-        const eventParams = {};
-        for (const key in gtagElement.dataset) {
-            if (key.startsWith('gtag') && key !== 'gtag') {
-                // Convert camelCase to snake_case (e.g., gtagLinkText -> link_text)
-                const paramName = key.replace('gtag', '').replace(/([A-Z])/g, '_$1').toLowerCase().replace(/^_/, '');
-                eventParams[paramName] = gtagElement.dataset[key];
+            // Collect all data-gtag-* attributes as event parameters
+            const eventParams = {};
+            for (const key in this.dataset) {
+                if (key.startsWith('gtag') && key !== 'gtag') {
+                    // Convert camelCase to snake_case (e.g., gtagLinkText -> link_text)
+                    const paramName = key.replace('gtag', '').replace(/([A-Z])/g, '_$1').toLowerCase().replace(/^_/, '');
+                    eventParams[paramName] = this.dataset[key];
+                }
             }
-        }
 
-        // Add common attributes if not already specified
-        if (!eventParams.link_text && gtagElement.textContent) {
-            eventParams.link_text = gtagElement.textContent.trim();
-        }
-        if (!eventParams.link_url && gtagElement.getAttribute('href')) {
-            eventParams.link_url = gtagElement.getAttribute('href');
-        }
+            // Add common attributes if not already specified
+            if (!eventParams.link_text && this.textContent) {
+                eventParams.link_text = this.textContent.trim();
+            }
+            if (!eventParams.link_url && this.getAttribute('href')) {
+                eventParams.link_url = this.getAttribute('href');
+            }
 
-        trackEvent(eventName, eventParams);
+            trackEvent(eventName, eventParams);
+        });
     });
 }
 
