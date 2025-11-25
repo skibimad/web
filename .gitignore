@@ -1,7 +1,10 @@
 
 .vscode
 config/config.php.local.php
+etc/config.php.local.php
 vendor
 public/attachments
 public/uploads
 vendor
+.env
+.env.local
