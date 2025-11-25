@@ -51,7 +51,8 @@ $getContent = function($section, $key) use ($landingContent) {
                 <?= $getContent('about', 'about_text') ?>
             </div>
             <div class="about-image">
-                <img src="/public/media/img/all-together.png" alt="All Heroes Together">
+                <?php $aboutImage = $getContent('about', 'image'); ?>
+                <img src="<?= htmlspecialchars($aboutImage ?: '/public/media/img/all-together.png') ?>" alt="All Heroes Together">
                 <div class="image-glow"></div>
             </div>
         </div>

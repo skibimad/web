@@ -57,7 +57,7 @@ CREATE TABLE `landing_page_content` (
   `section` varchar(50) NOT NULL,
   `field_key` varchar(100) NOT NULL,
   `field_value` text DEFAULT NULL,
-  `field_type` enum('string','rich') NOT NULL DEFAULT 'string',
+  `field_type` enum('string','rich','image') NOT NULL DEFAULT 'string',
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

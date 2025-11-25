@@ -5,6 +5,7 @@ use App\Core\Controller;
 use App\Core\Model\Collection;
 use App\Model\BlogPost;
 use App\Model\LandingPageContent;
+use App\Model\SocialLink;
 
 class Index extends Controller
 {
@@ -15,6 +16,7 @@ class Index extends Controller
             'blogPosts' => $this->getBlogPosts(),
             'heroes' => $this->getHeroes(),
             'landingContent' => $this->getLandingContent(),
+            'socialLinks' => $this->getSocialLinks(),
         ]);
     }
 
@@ -26,6 +28,22 @@ class Index extends Controller
     protected function getLandingContent(): array
     {
         return LandingPageContent::getAllSections();
+    }
+
+    /**
+     * Retrieve social links collection
+     *
+     * @return Collection
+     */
+    protected function getSocialLinks(): Collection
+    {
+        $socialLinksCollection = (new SocialLink())
+            ->getCollection()
+            ->setItemMode(Collection::ITEM_MODE_OBJECT)
+            ->addFilter(['enabled' => 1])
+            ->sort('display_order', 'ASC');
+
+        return $socialLinksCollection;
     }
 
     /**

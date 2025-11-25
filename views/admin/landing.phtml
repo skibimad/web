@@ -8,7 +8,7 @@ $sectionsConfig = $this('sectionsConfig');
 
 <div class="form-container">
     <div class="form-card">
-        <form method="post" action="/admin/landing/update" class="landing-form">
+        <form method="post" action="/admin/landing/update" class="landing-form" enctype="multipart/form-data">
             
             <?php foreach ($sectionsConfig as $sectionKey => $sectionConfig): ?>
             <div class="form-section">
@@ -32,6 +32,21 @@ $sectionsConfig = $this('sectionsConfig');
                                 class="summernote-editor"
                                 placeholder="Enter <?= htmlspecialchars(strtolower($fieldConfig['label'])) ?>..."
                             ><?= htmlspecialchars($currentValue) ?></textarea>
+                        <?php elseif ($fieldConfig['type'] === 'image'): ?>
+                            <?php if ($currentValue): ?>
+                                <div class="current-image">
+                                    <img src="<?= htmlspecialchars($currentValue) ?>" alt="Current image" style="max-width: 200px; max-height: 150px; margin-bottom: 10px;">
+                                </div>
+                            <?php endif; ?>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="<?= $fieldId ?>" name="landing_image_<?= $sectionKey ?>_<?= $fieldKey ?>" accept="image/*" class="file-input">
+                                <input type="hidden" name="<?= $fieldName ?>" value="<?= htmlspecialchars($currentValue) ?>">
+                                <div class="file-upload-area">
+                                    <div class="upload-icon">📁</div>
+                                    <p class="upload-text">Click to upload or drag and drop</p>
+                                    <p class="upload-subtext">PNG, JPG, GIF up to 5MB</p>
+                                </div>
+                            </div>
                         <?php else: ?>
                             <input 
                                 type="text" 

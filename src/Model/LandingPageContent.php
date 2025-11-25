@@ -16,6 +16,7 @@ class LandingPageContent extends Model
 
     const FIELD_TYPE_STRING = 'string';
     const FIELD_TYPE_RICH = 'rich';
+    const FIELD_TYPE_IMAGE = 'image';
 
     const SECTION_HOME = 'home';
     const SECTION_ABOUT = 'about';
@@ -161,6 +162,10 @@ class LandingPageContent extends Model
                     'about_text' => [
                         'label' => 'About Text',
                         'type' => self::FIELD_TYPE_RICH,
+                    ],
+                    'image' => [
+                        'label' => 'About Image',
+                        'type' => self::FIELD_TYPE_IMAGE,
                     ],
                 ],
             ],
