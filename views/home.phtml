@@ -1,11 +1,9 @@
 <?php
 
-use App\Core\Helper\Resource;
-
-$episodes = $this->var('episodes');
-$recentPosts = $this->var('blogPosts');
-$heroes = $this->var('heroes');
-$landingContent = $this->var('landingContent');
+$episodes = $this('episodes');
+$recentPosts = $this('blogPosts');
+$heroes = $this('heroes');
+$landingContent = $this('landingContent');
 
 // Helper function to get content value
 $getContent = function($section, $key) use ($landingContent) {
@@ -13,175 +11,11 @@ $getContent = function($section, $key) use ($landingContent) {
 };
 
 ?>
-<!-- Hero Section -->
-<section id="home" class="hero-section">
-    <div class="hero-background">
-        <video autoplay muted loop playsinline class="hero-video">
-            <!--source src="/public/media/video/all-together.mp4" type="video/mp4"-->
-            <source src="<?php echo Resource::getRandomVideo(); ?>" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-    </div>
-    <div class="hero-content">
-        <h1 class="glitch-text" data-text="SKIBIDI MADNESS">
-            <span>SKIBIDI MADNESS</span>
-        </h1>
-        <p class="hero-subtitle">
-            <?= htmlspecialchars($getContent('home', 'hero_subtitle')) ?>
-        </p>
-        <p class="hero-description">
-            <?= $getContent('home', 'hero_description') ?>
-        </p>
-        <div class="hero-buttons">
-            <a href="#videos" class="btn btn-primary">Watch Now</a>
-            <a href="/youclick?y=<?php echo \App\Core\Helper\YouChannel::getSubscribeButtonUrl(); ?>" target="_blank" class="btn btn-secondary">Subscribe</a>
-        </div>
-    </div>
-    <div class="scroll-indicator">
-        <div class="scroll-arrow"></div>
-    </div>
-</section>
 
 <!-- About Section -->
-<section id="about" class="about-section">
-    <div class="container">
-        <h2 class="section-title"><?= htmlspecialchars($getContent('about', 'title')) ?></h2>
-        <div class="about-content">
-            <div class="about-text">
-                <?= $getContent('about', 'about_text') ?>
-            </div>
-            <div class="about-image">
-                <?php $aboutImage = $getContent('about', 'image'); ?>
-                <img src="<?= htmlspecialchars($aboutImage ?: '/public/media/img/all-together.png') ?>" alt="All Heroes Together">
-                <div class="image-glow"></div>
-            </div>
-        </div>
-        
-        <!-- Original References -->
-        <div class="original-references">
-            <h3>Inspired by the Original Skibidi Toilet Universe</h3>
-            <p>
-                This series builds upon the creative foundation established by the original Skibidi Toilet creators 
-                and the vibrant community including DOM Studio, Virlance, Maxedy, and many other talented animators 
-                who have expanded this universe.
-            </p>
-            <div class="reference-links">
-                <a href="https://www.youtube.com/@DaFuqBoom" target="_blank" class="ref-link">
-                    <span>DaFuq!?Boom! (Original Creator)</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 
+<?php include(__DIR__ . '/home/about.phtml'); ?>
 <?php include(__DIR__ . '/home/episodes.phtml'); ?>
-
-<!-- Heroes Section (now after Videos) -->
-<section id="heroes" class="heroes-section">
-    <div class="container">
-        <h2 class="section-title"><?= htmlspecialchars($getContent('heroes', 'title')) ?></h2>
-        <p class="section-subtitle">
-            <?= $getContent('heroes', 'subtitle') ?>
-        </p>
-        
-        <div class="heroes-grid">
-            <?php foreach ($heroes as $hero): ?>
-            <!-- <?= htmlspecialchars($hero['name']) ?> -->
-            <div class="hero-card" data-hero="<?= htmlspecialchars($hero['slug']) ?>">
-                <div class="hero-card-inner">
-                    <div class="hero-image-wrapper">
-                        <img src="/<?= htmlspecialchars(trim($hero['image'], '/')) ?>" alt="<?= htmlspecialchars($hero['name']) ?>" class="hero-image">
-                        <video class="hero-video-preview" muted loop>
-                            <source src="/<?= htmlspecialchars(trim($hero['video'], '/')) ?>" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="hero-info">
-                        <h3 class="hero-name"><?= htmlspecialchars($hero['name']) ?></h3>
-                        <p class="hero-description"><?= $hero['description'] ?></p>
-                        <div class="hero-abilities">
-                            <?php foreach ($hero->getAbilities() as $ability): ?>
-                            <span class="ability"><?= htmlspecialchars($ability) ?></span>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-
-<!-- Blog Section -->
-<!--section id="blog" class="blog-preview-section">
-    <div class="container">
-        <h2 class="section-title">Latest News</h2>
-        <p class="section-subtitle">
-            Stay updated with the latest news, behind-the-scenes content, and announcements
-        </p>
-        
-        <div class="blog-grid">
-            <?php if (!empty($recentPosts)): ?>
-                <?php foreach ($recentPosts as $post): ?>
-                <div class="blog-card">
-                    <div class="flex tooltipable">
-                        <img height="200px" class="tooltip-content" src="/<?= htmlspecialchars(trim($post['image'], '/')) ?>" alt="<?= htmlspecialchars($post['title']) ?>" class="blog-card-image">
-                    </div>
-                    <div class="blog-card-content">
-                        <h3 class="blog-card-title"><?= htmlspecialchars($post['title']) ?></h3>
-                        <div class="blog-card-meta">
-                            <?= htmlspecialchars($post['author']) ?> • <?= date('F j, Y', strtotime($post['published_at'])) ?>
-                        </div>
-                        <p class="blog-card-excerpt"><?= htmlspecialchars(substr(strip_tags($post['content']), 0, 150) . '...') ?></p>
-
-                            <a href="/blog/#<?= htmlspecialchars($post->getAnchor()) ?>" class="btn btn-primary read-more-link">Read More</a>
-
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            <?php endif; ?>
-        </div>
-        
-        <div class="blog-view-all">
-            <a href="/blog" class="btn btn-primary">View All Posts</a>
-        </div>
-    </div>
-</section-->
-
-<!-- Channel Section -->
-<section id="channel" class="channel-section">
-    <div class="container">
-        <div class="channel-content">
-            <div class="channel-info">
-                <h2><?= htmlspecialchars($getContent('channel', 'title')) ?></h2>
-                <p>
-                    <?= $getContent('channel', 'subtitle') ?>
-                </p>
-                <div class="channel-stats">
-                    <div class="stat">
-                        <span class="stat-icon">🎬</span>
-                        <span>New Episodes Regularly</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-icon">🌟</span>
-                        <span>Exclusive Content</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-icon">🎮</span>
-                        <span>Community Events</span>
-                    </div>
-                </div>
-                <a href="/youclick?y=<?php echo \App\Core\Helper\YouChannel::getSubscribeButtonUrl(); ?>" target="_blank" class="btn btn-channel">
-                    <svg viewBox="0 0 24 24" fill="currentColor" class="youtube-icon">
-                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                    </svg>
-                    <span>Subscribe Now</span>
-                </a>
-            </div>
-            <div class="channel-visual">
-                <video autoplay muted loop playsinline class="channel-video">
-                    <source src="<?php echo Resource::getRandomVideo() ?>" type="video/mp4">
-                </video>
-            </div>
-        </div>
-    </div>
-</section>
+<?php include(__DIR__ . '/home/news.phtml'); ?>
+<?php include(__DIR__ . '/home/heroes.phtml'); ?>
+<?php include(__DIR__ . '/home/channel.phtml'); ?>
