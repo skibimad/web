@@ -156,26 +156,25 @@ body {
 }
 
 /* Theme Switcher */
-.theme-switcher {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
+.nav-theme-switcher {
     display: flex;
-    gap: 0.25rem;
-    background: var(--color-bg-secondary);
-    padding: 0.35rem;
+    align-items: center;
+}
+
+.theme-switcher {
+    display: flex;
+    gap: 0.15rem;
+    background: var(--color-bg-tertiary);
+    padding: 0.25rem;
     border-radius: 50px;
-    border: 2px solid var(--color-primary);
-    box-shadow: var(--glow-primary);
-    backdrop-filter: blur(10px);
+    border: 1px solid var(--color-primary);
 }
 
 .theme-btn {
     background: transparent;
     color: var(--color-text-secondary);
     border: none;
-    padding: 0.5rem 0.75rem;
+    padding: 0.4rem 0.5rem;
     font-size: 1rem;
     cursor: pointer;
     border-radius: 50px;
@@ -198,14 +197,14 @@ body {
 }
 
 .theme-btn svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     fill: currentColor;
 }
 
 /* Light theme specific adjustments */
 [data-theme="light"] .theme-switcher {
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-tertiary);
 }
 
 [data-theme="light"] .navbar {
@@ -1283,19 +1282,22 @@ section {
         font-size: 0.8rem;
     }
     
+    .nav-theme-switcher {
+        margin-top: 1rem;
+        justify-content: center;
+    }
+    
     .theme-switcher {
-        top: 10px;
-        right: 10px;
-        padding: 0.25rem;
+        padding: 0.2rem;
     }
     
     .theme-btn {
-        padding: 0.4rem 0.6rem;
+        padding: 0.35rem 0.5rem;
     }
     
     .theme-btn svg {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
     }
     
     .heroes-grid,
