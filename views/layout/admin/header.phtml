@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'Admin Panel - Skibidi Madness' ?></title>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- External libraries (local copies - run 'php bin/cli resource:external:update' to download) -->
+    <link rel="stylesheet" href="/public/css/external/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -16,8 +17,8 @@
     <link rel="stylesheet" href="/public/css/tooltip.css">
     <link rel="stylesheet" href="/public/css/admin/form.css">
 
-    <!-- Summernote Rich Editor -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Summernote Rich Editor (local copy) -->
+    <link href="/public/css/external/summernote-lite.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/admin/rich-editor.css">
 </head>
 <body class="admin-body">

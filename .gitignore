@@ -4,4 +4,7 @@ config/config.php.local.php
 vendor
 public/attachments
 public/uploads
-vendor
+public/css/external/*
+public/js/external/*
+!public/css/external/.gitkeep
+!public/js/external/.gitkeep

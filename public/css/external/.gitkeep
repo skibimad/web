@@ -1,0 +1,2 @@
+# This directory contains local copies of external CSS libraries.
+# Run 'php bin/cli resource:external:update' to download them.
