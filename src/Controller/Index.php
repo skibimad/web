@@ -11,7 +11,7 @@ class Index extends Controller
 {
     public function handle(): void
     {
-        $this->render('home', [
+        $this->render('landing', [
             'episodes' => $this->getEpisodes(),
             'blogPosts' => $this->getBlogPosts(),
             'heroes' => $this->getHeroes(),

@@ -2,6 +2,7 @@
 
 namespace App\Core\Model;
 
+use App\Core\Contract\ModelInterface;
 use App\Core\Database;
 use App\Core\Model;
 use PDO;
@@ -101,11 +102,11 @@ class Collection implements CollectionInterface
     /**
      * Collection constructor.
      *
-     * @param string|Model $model Model class name or instance
+     * @param string|ModelInterface $model Model class name or instance
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function __construct(string|Model $model)
+    public function __construct(string|ModelInterface $model)
     {
         if (is_string($model)) {
             if (!class_exists($model)) {
@@ -158,9 +159,9 @@ class Collection implements CollectionInterface
      * Create a new model instance with optional data.
      *
      * @param array $data
-     * @return Model
+     * @return ModelInterface
      */
-    protected function createModel(array $data = []): Model
+    protected function createModel(array $data = []): ModelInterface
     {
         $model  = new $this->modelClass();
         if ($data) {
@@ -711,6 +712,16 @@ class Collection implements CollectionInterface
         }
 
         return new \ArrayIterator(array_map([$this, 'createModel'], $stmt->fetchAll(PDO::FETCH_ASSOC)));
+    }
+
+    public function first(): ?ModelInterface
+    {
+        $this->setPageSize(1)->setPage(1);
+        $iterator = $this->fetch();
+        foreach ($iterator as $item) {
+            return $item;
+        }
+        return null;
     }
 
     /**

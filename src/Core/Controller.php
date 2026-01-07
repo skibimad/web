@@ -1,16 +1,19 @@
 <?php
 namespace App\Core;
 
-use App\Controller\AuthController;
+use App\Core\Contract\ControllerInterface;
+use App\Core\Contract\ResponseInterface;
 use App\Core\Contract\ViewInterface;
 use App\Core\Middleware\MiddlewareInterface;
 use App\Core\Middleware\MiddlewarePipeline;
 use App\Core\Middleware\RequestHandlerInterface;
 
-abstract class Controller
+abstract class Controller implements ControllerInterface
 {
     private Request $request;
+
     private ResponseInterface $response;
+    //private ResponseInterface $response;
 
     /**
      * @var MiddlewareInterface[]
@@ -23,9 +26,6 @@ abstract class Controller
         
         // Register middleware first, allowing middleware-based auth to be set up
         $this->registerMiddleware();
-        
-        // Legacy checkAuth - can be removed once all auth is handled by middleware
-        $this->checkAuth();
     }
 
     /**
@@ -116,103 +116,49 @@ abstract class Controller
         $pipeline->handle($this->request);
     }
 
+
     /**
-     * Get the request instance
-     *
-     * This method returns the Request instance associated with this controller.
-     * It can be used to access request data such as GET, POST, SESSION, etc.
-     *
-     * @return mixed
+     * @deprecated
+     * Alias for request method to get a value from the request.
      */
-    public function getRequest(?string $key = null, mixed $default = null): mixed
+    public function getRequest(?string $key = null): mixed
+    {
+        return $key ? $this->request($key) : $this->request();
+    }
+
+    public function request(?string $key = null): mixed
     {
         if ($key === null) {
             //main request object
             return $this->request;
         }
 
-        //specific request key: @deprecated
-        return $this->request->getRequest($key, $default);
+        return $this->request->request($key);
     }
 
-    /**
-     * Get a value from the session
-     *
-     * This method retrieves a value from the session using the provided key.
-     * If the key is not found, it returns the specified default value.
-     *
-     * @param string|null $key The key to retrieve from the session
-     * @param mixed $default The default value to return if the key is not found
-     * @return mixed The value from the session or the default value
-     */
-    public function getSession(?string $key = null, mixed $default = null): mixed
+    protected function response(): ResponseInterface
     {
-        return $this->getRequest()->session($key, $default);
-    }  
-
-    /**
-     * Check if user is authenticated
-     */
-    protected function checkAuth(): void
-    {
-        // $uid = $this->getRequest()->session('uid');
-
-        // if (
-        //     null === $uid 
-        //     && !$this instanceof  AuthController
-        //     //&& !$this instanceof \App\Controller\ErrorController
-        //     && !$this instanceof \App\Controller\NotFoundController
-        //     ) {
-        //     $this->redirect('/?q=auth/login');
-        //     exit;
-        // }
+        if (!isset($this->response)) {
+            $this->response = new Response();
+        }
+        return $this->response;
     }
 
-    /**
-     * Get a View instance for the given template
-     *
-     * This method creates a new View instance with the specified template and parameters.
-     * It can be used to render views in the application.
-     *
-     * @param string $template The name of the view template
-     * @param array $params Parameters to pass to the view
-     * @return View The View instance
-     */
+    
+
     protected function getView(string $template, array $params = []): ViewInterface
     {
-        return new View($this, $template, $params);
+        return new View($this->request(), $template, $params);
     }
 
-    /**
-     * Render a view with the given parameters
-     *
-     * This method is used to render a view template with the provided parameters.
-     * It will instantiate the View class and call its render method.
-     *
-     * @param string $view The name of the view template to render
-     * @param array $params Parameters to pass to the view
-     * @param bool $standalone Whether to render the view as a standalone page or not
-     * @throws \RuntimeException If the view file does not exist
-     */
-    protected function render(string $view, array $params = [], bool $standalone = false): void
-    {
-        
+    protected function render(string $view, array $params = [], bool $standalone = false): string
+    { 
         $viewObj = $this->getView($view, $params);
-        $viewObj->render($params, $standalone);
-        ob_end_flush();
-        
+        echo $viewObj->render($params, $standalone);
+        return '';
     }
 
-    /**
-     * Forward to another controller and action
-     *
-     * This method allows you to forward the request to another controller and action.
-     * It is useful for internal redirects within the application.
-     *
-     * @param string $controller The name of the controller to forward to
-     * @param string $action The action method to call in the controller
-     * @param array $params Additional parameters to pass to the action method
-     */
+
     public function forward(string $controller, string $action = 'index', array $params = []): void
     {
         if ($this->forvardV2($controller, $action, $params)) {
@@ -265,15 +211,22 @@ abstract class Controller
      * Redirect to a given URL
      *
      * @param string $url The URL to redirect to
+     * @param array $args Query parameters to append
      */
     public function redirect(string $url, array $args = []): void
     {
         if (!empty($args)) {
-            $url .= '?' . http_build_query($args);
+            $url .= (strpos($url, '?') === false ? '?' : '&') . http_build_query($args);
+        }
+
+        // Prevent header injection by removing newlines
+        $url = preg_replace('/[\r\n]/', '', $url);
+
+        if (!filter_var($url, FILTER_VALIDATE_URL) && strpos($url, '/') !== 0) {
+            throw new \InvalidArgumentException("Invalid redirect URL: $url");
         }
 
         header("Location: $url");
-
         exit;
     }
 
@@ -285,9 +238,8 @@ abstract class Controller
      */
     public function redirectReferer(): void
     {
-        $referer = $this->getRequest()->getReferer();
-        header("Location: $referer");
-        exit;
+        $referer = $this->request('HTTP_REFERER') ?? '/';
+        $this->redirect($referer);
     }
 
 }

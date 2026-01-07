@@ -12,8 +12,8 @@ class Blog extends AdminController
         $collection = $this->getPosts();
         
         // Handle pagination
-        $page = max(1, (int)$this->getRequest('page', 1));
-        $pageSize = (int)$this->getRequest('pageSize', 6);
+        $page = max(1, (int)$this->request('page') ?? 1);
+        $pageSize = (int)$this->request('pageSize') ?? 6;
         
         if ($pageSize < 1) {
             $pageSize = 6;

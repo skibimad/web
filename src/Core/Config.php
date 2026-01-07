@@ -34,8 +34,6 @@ class Config
         }
         $data = require $file;
 
-        $data = array_replace_recursive($data, self::loadDb()); // Load database config if needed
-
         $localData = @include ($file . '.local.php') ?: []; // Load local config if exists
         if (is_array($localData)) {
             $data = array_replace_recursive($data, $localData);
@@ -63,13 +61,6 @@ class Config
     {
         $this->load(self::LOCAL_FILE);
         return self::$data;
-    }
-
-    private static function loadDb(): array
-    {
-        // This method is intended to load configuration from a database.
-        // For now, it returns an empty array as a placeholder.
-        return [];
     }
 
     /**
@@ -128,40 +119,6 @@ class Config
         self::save();
     }
 
-    /**
-     * Save the current configuration data to the file.
-     *
-     * @throws \RuntimeException If the configuration file cannot be written.
-     */
-    public static function save(): void
-    {
-        // $file = self::get('config_file', 'config.php');
-        // $content = "<?php\nreturn " . var_export(self::$data, true) . ";\n";
-        // if (file_put_contents($file, $content) === false) {
-        //     throw new \RuntimeException("Failed to write config file: $file");
-        // }
-
-        // For now, we will not save to a file, but this method can be implemented later.
-        self::saveDb();
-        self::$isLoaded = true; // Ensure the configuration is marked as loaded after saving
-    }
-
-    /**
-     * Save the current configuration data to the database.
-     *
-     * @throws \RuntimeException If the configuration cannot be saved.
-     */
-    protected static function saveDb(): void
-    {
-        // This method is intended to save configuration to a database.
-        // For now, it does nothing as a placeholder.
-    }
-
-    /**
-     * Get all configuration data.
-     *
-     * @return array The entire configuration data.
-     */
     public static function all(): array
     {
         return self::$data;

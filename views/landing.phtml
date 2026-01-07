@@ -1,0 +1,19 @@
+<?php
+
+$episodes = $this('episodes');
+$recentPosts = $this('blogPosts');
+$heroes = $this('heroes');
+$landingContent = $this('landingContent');
+
+// Helper function to get landing page content value
+$getContent = function($section, $key) use ($landingContent) {
+    return isset($landingContent[$section][$key]) ? $landingContent[$section][$key]['value'] : '';
+};
+
+?>
+<?php include(__DIR__ . '/layout/landing/section/hero.phtml'); ?>
+<?php include(__DIR__ . '/layout/landing/section/about.phtml'); ?>
+<?php include(__DIR__ . '/layout/landing/section/episodes.phtml'); ?>
+<?php include(__DIR__ . '/layout/landing/section/news.phtml'); ?>
+<?php include(__DIR__ . '/layout/landing/section/heroes.phtml'); ?>
+<?php include(__DIR__ . '/layout/landing/section/channel.phtml'); ?>

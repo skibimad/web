@@ -1,12 +1,12 @@
 <?php
 namespace App\Core;
 
+use App\Core\Contract\ModelInterface;
 use App\Core\Model\Collection;
 use App\Core\Model\CollectionInterface;
-use ArrayAccess;
 use PDO;
 
-abstract class Model implements ArrayAccess
+abstract class Model implements ModelInterface
 {
     protected string $table;
     protected array $data = [];
@@ -38,21 +38,7 @@ abstract class Model implements ArrayAccess
     }
 
     /**
-     * Find a record by its ID.
-     *
-     * @param int $id The ID of the record to find
-     * @return static
-     */
-    public static function find(int $id): static
-    {
-        $instance = new static();
-        return $instance->load($id);
-    }
-
-    /**
-     * Get the name of the table associated with this model.
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getTable(): string
     {
@@ -60,10 +46,17 @@ abstract class Model implements ArrayAccess
     }
 
     /**
-     * Set the name of the table associated with this model.
-     *
-     * @param string $table The name of the table
-     * @return static
+      * {@inheritDoc}
+     */
+    public static function find(int $id): static
+    {
+        $instance = new static();
+        return $instance->load($id);
+    }
+
+
+    /**
+     * {@inheritDoc}
      */
     public function setTable(string $table): static
     {
@@ -72,9 +65,7 @@ abstract class Model implements ArrayAccess
     }
 
     /**
-     * Describe the fields in the table.
-     *
-     * @return array
+    * {@inheritDoc}
      */
     public function describe(): array
     {
@@ -87,9 +78,7 @@ abstract class Model implements ArrayAccess
     }
 
     /**
-     * Get the primary key of the model.
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getId(): ?int
     {
@@ -107,9 +96,7 @@ abstract class Model implements ArrayAccess
     }
 
     /**
-     * Get the collection associated with this model.
-     *
-     * @return Collection
+    * {@inheritDoc}
      */
     public function getCollection(?int $itemMode = null): Collection
     {
@@ -146,10 +133,7 @@ abstract class Model implements ArrayAccess
 
 
     /**
-     * Load a record by its ID.
-     *
-     * @param int $id The ID of the record to load
-     * @return static
+     * {@inheritDoc}
      */
     public function load(int $id): static
     {
@@ -206,10 +190,7 @@ abstract class Model implements ArrayAccess
     }
 
     /**
-     * Set data for the model.
-     *
-     * @param array $data The data to set
-     * @return static
+     * {@inheritDoc}
      */
     public function setData(array $data): static
     {
@@ -226,10 +207,7 @@ abstract class Model implements ArrayAccess
     }
 
     /**
-     * Get a specific field value.
-     *
-     * @param string $field The field name
-     * @return mixed|null The value of the field or null if it doesn't exist
+     * {@inheritDoc}
      */
     public function get(string $field): mixed
     {
@@ -237,12 +215,7 @@ abstract class Model implements ArrayAccess
     }
 
     /**
-     * Set a specific field value.
-     *
-     * @param string $field The field name
-     * @param mixed $value The value to set
-     * @return static
-     * @throws \Exception If the field does not exist in the table
+     * {@inheritDoc}
      */
     public function set(string $field, mixed $value): static
     {
@@ -254,12 +227,7 @@ abstract class Model implements ArrayAccess
     }
     
     /**
-     * Save the model data to the database.
-     *
-     * If the model is loaded, it will update the existing record.
-     * If not, it will create a new record.
-     *
-     * @return static
+     * {@inheritDoc}
      */
     public function save(): static
     {
@@ -301,11 +269,7 @@ abstract class Model implements ArrayAccess
     }
 
     /**
-     * Create a new record in the database.
-     *
-     * @param array $data The data to insert
-     * @return static
-     * @throws \Exception If there is an error during insertion
+     * {@inheritDoc}
      */
     public function create(array $data): static
     {
@@ -375,11 +339,7 @@ abstract class Model implements ArrayAccess
     }
 
     /**
-     * Update an existing record in the database.
-     *
-     * @param array $data The data to update
-     * @return static
-     * @throws \Exception If there is no primary key value set or if there is no data to update
+     * {@inheritDoc}
      */
     public function update(array $data): static
     {
@@ -459,10 +419,7 @@ abstract class Model implements ArrayAccess
     }
 
     /**
-     * Delete a record by its ID.
-     *
-     * @param int $id The ID of the record to delete
-     * @return bool Returns true if the deletion was successful
+     * {@inheritDoc}
      */
     public function delete(int $id): static
     {

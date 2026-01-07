@@ -16,19 +16,21 @@ class AdminUser extends Model
     protected string $table = self::TABLE;
 
 
-    public function loadByEmail(string $email): void
+    public function loadByEmail(string $email): static
     {
         $collection = $this->getCollection()
             ->setItemMode(CollectionInterface::ITEM_MODE_OBJECT)
             ->addFilter([self::COLUMN_USERNAME => $email])
             ->addFilter([self::COLUMN_ACTIVE => 1])
             ->setPageSize(1);
+        
+        $item = $collection->first();
 
-        foreach ($collection as $item) {
+        if ($item && $item instanceof AdminUser) {
             $this->setData($item->getData());
-            return;
+            return $this;
         }
-
+        
         throw new \Exception('Admin user not found.');
     }
 
