@@ -31,7 +31,7 @@ class AuthMiddleware implements MiddlewareInterface
     public function process(Request $request, RequestHandlerInterface $handler): void
     {
         // Get current route
-        $route = $request->getQuery('q', '');
+        $route = $request->query('q') ?? '';
         
         // Skip authentication for excluded routes
         if ($this->isExcludedRoute($route)) {
@@ -40,14 +40,14 @@ class AuthMiddleware implements MiddlewareInterface
         }
         
         // Check if user is authenticated
-        $adminUserId = $request->getSession('admin_user_id');
+        $adminUserId = $request->session('admin_user_id');
 
         if ($adminUserId === null) {
             // Store the intended URL for redirect after login
-            $request->setSession('intended_url', $_SERVER['REQUEST_URI'] ?? '/?q=admin/index');
+            $request->session('intended_url', /*$request->server(...)*/$_SERVER['REQUEST_URI'] ?? '/admin/index');
             
             // Redirect to admin login page (using query string format for compatibility)
-            header('Location: /?q=admin/login');
+            header('Location: /admin/login');
             exit;
         }
 

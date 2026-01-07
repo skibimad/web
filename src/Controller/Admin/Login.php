@@ -16,11 +16,11 @@ class Login extends AdminController
     {
         // If user is already logged in, redirect to dashboard
         if (Auth::isLoggedIn()) {
-            $this->redirect('/?q=admin/index');
+            $this->redirect('/admin/index');
             return;
         }
 
-        if ($this->getRequest()->isPost()) {
+        if ($this->request()->isPost()) {
             $this->processLogin();
             return;
         }
@@ -41,8 +41,8 @@ class Login extends AdminController
     private function processLogin(): void
     {
         $userData = [
-            'email' => $this->getRequest()->getPost('email'),
-            'password' => $this->getRequest()->getPost('password'),
+            'email' => $this->request()->post('email'),
+            'password' => $this->request()->post('password'),
         ];
 
         try {
@@ -50,17 +50,19 @@ class Login extends AdminController
             $auth->login($userData);
             
             // Login successful - get intended URL or default to admin dashboard
-            $intendedUrl = $this->getRequest()->getSession('intended_url', '/?q=admin/index');
-            $this->getRequest()->setSession('intended_url', null);
+            //$intendedUrl = $this->request()->session('intended_url', '/admin/index');
+            //$this->request()->session('intended_url', null);
             
-            $this->redirect($intendedUrl);
+            //$this->redirectReferer();
+            $this->redirect('/admin/index');
             return;
         } catch (\Throwable $e) {
-            $this->getRequest()->addError($e->getMessage());
+            die($e->getMessage());
+            $this->response()->addError($e->getMessage());
         }
 
         // On failure, redirect back to login page
-        $this->redirect('/?q=admin/login');
+        $this->redirect('/admin/login');
     }
 
     /**

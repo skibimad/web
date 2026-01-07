@@ -1,11 +1,7 @@
 <?php
 namespace App\Core\Contract;
 
-interface ViewInterface
+interface ViewInterface extends RenderableInterface
 {
-    public function getTemplate(): string;
-
-    public function setTemplate(string $template): void;
-
-    public function render(array $params = [], bool $standalone = false): void;
+    
 }

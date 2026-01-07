@@ -14,7 +14,7 @@ class Auth extends Helper
     public static function isLoggedIn(): bool
     {
         $request = static::getRequest();
-        return $request->getSession('admin_user_id') !== null;
+        return $request->session('admin_user_id') !== null;
     }
 
     /**
@@ -25,7 +25,7 @@ class Auth extends Helper
     public static function getAdminUserId(): ?int
     {
         $request = static::getRequest();
-        $userId = $request->getSession('admin_user_id');
+        $userId = $request->session('admin_user_id');
         return $userId !== null ? (int)$userId : null;
     }
 
@@ -52,8 +52,8 @@ class Auth extends Helper
             $adminUser->loadByEmail($email);
             
             if ($adminUser->getId() && password_verify($password, $adminUser->get('password_hash'))) {
-                $request->setSession('admin_user_id', $adminUser->getId());
-                $request->setSession('admin_user_email', $adminUser->get('email'));
+                $request->session('admin_user_id', $adminUser->getId());
+                $request->session('admin_user_email', $adminUser->get('email'));
                 return;
             }
             
@@ -73,8 +73,8 @@ class Auth extends Helper
         $request = static::getRequest();
         
         // Clear session variables
-        $request->setSession('admin_user_id', null);
-        $request->setSession('admin_user_email', null);
+        $request->session('admin_user_id', null);
+        $request->session('admin_user_email', null);
         
         // Clear the request session state
         $request->clearSession();
